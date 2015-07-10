@@ -47,6 +47,8 @@ module Deleatur
     config.i18n.default_locale = :'pt-BR'
     config.i18n.locale = :'pt-BR'
 
+    config.middleware.use Rack::Deflater
+
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
