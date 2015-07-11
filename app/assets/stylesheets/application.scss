@@ -1,7 +1,14 @@
-@import 'normalize-rails';
-@import 'bourbon';
 @import 'base/base';
-@import 'neat';
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+@import 'font-awesome';
+@import 'inspinia/inspinia';
+
+@import 'ng-table';
+@import 'ng-table/ng-table.min';
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -16,4 +23,6 @@
  *
  *
  *= require_self
+ *= require app
  */
+
