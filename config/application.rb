@@ -1,6 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
-# Pick the frameworks you want:
+  # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
 require "active_record/railtie"
@@ -16,12 +16,19 @@ Bundler.require(*Rails.groups)
 
 module Deleatur
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     # Do not generate specs for views and requests. Also, do not generate assets.
     config.generators do |g|
       g.helper false
       g.view_specs false
       g.assets false
       g.integration_tool false
+      g.controller_specs false
+      g.mailer_specs false
+      g.routing_specs false
+      g.scaffold_controller :scaffold_controller
     end
     config.app_generators do |g|
       g.test_framework :rspec

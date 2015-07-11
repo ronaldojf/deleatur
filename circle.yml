@@ -1,0 +1,11 @@
+machine:
+  ruby:
+    version: 2.2.1
+  rails:
+    version: 4.2.0
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: deleatur

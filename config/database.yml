@@ -16,3 +16,10 @@ test:
   min_messages: WARNING
   host: localhost
   template: template0
+
+production:
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  encoding: utf8
+  pool: 20
+  min_messages: WARNING

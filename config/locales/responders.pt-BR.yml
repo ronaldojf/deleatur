@@ -1,0 +1,12 @@
+pt-BR:
+  flash:
+    actions:
+      create:
+        notice: 'Registro criado com sucesso.'
+        alert: 'Registro não pôde ser criado. Confira o(s) erro(s) abaixo.'
+      update:
+        notice: 'Registro atualizado com sucesso.'
+        alert: 'Registro não pôde ser atualizado. Confira o(s) erro(s) abaixo.'
+      destroy:
+        notice: 'Registro excluído com sucesso.'
+        alert: 'Registro não pôde ser excluído. Confira o(s) erro(s) abaixo.'

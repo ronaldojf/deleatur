@@ -1,3 +1,8 @@
+html.turbolinks-progress-bar::before {
+  background-color: $light-green !important;
+  height: 2px !important;
+}
+
 .cursor-pointer { cursor: pointer; }
 
 #bg-loader {

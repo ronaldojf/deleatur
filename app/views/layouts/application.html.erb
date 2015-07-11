@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= page_title(app_name: 'Deleatur') %></title>
+    <%= favicon_link_tag 'favicon.png', rel: "shortcut icon" %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <%= csrf_meta_tags %>
+  </head>
+  <%= content_for?(:content) ? yield(:content) : yield %>
+</html>
+<body>
+  <%# render partial: 'layouts/sidemenu_admin' %>
+
+  <div id="page-wrapper" class="gray-bg">
+    <%# render partial: 'layouts/header_admin_signed_in' %>
+
+    <% if content_for?(:sub_header) %>
+      <div class="row wrapper border-bottom white-bg page-heading">
+        <%= yield(:sub_header) %>
+      </div>
+    <% end %>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <%= yield %>
+    </div>
+
+    <footer class="footer">
+      <strong>Deleatur</strong> <%= Date.today.year %>
+    </footer>
+  </div>
+</body>
