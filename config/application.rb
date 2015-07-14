@@ -16,9 +16,6 @@ Bundler.require(*Rails.groups)
 
 module Deleatur
   class Application < Rails::Application
-    # Use the responders controller from the responders gem
-    config.app_generators.scaffold_controller :responders_controller
-
     # Do not generate specs for views and requests. Also, do not generate assets.
     config.generators do |g|
       g.helper false
@@ -35,7 +32,7 @@ module Deleatur
     end
 
     # Prevent initializing your application and connect to the database on assets precompile.
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -51,6 +48,7 @@ module Deleatur
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
+    config.i18n.available_locales = [:'pt-BR']
     config.i18n.default_locale = :'pt-BR'
     config.i18n.locale = :'pt-BR'
 

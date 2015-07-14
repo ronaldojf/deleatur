@@ -71,4 +71,4 @@ pt-BR:
         other: "Não foi possível salvar %{resource}: %{count} erros."
   mailer:
     default:
-      from: "Gestão de Cursos - PM Erechim <cursos@pm-erechim.com.br>"
+      from: "Deleatur <deleatur@gmail.com>"

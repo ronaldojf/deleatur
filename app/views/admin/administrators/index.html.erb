@@ -1,0 +1,48 @@
+<% content_for :angular_controller, 'AdministratorsController' %>
+<%= content_for :sub_header do %>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2><%= t("models_and_attributes.models.#{controller_name.singularize}.other") %></h2>
+      <ol class="breadcrumb">
+        <li><%= link_to t('page.modules.home'), admin_root_path %></li>
+        <li class="active">
+          <strong><%= t('page.modules.administrators') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-sm-6 text-right">
+      <%= link_to new_admin_administrator_path, class: 'btn btn-w-m btn-primary m-t-md' do %>
+        <i class="fa fa-plus"></i>&nbsp;
+        <%= t('buttons.create') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="col-xs-12">
+  <div class="ibox float-e-margins">
+    <div class="ibox-title">
+      <h5>
+        <%= t('view.keywords.list') %>&nbsp;&nbsp;&nbsp;
+        <big><i class="fa fa-spinner fa-spin text-info" ng-show="loading"></i></big>
+      </h5>
+    </div>
+
+    <div class="ibox-content">
+      <%= flash_messages %>
+
+      <div class="m-b-lg">
+        <div class="input-group">
+          <input type="text" placeholder="Pesquisar..." class=" form-control">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-white"> Pesquisar</button>
+          </span>
+        </div>
+        <div>
+          <small>{{infoMessage}}</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+@media (max-width: $screen-sm) {
+  .welcome-message {
+    display: none;
+  }
+  .navbar-top-links {
+    li:last-child { float: right; }
+  }
+
+  .page-heading {
+    text-align: center !important;
+    div.text-right { text-align: center !important; }
+  }
+}
+
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group { z-index: 0; }
