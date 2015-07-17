@@ -35,7 +35,8 @@ pt-BR:
     destroy: Excluir
     edit: Editar
     save: Salvar
-    create: Novo
+    new: Novo
+    create: Criar
     search: Pesquisar
     clear_filters: Limpar Filtros
     signin: Entrar
@@ -45,14 +46,19 @@ pt-BR:
     edit: Alterar Dados
     signout: Sair
 
-  infos:
+  info:
     no_results: Nenhum resultado encontrado
+    editing_password: Preencha apenas se deseja alterar...
 
   view:
     keywords:
+      informations: Informações
       list: Listagem
       filter: Filtro
       see_more: Ver Mais
+
+  confirm:
+    delete_record: O registro será excluído.
 
   routes:
     new: novo

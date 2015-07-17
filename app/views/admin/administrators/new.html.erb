@@ -1,5 +1,36 @@
-<h1>New Administrator</h1>
+<%= content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), admin_root_path %></li>
+        <li><%= link_to t('page.modules.administrators'), administrators_path %></li>
+        <li class='active'>
+          <strong><%= t('actions.new') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to '#', class: 'btn btn-w-s btn-primary m-t-md',
+            data: {'form-submit' => administrators_path} do %>
 
-<%= render 'form' %>
+        <i class='fa fa-save'></i><br/>
+        <%= t('buttons.save') %>
+      <% end %>
+      <%= link_to @administrator, class: 'btn btn-w-s btn-warning m-t-md' do %>
+        <i class='fa fa-remove'></i><br/>
+        <%= t('buttons.cancel') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
-<%= link_to 'Back', administrators_path %>
+<div class='col-xs-12'>
+  <div class='ibox float-e-margins'>
+    <div class='ibox-content protected'>
+      <%= flash_messages %>
+
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

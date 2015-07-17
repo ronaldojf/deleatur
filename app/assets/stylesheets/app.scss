@@ -5,6 +5,8 @@ html.turbolinks-progress-bar::before {
 
 .cursor-pointer { cursor: pointer; }
 
+[data-href] { cursor: pointer; }
+
 #bg-loader {
   opacity: 0.6;
   color: #FFF;

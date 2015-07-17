@@ -133,7 +133,7 @@ $(document).on('page:change', function () {
     }
   });
 
-  $(window).bind("load resize scroll", function() {
+  $(window).bind("page:load load resize scroll", function() {
     if(!$("body").hasClass('body-small')) {
       fix_height();
     }
@@ -250,6 +250,8 @@ function SmoothlyMenu() {
 
 function toggleLocalStorageOn(key) {
   if (localStorageSupport()) {
+    key = String(key);
+
     if (localStorage.getItem(key) === 'on') {
       localStorage.setItem(key, 'off');
     } else {

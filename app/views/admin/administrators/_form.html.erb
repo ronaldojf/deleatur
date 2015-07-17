@@ -1,25 +1,24 @@
-<%= form_for(@administrator) do |f| %>
-  <% if @administrator.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@administrator.errors.count, "error") %> prohibited this administrator from being saved:</h2>
-
-      <ul>
-      <% @administrator.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@administrator) do |f| %>
+  <div class='form-inputs'>
+    <div class='row'>
+      <div class='col-md-6'>
+        <%= f.input :name %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.input :email, required: true %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :main %><br>
-    <%= f.check_box :main %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    <div class='row'>
+      <div class='col-md-6'>
+          <%= f.input :password, required: @administrator.new_record?,
+              hint: (@administrator.errors.blank? && @administrator.persisted?) ? t('info.editing_password') : '' %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.input :password_confirmation, required: @administrator.new_record? %>
+      </div>
+    </div>
+
+    <%= f.submit '', class: 'hide' %>
   </div>
 <% end %>

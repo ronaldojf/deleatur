@@ -1,37 +1,41 @@
 deleatur
-  .controller('AdministratorsController', ['$scope', '$http', 'ngTableParams', function($scope, $http, ngTableParams) {
-    $scope.filters = {};
-    $scope.loading = true;
-    $scope.infoMessage = I18n.t('js.info.loading');
+  .controller('AdministratorsController', ['$scope', '$http', '$sce', 'ngTableParams', function($scope, $http, $sce, ngTableParams) {
 
-    $scope.tableParams = new ngTableParams({
-      page: 1,
-      count: 25,
-      sorting: {name: 'asc'},
-      filter: $scope.filters,
-    }, {
-      total: 0,
-      getData: function($defer, params) {
-        var request = params.url();
-        request['format'] = 'json';
-        request['clear'] = $scope.filters['clear'];
-        $scope.loading = true;
+    $scope.init = function(config) {
+      $scope.config = config;
 
-        $http.get(Routes['admin_administrators_' + I18n.pathLocale](request))
-          .success(function (data) {
-            params.total(data.total);
-            $defer.resolve(data.result);
-          })
-          .finally(function(data) {
-            delete $scope.filters['clear'];
-            $scope.infoMessage = I18n.t('js.info.records_found_html', {count: data.total});
-            $scope.loading = false;
+      $scope.tableParams = new ngTableParams({
+        page: $scope.config.page,
+        count: 25,
+        sorting: $scope.config.sorting,
+        filter: $scope.config.filter,
+      }, {
+        total: 0,
+        getData: function($defer, params) {
+          var request = params.url();
+          request['format'] = 'json';
+
+          $scope.loading = true;
+          $scope.infoMessage = $sce.trustAsHtml(I18n.t('js.info.loading'));
+
+          $http.get(Routes['administrators_' + I18n.pathLocale](request))
+            .success(function (data) {
+              $scope.loading = false;
+              $scope.infoMessage = $sce.trustAsHtml(I18n.t('js.info.records_found_html', {count: data.total}));
+
+              params.total(data.total);
+              $defer.resolve(data.result);
+            })
+            .error(function() {
+              $scope.loading = false;
+              $scope.infoMessage = $sce.trustAsHtml(I18n.t('js.errors.searching_records'));
           });
-      }
-    });
+        }
+      });
+    };
 
     $scope.clearFilters = function() {
-      $scope.filters = {clear: true};
+      $scope.config.filter.general = "";
       angular.element("#filter").focus();
     };
   }]);

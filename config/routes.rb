@@ -2,17 +2,17 @@ Rails.application.routes.draw do
   localized do
     devise_for :administrators, path: :admin
 
-    namespace :admin do
+    scope :admin, module: :admin do
       resources :administrators
-      root 'home#index', as: :root
+      root 'home#index', as: :admin_root
     end
 
-    namespace :teacher do
-      root 'home#index', as: :root
+    scope :teacher, module: :teacher do
+      root 'home#index', as: :teacher_root
     end
 
-    namespace :student do
-      root 'home#index', as: :root
+    scope :student, module: :student do
+      root 'home#index', as: :student_root
     end
   end
 

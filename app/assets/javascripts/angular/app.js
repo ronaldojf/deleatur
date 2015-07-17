@@ -1,5 +1,7 @@
+//= require angular/custom-filters
 //= require angular/deleatur
 
 $(document).on('page:change', function(){
-  angular.bootstrap(document.body, ['deleatur']);
+  if (!angular.element('body').scope())
+    angular.bootstrap(document.body, ['deleatur']);
 });

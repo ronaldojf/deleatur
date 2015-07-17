@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Administrator, :type => :model do
-  it { expect(Administrator).to validate_presence_of :name }
+  it { should validate_presence_of :name }
 
     describe ".filter" do
     subject(:name) { "Jonh" }
@@ -48,12 +48,26 @@ RSpec.describe Administrator, :type => :model do
   describe "#destroy" do
     it "does not destroy if is a main administrator" do
       administrator = create :administrator, main: true
-      expect(administrator.destroy).to eq false
+      administrator.destroy
+      expect(Administrator.count).to eq 1
     end
 
     it "does destroy if is not a main administrator" do
       administrator = create :administrator
-      expect(administrator.destroy).to eq true
+      administrator.destroy
+      expect(Administrator.count).to eq 0
+    end
+  end
+
+  describe "#update" do
+    it "does not update if is a main administrator" do
+      administrator = create :administrator, main: true
+      expect(administrator.update(name: 'John Doe')).to be false
+    end
+
+    it "does update if is not a main administrator" do
+      administrator = create :administrator
+      expect(administrator.update(name: 'John Doe')).to be true
     end
   end
 end

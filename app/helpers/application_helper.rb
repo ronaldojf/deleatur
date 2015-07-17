@@ -4,7 +4,8 @@ module ApplicationHelper
   end
 
   def is_active_controller(controller_name)
-      params[:controller] == controller_name ? "active" : nil
+    @controller_without_namespace ||= params[:controller].split('/').last
+    @controller_without_namespace == controller_name ? "active" : nil
   end
 
   def is_active_action(action_name)

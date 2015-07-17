@@ -8,11 +8,11 @@
           </span>
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
-              <span class="block m-t-xs">
-                <strong class="font-bold"><%= current_user.name %></strong>
+              <span class="block m-t-xs" title="<%= current_user.name %>">
+                <strong class="font-bold"><%= current_user.name.truncate(40) %></strong>
               </span>
-              <span class="text-muted text-xs block">
-                <%= current_user.email %>
+              <span class="text-muted text-xs block" title="<%= current_user.email %>">
+                <%= current_user.email.truncate(23) %>
                 <b class="caret"></b>
               </span>
             </span>

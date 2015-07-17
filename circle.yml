@@ -1,11 +1,14 @@
-machine:
-  ruby:
-    version: 2.2.1
-  rails:
-    version: 4.2.0
+test:
+  pre:
+    - rake db:drop
+    - rake db:create
+    - rake db:migrate
+  post:
+    - bundle exec rake
 
 deployment:
-  staging:
+  production:
     branch: master
-    heroku:
-      appname: deleatur
+    commands:
+      - git push git@heroku.com:git@heroku.com:deleatur.git
+      - heroku run rake db:migrate --app deleatur

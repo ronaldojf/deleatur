@@ -1,18 +1,18 @@
 pt-BR:
   flash:
     actions:
-      general: &general
-        notice: &general_notice
-          'Registro criado com sucesso.'
-        alert: &general_alert
-          'Registro não pôde ser criado. Confira o(s) erro(s) abaixo.'
-
       create:
-        <<: *general
+        notice: Registro criado com sucesso.
+        alert: Registro não pôde ser criado. Confira o(s) erro(s) abaixo.
       update:
-        <<: *general
+        notice: Registro atualizado com sucesso.
+        alert: Registro não pôde ser atualizado. Confira o(s) erro(s) abaixo.
+      edit:
+        alerts:
+          editing_main_administrator: Este administrador não pode ser editado.
       destroy:
-        notice: &general_notice
-        alert: 'Registro não pôde ser excluído.'
-        main_administrator: 'Este administrador não pode ser editado.'
-        self_destroy: 'Não é posível se autoexcluir.'
+        notice: Registro excluído com sucesso.
+        alert: Registro não pôde ser excluído.
+        alerts:
+          main_administrator: Este administrador não pode ser excluído.
+          self_destroy: Não é posível se autoexcluir.

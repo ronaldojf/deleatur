@@ -20,3 +20,5 @@ pt-BR:
       records_found_html:
         one: ! Foi encontrado <strong>%{count}</strong> registro
         other: ! Foram encontrados <strong>%{count}</strong> registros
+    errors:
+      searching_records: 'Ocorreu um erro ao tentar buscar os registros, tente novamente mais tarde'

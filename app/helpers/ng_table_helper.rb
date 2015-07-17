@@ -1,24 +1,22 @@
 module NgTableHelper
-  # Another way to set custom values on ng_table scope
-  def ng_table_custom_values(values = {})
-    @ng_table_custom_values = values
-  end
+  def scope_for_ng_table(model)
+    result = model
+      .page(params[:page])
+      .per(params[:count])
 
-  class ActiveRecord::Base
-    def with_ng_table(custom_values = {})
-      values = custom_values
-        .merge(@ng_table_custom_values || {})
-        .merge(params || {})
+    not_store_on_session = params[:session_store].try(:[], :sorting) == "false"
 
-      self
-        .page(values[:page])
-        .per(values[:count])
-
-      if values[:sorting].try(:keys).try(:any?)
-        self.order(values[:sorting].inject({}) { |r, k|  r[k.first] = k.second.to_sym; r })
-      end
-
-      self
+    if params[:sorting].try(:keys).try(:any?)
+      store_controller_config :sorting, params[:sorting] unless not_store_on_session
+      result = result.order(params[:sorting].collect { |k,v|  [k.to_s, v.to_s].join(" ") })
     end
+
+    unless not_store_on_session
+      store_controller_config :page, params[:page]
+      store_controller_config :count, params[:count]
+      store_controller_config :filter, params[:filter]
+    end
+
+    result
   end
 end

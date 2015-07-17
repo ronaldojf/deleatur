@@ -29,7 +29,7 @@ $(function() {
     }).tooltip();
 
     $("[data-form-submit]").on("click", function(e) {
-      var form = $($(this).data("form-submit"));
+      var form = $("[action='" + $(this).data("form-submit") + "']");
 
       if (form.find("input[type='submit']").length > 0) {
         form.find("input[type='submit']").click();
@@ -52,13 +52,19 @@ $(function() {
   $(document).on("page:change", function() {
     window.app = new window.App();
 
-    $("div.form form *").on("change", function() {
+    $("form.protected *, .protected form *").on("change", function() {
       app.markDirty();
     });
 
-    $("a[href^='/']").on("click", function(e) {
+    $("a[href^='/'], a[href^='/'] *").on("click", function(e) {
       if (window._isDirty) {
-        window.hrefDirty = $(e.target).attr('href');
+      var target = $(e.target);
+
+        if (target.is('a')) {
+          window.hrefDirty = target.attr('href');
+        } else {
+          window.hrefDirty = target.parents("a[href^='/']:first").attr('href');
+        }
       }
     });
 
@@ -113,8 +119,9 @@ $(function() {
         cancelButtonText: I18n.t('js.buttons.cancel')
       }, function(confirmed) {
         if (confirmed) {
+          var path = window.hrefDirty;
           app.clearDirty();
-          Turbolinks.visit(window.hrefDirty);
+          Turbolinks.visit(path);
         }
       });
     }

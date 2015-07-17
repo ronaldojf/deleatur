@@ -18,6 +18,7 @@
 //= require bootstrap-sprockets
 //
 //= require angular-base
+//= require ng-rails-csrf
 //= require i18n/translations
 //= require base
 //= require angular/app

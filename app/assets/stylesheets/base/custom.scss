@@ -10,6 +10,38 @@
     text-align: center !important;
     div.text-right { text-align: center !important; }
   }
+
+  .show-action-label {
+    & div:first-child { text-align: left !important; }
+  }
 }
 
 .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group { z-index: 0; }
+
+.table-hover tbody tr:hover { background-color: $light-navy; }
+
+.btn-w-xl {min-width: 250px;}
+.btn-w-l {min-width: 160px;}
+.btn-w-s {min-width: 80px;}
+.btn-w-xs {min-width: 40px;}
+
+.show-action-label {
+  min-height: 40px;
+
+  & div:first-child {
+    text-align: right;
+    font-weight: bold;
+  }
+}
+
+.sweet-alert {
+  button.confirm {
+    background-color: $navy !important;
+
+    &:hover {
+      background-color: darken($navy, 3%)  !important;
+      border-color: darken($navy, 3%)  !important;
+      color: white !important;
+    }
+  }
+}
