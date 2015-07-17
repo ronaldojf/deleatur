@@ -9,6 +9,5 @@ test:
 deployment:
   production:
     branch: master
-    commands:
-      - git push git@heroku.com:deleatur.git
-      - heroku run rake db:migrate --app deleatur
+    heroku:
+      appname: deleatur
