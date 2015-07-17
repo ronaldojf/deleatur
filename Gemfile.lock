@@ -499,3 +499,6 @@ DEPENDENCIES
   validates_cpf_cnpj (= 0.2.0)
   vcr (= 2.9.3)
   webmock (= 1.20.4)
+
+BUNDLED WITH
+   1.10.5
