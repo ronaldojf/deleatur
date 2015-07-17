@@ -16,7 +16,7 @@ To run this project you need to have:
   * Windows - [PostgreSQL for Windows](http://www.postgresql.org/download/windows/)
 
 1. Install the dependencies above
-2. `$ git clone <REPOSITORY_URL> deleatur` - Clone the project
+2. `$ git clone git@github.com:ronaldojf/deleatur.git` - Clone the project
 3. `$ cd deleatur` - Go into the project folder
 4. `$ bin/setup` - Run the setup script
 5. `$ bin/rspec` - Run the specs to see if everything is working fine
