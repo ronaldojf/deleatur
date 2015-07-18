@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='<%= I18n.default_locale %>'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='robots' content='noindex,nofollow'>
+    <%= csrf_meta_tags %>
+
+    <% content_for(:module, t('page.modules.login')) %>
+    <title>
+      <%= page_title(app_name: t('page.titles.short'), page_title_symbol: :module, separator: ' | ') %>
+    </title>
+
+    <%= favicon_link_tag 'favicon.ico', rel: 'shortcut icon' %>
+    <%= stylesheet_link_tag 'public/app', media: 'all', 'data-turbolinks-track' => true %>
+
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag 'html5shiv.js' %>
+      <%= javascript_include_tag 'respond.min.js' %>
+    <![endif]-->
+
+    <%= javascript_include_tag 'public/app', 'data-turbolinks-track' => true %>
+  </head>
+
+  <body class='<%= body_class %> gray-bg'>
+
+    <!-- Main view  -->
+    <%= yield %>
+
+  </body>
+</html>

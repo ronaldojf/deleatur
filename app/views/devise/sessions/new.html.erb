@@ -1,0 +1,25 @@
+<div class='middle-box text-center loginscreen animated fadeInDown'>
+  <div>
+    <div class='logo-name'>
+      <%= image_tag 'deleatur-xs.png' %>
+      <%= t('app.name') %>
+    </div>
+    <h3><%= t("login.#{resource_name}.welcome") %></h3>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: 'm-t') do |f| %>
+      <%= f.input :email, label: false, required: true, autofocus: true %>
+      <%= f.input :password, label: false, required: true %>
+
+      <%= flash_messages fixed: true %>
+      <div class='form-actions'>
+        <%= f.button :submit, t('buttons.signin'), class: 'btn btn-primary block full-width m-b' %>
+      </div>
+
+      <a href='<%= new_password_path(resource_name) %>'><small><%= t('buttons.forgot_password') %></small></a>
+    <% end %>
+    <p class='m-t'>
+      <small>
+        <strong><%= t('page.titles.short') %></strong> <%= Date.today.year %>
+      </small>
+    </p>
+  </div>
+</div>
