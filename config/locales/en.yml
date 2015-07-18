@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  users:
+    administrators:
+      one: Administrator
+      other: Administrators
+    teacher:
+      one: Teacher
+      other: Teachers
+    student:
+      one: Student
+      other: Students

@@ -1,21 +1,21 @@
-<div class="row border-bottom">
-  <nav class="navbar navbar-static-top m-b-none" role="navigation">
-    <div class="navbar-header">
-      <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#">
-        <i class="fa fa-bars"></i>
+<div class='row border-bottom'>
+  <nav class='navbar navbar-static-top m-b-none' role='navigation'>
+    <div class='navbar-header'>
+      <a class='navbar-minimalize minimalize-styl-2 btn btn-primary' href='#'>
+        <i class='fa fa-bars'></i>
       </a>
     </div>
-    <ul class="nav navbar-top-links navbar-right">
+    <ul class='nav navbar-top-links navbar-right'>
       <li>
-        <span class="m-r-sm text-muted welcome-message">
+        <span class='m-r-sm text-muted welcome-message'>
           <%= t('page.welcome_html', app_name: t('app.name')) %>
         </span>
       </li>
 
       <li>
-        <%= link_to send("destroy_#{current_user_type}_session_path"), method: :delete,
+        <%= link_to send("destroy_#{current_user.user_type}_session_path"), method: :delete,
             data: {confirm: t('js.messages.contents.signout')} do %>
-          <i class="fa fa-sign-out"></i> <%= t('profile.signout') %>
+          <i class='fa fa-sign-out'></i> <%= t('profile.signout') %>
         <% end %>
       </li>
     </ul>

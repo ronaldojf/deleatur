@@ -4,6 +4,7 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   c.hook_into :webmock
   c.configure_rspec_metadata!
+  c.ignore_hosts 'codeclimate.com'
 
   # Filter Rails secrets that are strings or numbers
   secrets_to_filter = Rails.application.secrets.select do |key, value|

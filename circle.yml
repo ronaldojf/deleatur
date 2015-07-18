@@ -3,11 +3,10 @@ test:
     - rake db:drop
     - rake db:create
     - rake db:migrate
-  post:
-    - bundle exec rake
 
 deployment:
   production:
     branch: master
-    heroku:
-      appname: deleatur
+    commands:
+      - git push git@heroku.com:deleatur.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app deleatur

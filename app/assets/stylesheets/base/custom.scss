@@ -45,3 +45,19 @@
     }
   }
 }
+
+.logo-name {
+  color: #e6e6e6;
+  text-shadow: -1px 0 rgba(0,0,0,0.6), 0 1px rgba(0,0,0,0.6), 1px 0 rgba(0,0,0,0.6), 0 -1px rgba(0,0,0,0.6);
+  font-size: 65px;
+  font-weight: 700;
+  letter-spacing: -10px;
+  margin-bottom: 0px;
+  margin-right: 37px;
+
+  & img {
+    position: relative;
+    margin-bottom: 10px;
+    left: 5px;
+  }
+}

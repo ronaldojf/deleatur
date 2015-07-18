@@ -18,11 +18,10 @@ deleatur
           $scope.loading = true;
           $scope.infoMessage = $sce.trustAsHtml(I18n.t('js.info.loading'));
 
-          $http.get(Routes['administrators_' + I18n.pathLocale](request))
-            .success(function (data) {
+          $http.get(Routes['administrators' + I18n.pathLocale](request))
+            .success(function(data) {
               $scope.loading = false;
               $scope.infoMessage = $sce.trustAsHtml(I18n.t('js.info.records_found_html', {count: data.total}));
-
               params.total(data.total);
               $defer.resolve(data.result);
             })

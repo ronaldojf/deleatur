@@ -12,5 +12,7 @@ Rails.application.config.assets.precompile +=  %w(
   *.png  **/*.png  *.jpg  **/*.jpg  *.bpm  **/*.bpm
   *.svg  **/*.svg  *.js   **/*.js
 
+  email.css
+  public/app.css
   admin/app.css teacher/app.css student/app.css
 )

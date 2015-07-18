@@ -1,6 +1,11 @@
 module ApplicationHelper
-  def flash_messages
-    render partial: "flash_messages"
+  def flash_messages(options = {})
+    options[:alert] ||= {}
+    options[:notice] ||= {}
+    options[:warning] ||= {}
+    options[:info] ||= {}
+
+    render partial: "flash_messages", locals: { options: options }
   end
 
   def is_active_controller(controller_name)

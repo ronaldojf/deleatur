@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   ensure_security_headers # See more: https://github.com/twitter/secureheaders
 
-  helper_method :current_user, :current_user_type
+  helper_method :current_user
 
   def current_user
     I18n.t('users').each do |key, value|
@@ -17,10 +17,6 @@ class ApplicationController < ActionController::Base
     end
 
     nil
-  end
-
-  def current_user_type
-    current_user.class.name.underscore.to_sym
   end
 
   protected

@@ -10,6 +10,8 @@ require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+require File.expand_path('../../lib/base', __FILE__)
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -43,7 +45,6 @@ module Deleatur
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = ENV.fetch('TZ', 'Brasilia')
 
-
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
@@ -54,8 +55,9 @@ module Deleatur
 
     config.middleware.use Rack::Deflater
 
-
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    Jbuilder.key_format camelize: :lower
   end
 end

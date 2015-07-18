@@ -4,20 +4,27 @@ pt-BR:
       Deleatur
 
   page:
+    welcome_html: ! Seja bem-vindo ao <strong>%{app_name}</strong>!
     titles: &page_titles
       short: *app_name
     modules:
       home: Home
+      login: Login
       administrators: Administradores
       teachers: Professores
       students: Alunos
     footers: *page_titles
-    welcome_html: ! Seja bem-vindo ao <strong>%{app_name}</strong>!
 
   users:
-    administrator: Administrador(a)
-    teacher: Professor(a)
-    student: Estudante
+    administrator:
+      one: Administrador(a)
+      other: Administradores(as)
+    teacher:
+      one: Professor(a)
+      other: Professores(as)
+    student:
+      one: Estudante
+      other: Estudantes
 
   actions:
     new: Inserção
@@ -41,6 +48,37 @@ pt-BR:
     clear_filters: Limpar Filtros
     signin: Entrar
     publish: Publicar
+    forgot_password: Esqueceu sua senha?
+    send_password_instructions: Enviar instruções de troca de senha
+    change_my_password: Trocar minha senha
+    change_password: Trocar minha senha
+
+  login:
+    administrator:
+      welcome: Administração
+    teacher:
+      welcome: Professores
+    student:
+      welcome: Seja bem-vindo!
+      greeting: Você conseguirá ultrapassar seus limites hoje?
+      challenge: Faça login e mostre!
+
+  passwords:
+    new:
+      title: Esqueceu sua senha?
+      greeting: Coloque o seu endereço de e-mail abaixo.
+    edit:
+      title: Troque sua senha
+      greeting: Coloque o seu endereço de e-mail abaixo.
+    email:
+      greeting: ! Olá %{name}!
+      info_1: Alguém requisitou um link para trocar sua senha.
+      info_2: Você pode fazer isso clicando no botão abaixo.
+      warning: >
+        Se você não pediu por isso, por favor ignore esse e-mail.
+        Sua senha não será alterada até que você clique no botão acima e crie uma nova.
+    errors:
+      invalid_token: O link acessado não é mais válido para alterar a senha.
 
   profile:
     edit: Alterar Dados

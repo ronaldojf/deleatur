@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="<%= I18n.default_locale %>">
+<html lang='<%= I18n.default_locale %>'>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex,nofollow">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='robots' content='noindex,nofollow'>
     <%= csrf_meta_tags %>
 
     <% content_for(:module, t(controller_name, scope: [:page, :modules], default: '')) unless content_for? :module %>
@@ -11,26 +11,26 @@
       <%= page_title(app_name: t('page.titles.short'), page_title_symbol: :module, separator: ' | ') %>
     </title>
 
-    <%= favicon_link_tag 'favicon.ico', rel: "shortcut icon" %>
+    <%= favicon_link_tag 'favicon.ico', rel: 'shortcut icon' %>
     <%= stylesheet_link_tag    'admin/app', media: 'all', 'data-turbolinks-track' => true %>
 
     <!--[if lt IE 9]>
-      <%= javascript_include_tag "html5shiv.js" %>
-      <%= javascript_include_tag "respond.min.js" %>
+      <%= javascript_include_tag 'html5shiv.js' %>
+      <%= javascript_include_tag 'respond.min.js' %>
     <![endif]-->
 
-    <%= javascript_include_tag "i18n", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'i18n', 'data-turbolinks-track' => true %>
 
-    <script type="text/javascript">
-      I18n.defaultLocale = "<%= I18n.default_locale %>";
-      I18n.locale = "<%= I18n.locale %>";
-      I18n.pathLocale = "<%= I18n.locale.to_s.underscore %>";
+    <script type='text/javascript'>
+      I18n.defaultLocale = '<%= I18n.default_locale %>';
+      I18n.locale = '<%= I18n.locale %>';
+      I18n.pathLocale = '<%= I18n.locale.to_s.underscore.camelize %>';
     </script>
 
     <%= javascript_include_tag 'admin/app', 'data-turbolinks-track' => true %>
   </head>
 
-  <body class="<%= body_class %>" <%= raw(content_for?(:angular_controller) ? "ng-controller=\"#{content_for(:angular_controller)}\"" : "") %>>
+  <body class='<%= body_class %>' <%= raw(content_for?(:angular_controller) ? "ng-controller=\'#{content_for(:angular_controller)}\'" : '') %>>
 
     <div id="wrapper">
 
@@ -38,21 +38,21 @@
       <%= render 'layouts/navigation' %>
 
       <!-- Page wraper -->
-      <div id="page-wrapper" class="gray-bg">
+      <div id='page-wrapper' class='gray-bg'>
 
         <!-- Page wrapper -->
         <%= render 'layouts/topnavbar' %>
 
         <% if content_for?(:sub_header) %>
-          <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-xs-12">
+          <div class='row wrapper border-bottom white-bg page-heading'>
+            <div class='col-xs-12'>
               <%= yield(:sub_header) %>
             </div>
           </div>
         <% end %>
 
         <!-- Main view  -->
-        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class='wrapper wrapper-content animated fadeInRight'>
           <%= yield %>
         </div>
 

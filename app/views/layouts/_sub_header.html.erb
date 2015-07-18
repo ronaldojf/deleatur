@@ -1,14 +1,14 @@
-<div class="row wrapper border-bottom white-bg page-heading">
+<div class='row wrapper border-bottom white-bg page-heading'>
   <% if options.blank? %>
     <%= yield %>
   <% else %>
-    <div class="col-xs-12">
+    <div class='col-xs-12'>
       <h2><%= options.module || t("models_and_attributes.models.#{controller_name.singularize}.other") %></h2>
-      <ol class="breadcrumb">
+      <ol class='breadcrumb'>
         <% options.breadcrumb.each_with_index do |item, i| %>
           <% active = breadcrumb_active?(item.try(:active), options.breadcrumb.size, i) %>
 
-          <li class="<%= 'active' if active %>">
+          <li class='<%= 'active' if active %>'>
             <%= raw('<strong>') if active %>
 
               <%= link_to ((item.try(:[], item.try(:keys).try(:first)).try(:[], 'label') rescue nil) ||
