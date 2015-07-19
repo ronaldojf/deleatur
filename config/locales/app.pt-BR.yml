@@ -79,6 +79,7 @@ pt-BR:
         Sua senha não será alterada até que você clique no botão acima e crie uma nova.
     errors:
       invalid_token: O link acessado não é mais válido para alterar a senha.
+      found_errors: Não foi possível executar esta ação devido ao(s) erro(s) abaixo.
 
   profile:
     edit: Alterar Dados

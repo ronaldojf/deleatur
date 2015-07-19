@@ -1,0 +1,69 @@
+<%% content_for :angular_controller, "<%= class_name.pluralize %>Controller" %>
+<%% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%%= t('models_and_attributes.models.<%= singular_table_name %>.other') %></h2>
+      <ol class='breadcrumb'>
+        <!-- INTENTIONAL ERROR, DO NOT CORRECT IT ON SCAFFOLD GENERATOR -->
+        <li><%%= link_to t('page.modules.home'), #admin_root_path %></li>
+        <li class='active'>
+          <strong><%%= t('page.modules.<%= plural_table_name %>') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%%= link_to new_<%= singular_table_name %>_path, class: 'btn btn-w-s btn-primary m-t-md' do %>
+        <i class='fa fa-plus'></i><br/>
+        <%%= t('buttons.new') %>
+      <%% end %>
+    </div>
+  </div>
+<%% end %>
+<%= instance_variables %>
+<div class='col-xs-12' ng-init='init(<%%= @config.to_json_with_active_support_encoder %>)'>
+  <div class='ibox float-e-margins'>
+    <div class='ibox-title'>
+      <h5>
+        <%%= t('view.keywords.list') %>&nbsp;&nbsp;&nbsp;
+        <big><i class='fa fa-spinner fa-spin text-success' ng-show='loading'></i></big>
+      </h5>
+    </div>
+
+    <div class='ibox-content'>
+      <%%= flash_messages %>
+
+      <div class='m-b-lg'>
+        <div class='form-inputs'>
+          <input type='text' id='filter' placeholder="<%%= t('js.placeholders.search') %>"
+              class='form-control input-md' ng-model='config.filter.general'>
+          </span>
+        </div>
+        <div>
+          <small ng-bind-html='infoMessage'></small>
+          <small>
+            <a class='pull-right' ng-click='clearFilters()'><%%= t('buttons.clear_filters') %></a>
+          </small>
+        </div>
+      </div>
+
+      <hr>
+      <p ng-show='tableParams.data.length == 0' class='alert alert-info'><i class='icon-info-sign'></i> <%%= t('info.no_results') %></p>
+      <div class='table-responsive' ng-show='tableParams.data.length > 0'>
+        <div loading-container='tableParams.settings().$loading'>
+          <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>
+            <tr data-href='{{<%= singular_table_name %>.showHtmlUrl}}' ng-repeat='<%= singular_table_name %> in $data track by <%= singular_table_name %>.id'>
+
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+              <td data-title="'<%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %>'" sortable="'<%= attribute.name %>'">
+                {{<%= singular_table_name %>.<%= attribute.name %>}}
+              </td>
+<% end -%>
+
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <% content_for :angular_controller, 'AdministratorsController' %>
-<%= content_for :sub_header do %>
+<% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
       <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
@@ -40,7 +40,7 @@
         <div>
           <small ng-bind-html='infoMessage'></small>
           <small>
-            <a class='pull-right' ng-click='clearFilters()'>Limpar</a>
+            <a class='pull-right' ng-click='clearFilters()'><%= t('buttons.clear_filters') %></a>
           </small>
         </div>
       </div>

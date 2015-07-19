@@ -8,6 +8,7 @@ deployment:
   production:
     branch: master
     commands:
+      - git fetch origin --unshallow
       - git push git@heroku.com:deleatur.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app deleatur
       - heroku run rake db:seed --app deleatur

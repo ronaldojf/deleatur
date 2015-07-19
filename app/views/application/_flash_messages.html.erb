@@ -1,7 +1,7 @@
 <% if notice || alert || options[:notice].present? || options[:alert].present? || options[:warning].present? || options[:info].present? %>
 
   <div id='messages'>
-    <%= content_tag :div, class: "alert alert-success #{'alert-dismissable' unless options[:fixed] || options[:notice][:fixed]} #{options[:notice_class]}" do %>
+    <%= content_tag :div, class: "alert alert-success #{'alert-dismissable' unless options[:fixed] || options[:notice][:fixed]} #{options[:notice][:class]}" do %>
       <% unless options[:fixed] || options[:notice][:fixed] %>
         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
       <% end %>
@@ -10,11 +10,11 @@
         <i class='fa fa-<%= notice_icon == true ? '' : notice_icon %>'></i>
       <% end %>
 
-      <%= options[:notice][:show] ? options[:notice][:message] : notice %>
+      <%= options[:notice][:show] ? options[:notice][:message] || notice : notice %>
     <% end if options[:notice][:show] || notice %>
 
 
-    <%= content_tag :div, class: "alert alert-danger #{'alert-dismissable' unless options[:fixed] || options[:notice][:fixed]} #{options[:alert][:class]}" do %>
+    <%= content_tag :div, class: "alert alert-danger #{'alert-dismissable' unless options[:fixed] || options[:alert][:fixed]} #{options[:alert][:class]}" do %>
       <% unless options[:fixed] || options[:alert][:fixed] %>
         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
       <% end %>
@@ -23,7 +23,7 @@
         <i class='fa fa-<%= alert_icon == true ? '' : alert_icon %>'></i>
       <% end %>
 
-      <%= options[:alert][:show] ? options[:alert][:message] : alert %>
+      <%= options[:alert][:show] ? options[:alert][:message] || alert : alert %>
     <% end if options[:alert][:show] || alert %>
 
 

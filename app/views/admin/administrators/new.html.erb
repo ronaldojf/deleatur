@@ -1,4 +1,4 @@
-<%= content_for :sub_header do %>
+<% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
       <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
@@ -25,12 +25,13 @@
   </div>
 <% end %>
 
-<div class='col-xs-12'>
-  <div class='ibox float-e-margins'>
-    <div class='ibox-content protected'>
-      <%= flash_messages %>
-
-      <%= render 'form' %>
+<div class="row">
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-content protected'>
+        <%= flash_messages %>
+        <%= render 'form' %>
+      </div>
     </div>
   </div>
 </div>

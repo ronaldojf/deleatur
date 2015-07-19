@@ -6,7 +6,7 @@ class Admin::AdministratorsController < Admin::BaseController
       format.html { render :index }
       format.json do
         @administrators = scope_for_ng_table(Administrator)
-                            .filter(params[:filter].try(:[], 'general'))
+                            .filter(params[:filter].try(:[], :general))
       end
     end
   end
