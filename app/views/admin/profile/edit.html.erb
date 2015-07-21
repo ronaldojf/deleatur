@@ -34,7 +34,7 @@
           <div class='form-inputs'>
             <div class='row'>
               <div class='col-md-6'>
-                <%= f.input :name %>
+                <%= f.input :name, input_html: {'responsive-focus' => true} %>
               </div>
               <div class='col-md-6'>
                 <%= f.input :email, required: true %>
@@ -43,13 +43,14 @@
 
             <div class='row'>
               <div class='col-md-4'>
-                <%= f.input :current_password %>
+                <%= f.input :current_password, input_html: {'fake-password' => true} %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :password, hint: current_user.errors.blank? ? t('info.editing_password') : '' %>
+                <%= f.input :password, hint: current_user.errors.blank? ? t('info.editing_password') : '',
+                      input_html: {'fake-password' => true} %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :password_confirmation %>
+                <%= f.input :password_confirmation, input_html: {'fake-password' => true} %>
               </div>
             </div>
 

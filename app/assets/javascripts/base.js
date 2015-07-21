@@ -47,6 +47,33 @@ $(function() {
     setTimeout(function() {
       $("[autofocus]:first").focus();
     }, 500);
+
+    $('[responsive-focus]:first').each(function() {
+      if (window.innerWidth >= 769) {
+        $(this).focus();
+      }
+    });
+
+    if ($('[fake-password]').length > 0) {
+      window.fakePassword = Math.random().toString(36).substring(8);
+      $('[fake-password]').val(window.fakePassword);
+
+      $('[fake-password]').on('focus', function() {
+        if ($(this).val() === window.fakePassword) {
+          $(this).val('');
+        }
+      });
+
+      $('[fake-password]').on('blur', function() {
+        if ($(this).val().length <= 0) {
+          $(this).val(window.fakePassword);
+        }
+      });
+
+      $('form').on('submit', function() {
+        $('[fake-password]').val('');
+      });
+    }
   }
 
   $(document).on("page:change", function() {

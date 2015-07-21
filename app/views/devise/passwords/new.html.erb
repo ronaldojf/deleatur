@@ -12,7 +12,7 @@
               <%= flash_messages fixed: true, alert: { show: alert, message: I18n.t('passwords.errors.found_errors') } %>
 
               <div class='form-group'>
-                <%= f.input :email, label: false, required: true %>
+                <%= f.input :email, label: false, required: true, input_html: {'responsive-focus' => true} %>
               </div>
 
               <%= f.button :submit, t('buttons.send_password_instructions'), class: 'btn btn-primary block full-width m-b' %>

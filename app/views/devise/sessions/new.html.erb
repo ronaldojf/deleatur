@@ -6,7 +6,7 @@
     </div>
     <h3><%= t("login.#{resource_name}.welcome") %></h3>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: 'm-t') do |f| %>
-      <%= f.input :email, label: false, required: true %>
+      <%= f.input :email, label: false, required: true, input_html: {'responsive-focus' => true} %>
       <%= f.input :password, label: false, required: true %>
 
       <%= flash_messages fixed: true %>
