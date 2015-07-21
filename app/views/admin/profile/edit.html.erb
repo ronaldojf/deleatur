@@ -1,0 +1,63 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), admin_root_path %></li>
+        <li class='active'>
+          <strong><%= t('page.modules.profile') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to administrators_path, class: 'btn btn-w-s btn-primary m-t-md',
+            data: {'form-submit' => admin_profile_path} do %>
+
+        <i class='fa fa-save'></i><br/>
+        <%= t('buttons.save') %>
+      <% end %>
+      <%= link_to admin_root_path, class: 'btn btn-w-s btn-warning m-t-md' do %>
+        <i class='fa fa-remove'></i><br/>
+        <%= t('buttons.cancel') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class='col-xs-12 current-responsive-padding'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-content protected'>
+        <%= flash_messages %>
+
+        <%= simple_form_for(current_user, url: admin_profile_path) do |f| %>
+          <div class='form-inputs'>
+            <div class='row'>
+              <div class='col-md-6'>
+                <%= f.input :name %>
+              </div>
+              <div class='col-md-6'>
+                <%= f.input :email, required: true %>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='col-md-4'>
+                <%= f.input :current_password %>
+              </div>
+              <div class='col-md-4'>
+                <%= f.input :password, hint: current_user.errors.blank? ? t('info.editing_password') : '' %>
+              </div>
+              <div class='col-md-4'>
+                <%= f.input :password_confirmation %>
+              </div>
+            </div>
+
+            <%= f.submit '', class: 'hide' %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

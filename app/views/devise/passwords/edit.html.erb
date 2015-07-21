@@ -14,7 +14,7 @@
                   alert: { show: f.full_error(:reset_password_token).present?, message: t('passwords.errors.invalid_token') } %>
 
               <div class='form-group'>
-                <%= f.input :password, label: false, required: true, autofocus: true %>
+                <%= f.input :password, label: false, required: true %>
                 <%= f.input :password_confirmation, label: false, required: true %>
               </div>
 

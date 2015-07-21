@@ -9,6 +9,7 @@ pt-BR:
       short: *app_name
     modules:
       home: Home
+      profile: Perfil
       login: Login
       administrators: Administradores
       teachers: Professores
@@ -156,6 +157,10 @@ pt-BR:
         male: Masculino
         female: Feminino
 
+  errors:
+    custom_messages:
+      current_password_not_match: não confere
+
   activerecord:
     <<: *models_and_attributes
   activemodel:
@@ -169,14 +174,3 @@ pt-BR:
     options:
       defaults:
         <<: *enum_items
-    placeholders:
-      defaults:
-        name: Digite o Nome
-        email: Digite o E-Mail
-        password: Digite a Senha
-        password_confirmation: Digite a Confirmação de Senha
-        current_password: Digite a Senha Atual
-        cpf: Digite o CPF
-        gender: Digite o Sexo
-        birthdate: Digite a Data de Nascimento
-        phone: Digite o Telefone

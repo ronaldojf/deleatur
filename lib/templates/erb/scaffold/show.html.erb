@@ -6,7 +6,7 @@
         <li><%%= link_to t('page.modules.home'), <%= singular_table_name %>_root_path %></li>
         <li><%%= link_to t('page.modules.<%= plural_table_name %>'), <%= plural_table_name %>_path %></li>
         <li class="active">
-          <strong><%%= t('actions.edit') %></strong>
+          <strong><%%= t('actions.show') %></strong>
         </li>
       </ol>
     </div>
@@ -35,27 +35,29 @@
   </div>
 <%% end %>
 
-<div class='col-xs-12'>
-  <div class='ibox float-e-margins'>
-    <div class='ibox-title'>
-      <h5>
-        <%%= t('view.keywords.informations') %>
-      </h5>
-    </div>
+<div class="row responsive-padding">
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%%= t('view.keywords.informations') %>
+        </h5>
+      </div>
 
-    <div class='ibox-content'>
-      <%%= flash_messages %>
+      <div class='ibox-content'>
+        <%%= flash_messages %>
 
-      <ul class='todo-list'>
+        <ul class='todo-list'>
 
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-        <li class='show-action-label'>
-          <div class='col-sm-3'><%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %>:</div>
-          <div class='col-sm-9'><%%= @<%= singular_table_name %>.<%= attribute.name %> %></div>
-        </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%%= t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') %>:</div>
+            <div class='col-sm-9'><%%= @<%= singular_table_name %>.<%= attribute.name %> %></div>
+          </li>
 <% end -%>
 
-      </ul>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

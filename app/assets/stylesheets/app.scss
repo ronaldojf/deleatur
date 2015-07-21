@@ -1,6 +1,7 @@
 html.turbolinks-progress-bar::before {
   background-color: $navy !important;
-  height: 2px !important;
+  height: 3px !important;
+  z-index: 2002 !important;
 }
 
 .cursor-pointer { cursor: pointer; }

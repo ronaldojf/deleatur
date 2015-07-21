@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     scope :admin, module: :admin do
       resources :administrators
+      resources :profile, only: [:edit, :update], as: :admin_profile
       root 'home#index', as: :admin_root
     end
 

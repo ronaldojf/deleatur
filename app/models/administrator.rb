@@ -1,7 +1,10 @@
 class Administrator < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :validatable
 
+  attr_accessor :current_password, :validate_current_password
+
   validates :name, presence: true
+  validate :authenticate_password, if: :validate_current_password
 
   scope :filter, -> (text) {
     where('name ILIKE :text OR email ILIKE :text', text: "%#{text}%") if text.present?
@@ -11,7 +14,11 @@ class Administrator < ActiveRecord::Base
     self.main? ? false : super
   end
 
-  def update(params)
-    self.main? ? false : super(params)
+  private
+
+  def authenticate_password
+    if self.password.present? && !Administrator.find(self.id).valid_password?(@current_password.to_s)
+      errors.add(:current_password, I18n.t('errors.custom_messages.current_password_not_match'))
+    end
   end
 end
