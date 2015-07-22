@@ -1,4 +1,4 @@
-class Admin::ProfileController < Admin::BaseController
+class Admin::ProfilesController < Admin::BaseController
 
   def update
     current_user.update(administrator_params)

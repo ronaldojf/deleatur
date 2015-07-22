@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :administrators
-      resources :profile, only: [:edit, :update]
+      resource :profile, only: [:edit, :update]
       root 'home#index'
     end
 

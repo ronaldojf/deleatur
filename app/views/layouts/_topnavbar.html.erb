@@ -21,7 +21,7 @@
           </a>
           <ul class='dropdown-menu animated fadeInRight user-menu'>
             <li>
-              <%= link_to edit_admin_profile_path(Rack::Utils.escape_path(current_user.name.remover_acentos.downcase.gsub(' ', '-'))) do %>
+              <%= link_to [:edit, :admin, :profile] do %>
                 <i class='fa fa-edit'></i> <%= t('profile.edit') %>
               <% end %>
             </li>
