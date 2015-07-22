@@ -3,20 +3,20 @@
     <div class='col-sm-6'>
       <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
       <ol class='breadcrumb'>
-        <li><%= link_to t('page.modules.home'), admin_root_path %></li>
+        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
         <li class='active'>
           <strong><%= t('page.modules.profile') %></strong>
         </li>
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
-      <%= link_to administrators_path, class: 'btn btn-w-s btn-primary m-t-md',
-            data: {'form-submit' => admin_profile_path} do %>
+      <%= link_to [:admin, :administrators], class: 'btn btn-w-s btn-primary m-t-md',
+            data: {'form-submit' => url_for([:admin, :profile])} do %>
 
         <i class='fa fa-save'></i><br/>
         <%= t('buttons.save') %>
       <% end %>
-      <%= link_to admin_root_path, class: 'btn btn-w-s btn-warning m-t-md' do %>
+      <%= link_to [:admin, :root], class: 'btn btn-w-s btn-warning m-t-md' do %>
         <i class='fa fa-remove'></i><br/>
         <%= t('buttons.cancel') %>
       <% end %>
@@ -30,7 +30,7 @@
       <div class='ibox-content protected'>
         <%= flash_messages %>
 
-        <%= simple_form_for(current_user, url: admin_profile_path) do |f| %>
+        <%= simple_form_for(current_user, url: [:admin, :profile]) do |f| %>
           <div class='form-inputs'>
             <div class='row'>
               <div class='col-md-6'>

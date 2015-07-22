@@ -16,27 +16,27 @@ class Admin::AdministratorsController < Admin::BaseController
   end
 
   def edit
-    redirect_to(@administrator, alert: I18n.t('flash.actions.edit.alerts.editing_main_administrator')) if @administrator.main
+    redirect_to([:admin, @administrator], alert: I18n.t('flash.actions.edit.alerts.editing_main_administrator')) if @administrator.main
   end
 
   def create
     @administrator = Administrator.new(administrator_params)
     @administrator.save
-    respond_with @administrator
+    respond_with :admin, @administrator
   end
 
   def update
     @administrator.update(administrator_params)
-    respond_with @administrator
+    respond_with :admin, @administrator
   end
 
   def destroy
     if current_user.main
       if @administrator.main
-        redirect_to @administrator, alert: I18n.t('flash.actions.destroy.alerts.main_administrator')
+        redirect_to [:admin, @administrator], alert: I18n.t('flash.actions.destroy.alerts.main_administrator')
       else
         @administrator.destroy
-        respond_with @administrator, location: -> { administrators_path }
+        respond_with @administrator, location: -> { admin_administrators_path }
       end
     end
   end

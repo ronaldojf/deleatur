@@ -22,12 +22,12 @@ class <%= controller_class_name %>Controller < ApplicationController
   def create
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "#{singular_table_name}_params") %>
     @<%= orm_instance.save %>
-    respond_with @<%= singular_table_name %>
+    respond_with :<%= singular_table_name %>, @<%= singular_table_name %>
   end
 
   def update
     @<%= orm_instance.update("#{singular_table_name}_params") %>
-    respond_with @<%= singular_table_name %>
+    respond_with :<%= singular_table_name %>, @<%= singular_table_name %>
   end
 
   def destroy

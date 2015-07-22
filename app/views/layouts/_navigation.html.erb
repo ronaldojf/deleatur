@@ -25,7 +25,7 @@
             </li>
             <li class='divider'></li>
             <li>
-              <%= link_to send("destroy_#{current_user.user_type}_session_path"), method: :delete,
+              <%= link_to destroy_session_path(current_user.user_type), method: :delete,
                   data: {confirm: t('js.messages.contents.signout')} do %>
                 <i class='fa fa-sign-out'></i> <%= t('profile.signout') %>
               <% end %>

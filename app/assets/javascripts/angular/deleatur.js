@@ -1,5 +1,5 @@
 (function() {
-  window.deleatur = angular.module('deleatur', ['ngTable', 'ui.utils.masks', 'idf.br-filters', 'ng-rails-csrf', 'deleatur.filters'])
+  window.deleatur = window.angular.module('deleatur', ['ngTable', 'ui.utils.masks', 'idf.br-filters', 'ng-rails-csrf', 'deleatur.filters'])
 
   .directive('ngEnter', function() {
     return function(scope, element, attrs) {
@@ -12,7 +12,7 @@
           event.preventDefault();
         }
       });
-    }
+    };
   })
 
   .directive('loadingContainer', function () {
@@ -20,7 +20,7 @@
       restrict: 'A',
       scope: false,
       link: function(scope, element, attrs) {
-        var loadingLayer = angular.element('<div class="loading"></div>');
+        var loadingLayer = window.angular.element('<div class="loading"></div>');
         element.append(loadingLayer);
         element.addClass('loading-container');
         scope.$watch(attrs.loadingContainer, function(value) {
@@ -43,5 +43,5 @@
         });
       }
     };
-  }])
+  }]);
 })();

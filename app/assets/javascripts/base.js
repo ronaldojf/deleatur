@@ -1,5 +1,5 @@
 $(function() {
-  Turbolinks.enableProgressBar();
+  window.Turbolinks.enableProgressBar();
 
   window.App = function() {
     this.binds();
@@ -8,28 +8,26 @@ $(function() {
   App.prototype.markDirty = function() {
     if (!window._isDirty) {
       $(window).bind("beforeunload", function(e){
-        var message = I18n.t('js.forms.unsaved.default');
+        var message = window.I18n.t('js.forms.unsaved.default');
 
         e = e || window.event;
         e.returnValue = message;
       });
     }
     window._isDirty = true;
-  }
+  };
 
   App.prototype.clearDirty = function() {
     window._isDirty = false;
     window.hrefDirty = undefined;
     $(window).unbind("beforeunload");
-  }
+  };
 
   App.prototype.binds = function() {
-    $("[data-toggle=tooltip]").on("click", function(e) {
-      e.preventDefault();
-    }).tooltip();
+    $('[data-toggle=tooltip]').on('click', function(e) { e.preventDefault(); }).tooltip();
 
-    $("[data-form-submit]").on("click", function(e) {
-      var form = $("[action='" + $(this).data("form-submit") + "']");
+    $('[data-form-submit]').on('click', function(e) {
+      var form = $("[action='" + $(this).data('form-submit') + "']");
 
       if (form.find("input[type='submit']").length > 0) {
         form.find("input[type='submit']").click();
@@ -40,12 +38,12 @@ $(function() {
       e.preventDefault();
     });
 
-    $("body").on("click", "tr[data-href] td:not([data-no-href])", function(e) {
-      Turbolinks.visit($(this).parents("tr:first").data("href"));
+    $('body').on('click', 'tr[data-href] td:not([data-no-href])', function() {
+      window.Turbolinks.visit($(this).parents('tr:first').data('href'));
     });
 
     setTimeout(function() {
-      $("[autofocus]:first").focus();
+      $('[autofocus]:first').focus();
     }, 500);
 
     $('[responsive-focus]:first').each(function() {
@@ -71,19 +69,23 @@ $(function() {
       });
 
       $('form').on('submit', function() {
-        $('[fake-password]').val('');
+        $('[fake-password]').each(function() {
+          if ($(this).val() === window.fakePassword) {
+            $(this).val('');
+          }
+        });
       });
     }
-  }
+  };
 
-  $(document).on("page:change", function() {
+  $(document).on('page:change', function() {
     window.app = new window.App();
 
-    $("form.protected *, .protected form *").on("change", function() {
-      app.markDirty();
+    $('form.protected *, .protected form *').on('change', function() {
+      window.app.markDirty();
     });
 
-    $("a[href^='/'], a[href^='/'] *").on("click", function(e) {
+    $("a[href^='/'], a[href^='/'] *").on('click', function(e) {
       if (window._isDirty) {
       var target = $(e.target);
 
@@ -96,7 +98,7 @@ $(function() {
     });
 
     $("div.form form").on("submit", function() {
-      app.clearDirty();
+      window.app.clearDirty();
     });
 
     $.rails.allowAction = function(link) {
@@ -112,43 +114,43 @@ $(function() {
         link.removeAttr('data-confirm');
         link.trigger('click.rails');
       } else {
-        Turbolinks.visit(link.attr('href'));
+        window.Turbolinks.visit(link.attr('href'));
       }
     };
 
     $.rails.showConfirmDialog = function(link) {
-      message = link.attr('data-confirm');
-      swal({
-        title: I18n.t('js.messages.titles.sure'),
+      var message = link.attr('data-confirm');
+      window.swal({
+        title: window.I18n.t('js.messages.titles.sure'),
         text: message,
-        type: "warning",
+        type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#1ab394",
-        cancelButtonColor: "#f3f3f4",
-        confirmButtonText: I18n.t('js.buttons.ok'),
-        cancelButtonText: I18n.t('js.buttons.cancel')
+        confirmButtonColor: '#1ab394',
+        cancelButtonColor: '#f3f3f4',
+        confirmButtonText: window.I18n.t('js.buttons.ok'),
+        cancelButtonText: window.I18n.t('js.buttons.cancel')
       });
-      $('.sweet-alert .confirm').on('click', function() { $.rails.confirmed(link) });
+      $('.sweet-alert .confirm').on('click', function() { $.rails.confirmed(link); });
     };
   });
 
-  $(document).on("page:before-change", function(e) {
+  $(document).on('page:before-change', function(e) {
     if (window._isDirty && window.hrefDirty) {
       e.preventDefault();
-      swal({
-        title: I18n.t('js.messages.titles.sure'),
-        text: I18n.t('js.forms.unsaved.quit'),
-        type: "warning",
+      window.swal({
+        title: window.I18n.t('js.messages.titles.sure'),
+        text: window.I18n.t('js.forms.unsaved.quit'),
+        type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#1ab394",
-        cancelButtonColor: "#f3f3f4",
-        confirmButtonText: I18n.t('js.buttons.ok'),
-        cancelButtonText: I18n.t('js.buttons.cancel')
+        confirmButtonColor: '#1ab394',
+        cancelButtonColor: '#f3f3f4',
+        confirmButtonText: window.I18n.t('js.buttons.ok'),
+        cancelButtonText: window.I18n.t('js.buttons.cancel')
       }, function(confirmed) {
         if (confirmed) {
           var path = window.hrefDirty;
-          app.clearDirty();
-          Turbolinks.visit(path);
+          window.app.clearDirty();
+          window.Turbolinks.visit(path);
         }
       });
     }
