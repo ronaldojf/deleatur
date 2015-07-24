@@ -19,8 +19,6 @@ class ApplicationController < ActionController::Base
     nil
   end
 
-  protected
-
   def store_controller_config(name, value)
     session[key_for_controller_session] ||= {}
     session[key_for_controller_session][name.to_s] = value
