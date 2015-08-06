@@ -14,6 +14,7 @@ pt-BR:
       administrators: Administradores
       teachers: Professores
       students: Alunos
+      subjects: Disciplinas
     footers: *page_titles
 
   users:
@@ -52,7 +53,6 @@ pt-BR:
     forgot_password: Esqueceu sua senha?
     send_password_instructions: Enviar instruções de troca de senha
     change_my_password: Trocar minha senha
-    change_password: Trocar minha senha
 
   login:
     administrator:
@@ -105,6 +105,7 @@ pt-BR:
     edit: editar
     publish: publicar
     administrators: administradores
+    subjects: disciplinas
     teachers: professores
     students: alunos
     profile: perfil
@@ -126,6 +127,9 @@ pt-BR:
       student:
         one: Aluno
         other: Alunos
+      subject:
+        one: Disciplina
+        other: Disciplinas
     attributes: &attributes
       person: &person
         name: Nome
@@ -148,6 +152,8 @@ pt-BR:
       student:
         <<: *person
         <<: *user
+      subject:
+        description: Descrição
 
   enums:
     names: &enum_names

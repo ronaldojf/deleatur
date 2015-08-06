@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+
   localized do
     devise_for :administrators, path: :admin
 
     namespace :admin do
-      resources :administrators
       resource :profile, only: [:edit, :update]
+      resources :administrators
+      resources :subjects
       root 'home#index'
     end
 

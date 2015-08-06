@@ -4,3 +4,12 @@
     <span class="nav-label"><%= t('models_and_attributes.models.administrator.other') %></span>
   <% end %>
 </li>
+
+<li class="<%= is_active_controller('subjects') %>">
+  <%= link_to admin_subjects_path do %>
+    <i class='fa fa-book'></i>
+    <span class="nav-label"><%= t('models_and_attributes.models.subject.other') %></span>
+  <% end %>
+</li>
+
+<!-- Sempre procurar todos os ícones -->

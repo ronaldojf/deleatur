@@ -47,7 +47,7 @@ $(function() {
     }, 500);
 
     $('[responsive-focus]:first').each(function() {
-      if (window.innerWidth >= 769) {
+      if (window.innerWidth > 1024) {
         $(this).focus();
       }
     });

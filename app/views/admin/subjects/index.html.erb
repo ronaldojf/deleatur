@@ -2,16 +2,16 @@
 <% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
-      <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
+      <h2><%= t('models_and_attributes.models.subject.other') %></h2>
       <ol class='breadcrumb'>
         <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
         <li class='active'>
-          <strong><%= t('page.modules.administrators') %></strong>
+          <strong><%= t('page.modules.subjects') %></strong>
         </li>
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
-      <%= link_to [:new, :admin, :administrator], class: 'btn btn-w-s btn-primary m-t-md' do %>
+      <%= link_to [:new, :admin, :subject], class: 'btn btn-w-s btn-primary m-t-md' do %>
         <i class='fa fa-plus'></i><br/>
         <%= t('buttons.new') %>
       <% end %>
@@ -20,7 +20,7 @@
 <% end %>
 
 <div class="row responsive-padding">
-  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminAdministrators')">
+  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminSubjects')">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
         <h5>
@@ -50,13 +50,10 @@
         <div class='table-responsive' ng-show='tableParams.data.length > 0'>
           <div loading-container='tableParams.settings().$loading'>
             <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>
-              <tr data-href='{{administrator.showHtmlUrl}}' ng-repeat='administrator in $data track by administrator.id'>
+              <tr data-href='{{subject.showHtmlUrl}}' ng-repeat='subject in $data track by subject.id'>
 
-                <td data-title="'<%= t('activerecord.attributes.administrator.name') %>'" sortable="'name'">
-                  {{administrator.name}}
-                </td>
-                <td data-title="'<%= t('activerecord.attributes.administrator.email') %>'" sortable="'email'">
-                  {{administrator.email}}
+                <td data-title="'<%= t('activerecord.attributes.subject.description') %>'" sortable="'description'">
+                  {{subject.description}}
                 </td>
 
               </tr>

@@ -1,4 +1,4 @@
-<%% content_for :angular_controller, "<%= class_name.pluralize %>Controller" %>
+<%% content_for :angular_controller, 'BaseController' %>
 <%% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
@@ -18,9 +18,9 @@
     </div>
   </div>
 <%% end %>
-<%= instance_variables %>
+
 <div class="row responsive-padding">
-  <div class='col-xs-12' ng-init='init(<%%= @config.to_json_with_active_support_encoder %>)'>
+  <div class='col-xs-12' ng-init="initTable(<%%= @config.to_json_with_active_support_encoder %>, 'admin<%= class_name.pluralize %>')">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
         <h5>
