@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resource :profile, only: [:edit, :update]
       resources :administrators
       resources :subjects
+      resources :classrooms
       root 'home#index'
     end
 

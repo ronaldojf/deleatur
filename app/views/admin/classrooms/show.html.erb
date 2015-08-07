@@ -1,0 +1,61 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t('models_and_attributes.models.classroom.other') %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
+        <li><%= link_to t('page.modules.classrooms'), [:admin, :classrooms] %></li>
+        <li class="active">
+          <strong><%= t('actions.show') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to [:new, :admin, :classroom], class: 'btn btn-w-s btn-primary m-t-md' do %>
+        <i class='fa fa-plus'></i><br/>
+        <%= t('buttons.new') %>
+      <% end %>
+
+      <%= link_to [:edit, :admin, @classroom], class: 'btn btn-w-s btn-info m-t-md' do %>
+        <i class='fa fa-edit'></i><br/>
+        <%= t('buttons.edit') %>
+      <% end %>
+
+      <%= link_to [:admin, @classroom], class: 'btn btn-w-s btn-danger m-t-md',
+            method: :delete, data: {confirm: t('confirm.delete_record')} do %>
+        <i class='fa fa-trash'></i><br/>
+        <%= t('buttons.destroy') %>
+      <% end %>
+
+      <%= link_to [:admin, :classrooms], class: 'btn btn-w-s btn-white m-t-md m-l-sm' do %>
+        <i class='fa fa-arrow-right'></i><br/>
+        <%= t('buttons.back') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row responsive-padding">
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%= t('view.keywords.informations') %>
+        </h5>
+      </div>
+
+      <div class='ibox-content'>
+        <%= flash_messages %>
+
+        <ul class='todo-list'>
+
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.classroom.identifier') %>:</div>
+            <div class='col-sm-9'><%= @classroom.identifier %></div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

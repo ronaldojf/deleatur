@@ -1,0 +1,67 @@
+<% content_for :angular_controller, 'BaseController' %>
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t('models_and_attributes.models.classroom.other') %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
+        <li class='active'>
+          <strong><%= t('page.modules.classrooms') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to [:new, :admin, :classroom], class: 'btn btn-w-s btn-primary m-t-md' do %>
+        <i class='fa fa-plus'></i><br/>
+        <%= t('buttons.new') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row responsive-padding">
+  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminClassrooms')">
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%= t('view.keywords.list') %>&nbsp;&nbsp;&nbsp;
+          <big><i class='fa fa-spinner fa-spin text-success' ng-show='loading'></i></big>
+        </h5>
+      </div>
+
+      <div class='ibox-content'>
+        <%= flash_messages %>
+
+        <div class='m-b-lg'>
+          <div class='form-inputs'>
+            <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
+                class='form-control input-md' ng-model='config.filter.general'>
+          </div>
+          <div>
+            <small ng-bind-html='infoMessage'></small>
+            <small>
+              <a class='pull-right' ng-click='clearFilters()'><%= t('buttons.clear_filters') %></a>
+            </small>
+          </div>
+        </div>
+
+        <hr>
+        <p ng-show='tableParams.data.length == 0' class='alert alert-info'><i class='icon-info-sign'></i> <%= t('info.no_results') %></p>
+        <div class='table-responsive' ng-show='tableParams.data.length > 0'>
+          <div loading-container='tableParams.settings().$loading'>
+            <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>
+              <tr data-href='{{classroom.showHtmlUrl}}' ng-repeat='classroom in $data track by classroom.id'>
+
+                <td data-title="'<%= t('activerecord.attributes.classroom.identifier') %>'" sortable="'identifier'">
+                  {{classroom.identifier}}
+                </td>
+
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

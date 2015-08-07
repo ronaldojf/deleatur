@@ -15,6 +15,7 @@ pt-BR:
       teachers: Professores
       students: Alunos
       subjects: Disciplinas
+      classrooms: Turmas
     footers: *page_titles
 
   users:
@@ -106,6 +107,7 @@ pt-BR:
     publish: publicar
     administrators: administradores
     subjects: disciplinas
+    classrooms: turmas
     teachers: professores
     students: alunos
     profile: perfil
@@ -130,6 +132,9 @@ pt-BR:
       subject:
         one: Disciplina
         other: Disciplinas
+      classroom:
+        one: Turma
+        other: Turmas
     attributes: &attributes
       person: &person
         name: Nome
@@ -154,6 +159,8 @@ pt-BR:
         <<: *user
       subject:
         description: Descrição
+      classroom:
+        identifier: Sala
 
   enums:
     names: &enum_names

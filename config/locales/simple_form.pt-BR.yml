@@ -22,6 +22,8 @@ pt-BR:
         birthdate: Digite a Data de Nascimento
         phone: Digite o Telefone
         description: Digite a Descrição
+      classroom:
+        identifier: Digite o Identificador da Sala
     # labels:
     #   defaults:
     #     password: 'Password'

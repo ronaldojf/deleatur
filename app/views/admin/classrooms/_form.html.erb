@@ -1,0 +1,12 @@
+<%= simple_form_for([:admin, @classroom]) do |f| %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :identifier, input_html: { 'responsive-focus' => true } %>
+      </div>
+    </div>
+
+    <%= f.submit "", class: "hide" %>
+  </div>
+<% end %>

@@ -12,4 +12,11 @@
   <% end %>
 </li>
 
+<li class="<%= is_active_controller('classrooms') %>">
+  <%= link_to admin_classrooms_path do %>
+    <i class='fa fa-building-o'></i>
+    <span class="nav-label"><%= t('models_and_attributes.models.classroom.other') %></span>
+  <% end %>
+</li>
+
 <!-- Sempre procurar todos os ícones -->
