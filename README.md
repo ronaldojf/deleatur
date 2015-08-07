@@ -29,3 +29,9 @@ You can see [an example here](http://showterm.io/6a0054fb8b6b53a56ef2c#slow)
 
 1. `$ rails server` - Opens the server
 2. Open [http://localhost:3000](http://localhost:3000)
+
+## Demo URL
+
+[http://deleatur.herokuapp.com](http://deleatur.herokuapp.com)
+* Username: teste@teste.com.br
+* Password: deleatur1234
