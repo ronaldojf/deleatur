@@ -71,7 +71,7 @@ RSpec.describe Teacher, :type => :model do
   end
 
   describe '#formatted_phone' do
-    subject { build :teacher, phone: '05497902135' }
+    subject { build :teacher, phone: '5497902135' }
 
     it 'does return a formatted phone' do
       expect(subject.formatted_phone).to eq '(54) 9790-2135'
