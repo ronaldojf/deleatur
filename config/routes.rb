@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :administrators
       resources :subjects
       resources :classrooms
+      resources :teachers , only: [:index, :show, :update, :destroy]
       root 'home#index'
     end
 

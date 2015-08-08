@@ -27,6 +27,7 @@ gem 'date_validator',                 '0.8.1'
 gem 'responders',                     '2.1.0'
 gem 'route_translator',               '4.0.0'
 gem 'validates_cpf_cnpj',             '0.2.0'
+gem 'phonie',                         '3.1.12'
 
 gem 'compass-rails',                  '2.0.4'
 gem 'bootstrap-sass',                 '3.3.5.1'
@@ -80,5 +81,4 @@ group :development, :test do
   gem 'spring',                       '1.2.0'
 
   gem 'brfaker',                      '0.1.0'
-  gem 'faker',                        '1.4.3'
 end

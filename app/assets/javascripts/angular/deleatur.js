@@ -1,6 +1,5 @@
 (function() {
   window.deleatur = window.angular.module('deleatur', ['ngTable', 'ui.utils.masks', 'idf.br-filters', 'ng-rails-csrf', 'deleatur.filters'])
-
   .directive('ngEnter', function() {
     return function(scope, element, attrs) {
       element.bind('keydown keypress', function(event) {

@@ -1,0 +1,100 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t('models_and_attributes.models.teacher.other') %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
+        <li><%= link_to t('page.modules.teachers'), [:admin, :teachers] %></li>
+        <li class="active">
+          <strong><%= t('actions.show') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <% if @teacher.pending? %>
+        <%= link_to [:admin, @teacher], class: 'btn btn-w-s btn-primary m-t-md',
+              method: :patch, data: {confirm: t('confirm.approve_record')} do %>
+          <i class='fa fa-check'></i><br/>
+          <%= t('buttons.approve_register') %>
+        <% end %>
+
+        <%= link_to [:admin, @teacher], class: 'btn btn-w-s btn-danger m-t-md',
+              method: :delete, data: {confirm: t('confirm.delete_record')} do %>
+          <i class='fa fa-times'></i><br/>
+          <%= t('buttons.disapprove_register') %>
+        <% end %>
+
+      <% else %>
+
+        <% if @teacher.locked? %>
+          <%= link_to [:admin, @teacher], class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
+            <i class='fa fa-unlock'></i><br/>
+            <%= t('buttons.unlock') %>
+          <% end %>
+
+        <% else %>
+
+          <%= link_to url_for([:admin, @teacher, status: :locked]), class: 'btn btn-w-s btn-warning m-t-md',
+              method: :patch, data: {confirm: t('confirm.lock_record')} do %>
+            <i class='fa fa-lock'></i><br/>
+            <%= t('buttons.lock') %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= link_to [:admin, :teachers], class: 'btn btn-w-s btn-white m-t-md m-l-sm' do %>
+        <i class='fa fa-arrow-right'></i><br/>
+        <%= t('buttons.back') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row responsive-padding">
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%= t('view.keywords.informations') %>
+        </h5>
+      </div>
+
+      <div class='ibox-content'>
+        <%= flash_messages warning: {
+          show: !@teacher.approved?,
+          fixed: true,
+          icon: :warning,
+          message: t("infos.#{@teacher.pending? ? 'pending_register' : 'locked_record'}")
+        } %>
+
+        <ul class='todo-list'>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.teacher.name') %>:</div>
+            <div class='col-sm-9'><%= @teacher.name %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.teacher.gender') %>:</div>
+            <div class='col-sm-9'><%= t(@teacher.gender, scope: [:enums, :items, :gender]) %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.teacher.email') %>:</div>
+            <div class='col-sm-9'><%= @teacher.email %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.teacher.cpf') %>:</div>
+            <div class='col-sm-9'><%= @teacher.formatted_cpf %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.teacher.phone') %>:</div>
+            <div class='col-sm-9'><%= @teacher.formatted_phone %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.teacher.birth_date') %>:</div>
+            <div class='col-sm-9'><%= l(@teacher.birth_date) %></div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

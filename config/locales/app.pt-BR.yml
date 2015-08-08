@@ -54,6 +54,10 @@ pt-BR:
     forgot_password: Esqueceu sua senha?
     send_password_instructions: Enviar instruções de troca de senha
     change_my_password: Trocar minha senha
+    approve_register: Aprovar Cadastro
+    disapprove_register: Reprovar Cadastro
+    lock: Bloquear
+    unlock: Desbloquear
 
   login:
     administrator:
@@ -100,6 +104,8 @@ pt-BR:
 
   confirm:
     delete_record: O registro será excluído.
+    lock_record: O registro será bloqueado.
+    approve_record: O registro será aprovado.
 
   routes:
     new: novo
@@ -141,7 +147,8 @@ pt-BR:
         cpf: CPF
         formated_cpf: CPF
         gender: Sexo
-        birthdate: Data de Nascimento
+        status: Status
+        birth_date: Data de Nascimento
         phone: Telefone
       user: &user
         email: E-Mail
@@ -165,14 +172,25 @@ pt-BR:
   enums:
     names: &enum_names
       gender: Sexo
+      status: Status
     items: &enum_items
       gender:
         male: Masculino
         female: Feminino
+    specific_items: &enum_specific_items
+      teacher:
+        status:
+          pending: Aprovação Pendente
+          approved: Aprovado
+          locked: Bloqueado
 
   errors:
     custom_messages:
       current_password_not_match: não confere
+
+  infos:
+    pending_register: Cadastro pendente de aprovação.
+    locked_record: Registro bloqueado.
 
   activerecord:
     <<: *models_and_attributes
@@ -185,5 +203,6 @@ pt-BR:
       <<: *attributes
       <<: *enum_names
     options:
+      <<: *enum_specific_items
       defaults:
         <<: *enum_items

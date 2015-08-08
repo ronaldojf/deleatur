@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Classroom, :type => :model do
-  it { expect(subject).to validate_presence_of :identifier }
-  it { expect(subject).to validate_uniqueness_of :identifier }
-  it { expect(subject).to have_and_belong_to_many :subjects }
+  it { is_expected.to validate_presence_of :identifier }
+  it { is_expected.to validate_uniqueness_of :identifier }
+  it { is_expected.to have_and_belong_to_many :subjects }
 
     describe '.filter' do
     subject(:identifier) { '301-A' }

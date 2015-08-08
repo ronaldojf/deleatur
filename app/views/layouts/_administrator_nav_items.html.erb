@@ -19,4 +19,9 @@
   <% end %>
 </li>
 
-<!-- Sempre procurar todos os ícones -->
+<li class="<%= is_active_controller('teachers') %>">
+  <%= link_to admin_teachers_path do %>
+    <i class='fa fa-graduation-cap'></i>
+    <span class="nav-label"><%= t('models_and_attributes.models.teacher.other') %></span>
+  <% end %>
+</li>

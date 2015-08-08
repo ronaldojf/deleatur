@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Administrator, :type => :model do
-  it { expect(subject).to validate_presence_of :name }
+  it { is_expected.to validate_presence_of :name }
 
     describe '.filter' do
     subject(:name) { 'Jonh' }

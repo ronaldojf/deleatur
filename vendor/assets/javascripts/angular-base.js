@@ -3,3 +3,4 @@
 //= require angular/filters
 //= require angular/ng-table
 //= require angular/masks
+// require angular/ngMask
