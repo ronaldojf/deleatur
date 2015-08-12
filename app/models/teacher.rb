@@ -1,6 +1,9 @@
 class Teacher < ActiveRecord::Base
   only_digits :phone
 
+  has_and_belongs_to_many :classrooms
+  has_and_belongs_to_many :subjects
+
   enum gender: [:male, :female]
   enum status: [:pending, :approved, :locked]
 
