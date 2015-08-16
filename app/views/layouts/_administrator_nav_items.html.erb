@@ -21,7 +21,14 @@
 
 <li class="<%= is_active_controller('teachers') %>">
   <%= link_to admin_teachers_path do %>
-    <i class='fa fa-graduation-cap'></i>
+    <i class='fa fa-group'></i>
     <span class="nav-label"><%= t('models_and_attributes.models.teacher.other') %></span>
+  <% end %>
+</li>
+
+<li class="<%= is_active_controller('students') %>">
+  <%= link_to admin_students_path do %>
+    <i class='fa fa-graduation-cap'></i>
+    <span class="nav-label"><%= t('models_and_attributes.models.student.other') %></span>
   <% end %>
 </li>

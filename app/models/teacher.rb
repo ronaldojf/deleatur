@@ -9,7 +9,7 @@ class Teacher < ActiveRecord::Base
 
   validates :name, :gender, :cpf, :phone, :birth_date, presence: true
   validates :birth_date, date: { before_than: Proc.new { Date.current } }
-  validates :cpf, cpf: true
+  validates :cpf, cpf: true, uniqueness: true
   validates :phone, phone: true
   validates :gender, inclusion: { in: Teacher.genders.keys }
   validates :status, inclusion: { in: Teacher.statuses.keys }

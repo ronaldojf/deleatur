@@ -1,0 +1,84 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t('models_and_attributes.models.student.other') %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
+        <li><%= link_to t('page.modules.students'), [:admin, :students] %></li>
+        <li class="active">
+          <strong><%= t('actions.show') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <% if @student.locked? %>
+        <%= link_to [:admin, @student], class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
+          <i class='fa fa-unlock'></i><br/>
+          <%= t('buttons.unlock') %>
+        <% end %>
+
+      <% else %>
+
+        <%= link_to url_for([:admin, @student, status: :locked]), class: 'btn btn-w-s btn-warning m-t-md',
+            method: :patch, data: {confirm: t('confirm.lock_record')} do %>
+          <i class='fa fa-lock'></i><br/>
+          <%= t('buttons.lock') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row responsive-padding">
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%= t('view.keywords.informations') %>
+        </h5>
+      </div>
+
+      <div class='ibox-content'>
+        <%= flash_messages warning: {
+          show: @student.locked?,
+          fixed: true,
+          icon: :warning,
+          message: t('infos.locked_record')
+        } %>
+
+        <ul class='todo-list'>
+
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.name') %>:</div>
+            <div class='col-sm-9'><%= @student.name %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.gender') %>:</div>
+            <div class='col-sm-9'><%= t(@student.gender, scope: [:enums, :items, :gender]) %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.email') %>:</div>
+            <div class='col-sm-9'><%= @student.email %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.cpf') %>:</div>
+            <div class='col-sm-9'><%= @student.formatted_cpf %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.phone') %>:</div>
+            <div class='col-sm-9'><%= @student.formatted_phone %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.birth_date') %>:</div>
+            <div class='col-sm-9'><%= l(@student.birth_date) %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.student.classroom') %>:</div>
+            <div class='col-sm-9' data-href='<%= url_for([:admin, @student.classroom]) %>'><%= @student.classroom.identifier %></div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

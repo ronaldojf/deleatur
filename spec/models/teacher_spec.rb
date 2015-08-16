@@ -6,7 +6,7 @@ RSpec.describe Teacher, :type => :model do
   it { is_expected.to validate_presence_of :cpf }
   it { is_expected.to validate_presence_of :phone }
   it { is_expected.to validate_presence_of :birth_date }
-  it { is_expected.to validate_presence_of :birth_date }
+  it { is_expected.to validate_uniqueness_of :cpf }
   it { is_expected.to define_enum_for :gender }
   it { is_expected.to define_enum_for :status }
   it { is_expected.to have_and_belong_to_many :classrooms }

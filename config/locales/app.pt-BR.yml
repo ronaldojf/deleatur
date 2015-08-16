@@ -13,7 +13,7 @@ pt-BR:
       login: Login
       administrators: Administradores
       teachers: Professores
-      students: Alunos
+      students: Estudantes
       subjects: Disciplinas
       classrooms: Turmas
     footers: *page_titles
@@ -115,7 +115,7 @@ pt-BR:
     subjects: disciplinas
     classrooms: turmas
     teachers: professores
-    students: alunos
+    students: estudantes
     profile: perfil
     password: senha
     sign_in: entrar
@@ -133,8 +133,8 @@ pt-BR:
         one: Professor
         other: Professores
       student:
-        one: Aluno
-        other: Alunos
+        one: Estudante
+        other: Estudantes
       subject:
         one: Disciplina
         other: Disciplinas
@@ -164,6 +164,7 @@ pt-BR:
       student:
         <<: *person
         <<: *user
+        classroom: Sala de Aula
       subject:
         description: Descrição
       classroom:
@@ -182,6 +183,10 @@ pt-BR:
         status:
           pending: Aprovação Pendente
           approved: Aprovado
+          locked: Bloqueado
+      student:
+        status:
+          normal: Normal
           locked: Bloqueado
 
   errors:
