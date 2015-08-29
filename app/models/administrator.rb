@@ -1,4 +1,5 @@
 class Administrator < ActiveRecord::Base
+  include User::Base
   devise :database_authenticatable, :recoverable, :validatable
 
   attr_accessor :current_password, :validate_current_password

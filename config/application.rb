@@ -8,7 +8,6 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 
-require File.expand_path('../../lib/base', __FILE__)
 Bundler.require(*Rails.groups)
 
 module Deleatur

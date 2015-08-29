@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    I18n.t('users').each do |key, value|
+    [:administrator, :teacher, :student].each do |key|
       return send("current_#{key}") if respond_to? "current_#{key}"
     end
 

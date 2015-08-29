@@ -1,4 +1,5 @@
 class Teacher < ActiveRecord::Base
+  include User::Base, Person::Base, Utils::AttributesCleaner
   only_digits :phone
 
   has_and_belongs_to_many :classrooms
@@ -22,16 +23,6 @@ class Teacher < ActiveRecord::Base
         text: "%#{text}%", special: "%#{cleaned_text}%")
     end
   }
-
-  def formatted_phone
-    cleaned_phone = self.phone.gsub(/\D/, '')
-    Phonie.configure { |c| c.n1_length = (cleaned_phone.size > 10) ? 5 : 4 }
-    Phonie::Phone.parse(cleaned_phone).format(:br)
-  end
-
-  def formatted_cpf
-    Cpf.new(self.cpf).to_s
-  end
 
   def lock
     self.update status: :locked if self.approved?

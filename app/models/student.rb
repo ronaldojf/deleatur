@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+  include User::Base, Person::Base, Utils::AttributesCleaner
   only_digits :phone
 
   belongs_to :classroom
@@ -17,8 +18,7 @@ class Student < ActiveRecord::Base
     if text.present?
       cleaned_text = text.gsub(/[\-|\s|\.|\(|\)]/, '')
 
-      joins(:classroom)
-      .where('name ILIKE :text OR email ILIKE :text OR cpf ILIKE :special OR phone ILIKE :special',
+      where('name ILIKE :text OR email ILIKE :text OR cpf ILIKE :special OR phone ILIKE :special',
         text: "%#{text}%", special: "%#{cleaned_text}%")
     end
   }
@@ -30,16 +30,6 @@ class Student < ActiveRecord::Base
       .where{classrooms.id == classroom}
     end
   }
-
-  def formatted_phone
-    cleaned_phone = self.phone.to_s.gsub(/\D/, '')
-    Phonie.configure { |c| c.n1_length = (cleaned_phone.size > 10) ? 5 : 4 }
-    Phonie::Phone.parse(cleaned_phone).try(:format, :br)
-  end
-
-  def formatted_cpf
-    Cpf.new(self.cpf).to_s
-  end
 
   def lock
     self.update status: :locked if self.normal?
