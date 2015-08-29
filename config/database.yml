@@ -1,21 +1,19 @@
-development:
+default: &default
   adapter: postgresql
   encoding: utf8
-  database: deleatur_development
   pool: 5
   username: postgres
   host: localhost
   template: template0
 
+development:
+  <<: *default
+  database: deleatur_development
+
 test:
-  adapter: postgresql
-  encoding: utf8
+  <<: *default
   database: deleatur_test
-  pool: 5
-  username: postgres
   min_messages: WARNING
-  host: localhost
-  template: template0
 
 production:
   adapter: postgresql

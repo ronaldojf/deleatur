@@ -1,32 +1,32 @@
-<li class="<%= is_active_controller('administrators') %>">
+<li class="<%= class_for_item_menu('administrators') %>">
   <%= link_to admin_administrators_path do %>
     <i class='fa fa-user'></i>
     <span class="nav-label"><%= t('models_and_attributes.models.administrator.other') %></span>
   <% end %>
 </li>
 
-<li class="<%= is_active_controller('subjects') %>">
+<li class="<%= class_for_item_menu('subjects') %>">
   <%= link_to admin_subjects_path do %>
     <i class='fa fa-book'></i>
     <span class="nav-label"><%= t('models_and_attributes.models.subject.other') %></span>
   <% end %>
 </li>
 
-<li class="<%= is_active_controller('classrooms') %>">
+<li class="<%= class_for_item_menu('classrooms') %>">
   <%= link_to admin_classrooms_path do %>
     <i class='fa fa-building-o'></i>
     <span class="nav-label"><%= t('models_and_attributes.models.classroom.other') %></span>
   <% end %>
 </li>
 
-<li class="<%= is_active_controller('teachers') %>">
+<li class="<%= class_for_item_menu('teachers') %>">
   <%= link_to admin_teachers_path do %>
     <i class='fa fa-group'></i>
     <span class="nav-label"><%= t('models_and_attributes.models.teacher.other') %></span>
   <% end %>
 </li>
 
-<li class="<%= is_active_controller('students') %>">
+<li class="<%= class_for_item_menu('students') %>">
   <%= link_to admin_students_path do %>
     <i class='fa fa-graduation-cap'></i>
     <span class="nav-label"><%= t('models_and_attributes.models.student.other') %></span>

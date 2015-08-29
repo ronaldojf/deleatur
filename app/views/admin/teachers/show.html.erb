@@ -43,7 +43,7 @@
       <% end %>
 
       <%= link_to [:admin, :teachers], class: 'btn btn-w-s btn-white m-t-md m-l-sm' do %>
-        <i class='fa fa-arrow-right'></i><br/>
+        <i class='fa fa-reply'></i><br/>
         <%= t('buttons.back') %>
       <% end %>
     </div>
@@ -60,7 +60,7 @@
       </div>
 
       <div class='ibox-content'>
-        <%= flash_messages warning: {
+        <%= custom_flash_messages warning: {
           show: !@teacher.approved?,
           fixed: true,
           icon: :warning,

@@ -1,6 +1,11 @@
 $(function() {
   window.Turbolinks.enableProgressBar();
 
+  window.localizedPath = function(args) {
+    var pathPrefix = [].shift.apply(arguments);
+    return window.Routes[pathPrefix + window.I18n.pathLocale].apply(this, arguments);
+  };
+
   window.App = function() {
     this.binds();
   };
@@ -42,15 +47,11 @@ $(function() {
       window.Turbolinks.visit($(this).parents('tr:first').data('href'));
     });
 
-    setTimeout(function() {
-      $('[autofocus]:first').focus();
-    }, 500);
-
-    $('[responsive-focus]:first').each(function() {
-      if (window.innerWidth > 1024) {
-        $(this).focus();
-      }
-    });
+    if ($('html.no-touch').length > 0) {
+      setTimeout(function() {
+        $('[responsive-focus]:first').focus();
+      }, 500);
+    }
 
     if ($('[fake-password]').length > 0) {
       window.fakePassword = Math.random().toString(36).substring(8);

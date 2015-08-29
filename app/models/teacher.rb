@@ -16,8 +16,10 @@ class Teacher < ActiveRecord::Base
 
   scope :filter, -> (text) {
     if text.present?
+      cleaned_text = text.gsub(/[\-|\s|\.|\(|\)]/, '')
+
       where('name ILIKE :text OR email ILIKE :text OR cpf ILIKE :special OR phone ILIKE :special',
-        text: "%#{text}%", special: "%#{text.gsub(/[\-|\s|\.|\(|\)]/, '')}%")
+        text: "%#{text}%", special: "%#{cleaned_text}%")
     end
   }
 

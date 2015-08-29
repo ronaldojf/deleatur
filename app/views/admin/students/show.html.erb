@@ -39,7 +39,7 @@
       </div>
 
       <div class='ibox-content'>
-        <%= flash_messages warning: {
+        <%= custom_flash_messages warning: {
           show: @student.locked?,
           fixed: true,
           icon: :warning,

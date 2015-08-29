@@ -18,7 +18,7 @@ deleatur
           $scope.loading = true;
           $scope.infoMessage = $sce.trustAsHtml(window.I18n.t('js.info.loading'));
 
-          $http.get(Routes[pathPrefix + window.I18n.pathLocale](request))
+          $http.get(window.localizedPath(pathPrefix, request))
             .success(function(data) {
               $scope.loading = false;
               $scope.infoMessage = $sce.trustAsHtml(window.I18n.t('js.info.records_found_html', {count: data.total}));
