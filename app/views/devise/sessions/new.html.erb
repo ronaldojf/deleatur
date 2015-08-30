@@ -9,7 +9,7 @@
       <%= f.input :email, label: false, required: true, input_html: {'responsive-focus' => true} %>
       <%= f.input :password, label: false, required: true %>
 
-      <%= custom_flash_messages fixed: true %>
+      <%= flash_messages %>
       <div class='form-actions'>
         <%= f.button :submit, t('buttons.signin'), class: 'btn btn-primary block full-width m-b' %>
       </div>

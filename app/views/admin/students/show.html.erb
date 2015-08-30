@@ -11,6 +11,11 @@
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
+    <%= link_to [:edit, :admin, @student], class: 'btn btn-w-s btn-info m-t-md' do %>
+        <i class='fa fa-edit'></i><br/>
+        <%= t('buttons.edit') %>
+      <% end %>
+
       <% if @student.locked? %>
         <%= link_to [:admin, @student], class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
           <i class='fa fa-unlock'></i><br/>
@@ -29,6 +34,7 @@
   </div>
 <% end %>
 
+<%= flash_messages %>
 <div class="row responsive-padding">
   <div class='col-xs-12'>
     <div class='ibox float-e-margins'>

@@ -9,17 +9,12 @@ module ApplicationHelper
   end
 
   # options = {
-  #   fixed:      true,     # general alerts types without dismissable
-  #   icon:       'user',   # general alerts types with icon
-  #   alert: {                # alert type
-  #     fixed:    true,         # specific alert type without dismissable
-  #     icon:     'flag',       # specific alert type with icon
-  #     show:     true,         # show a specific alert type
-  #     message:  'Hi!'         # display a message to a specific alert type
-  #   }
+  #   icon:       'user',    # general alerts types with icon
+  #   alert: {icon: 'user'}, # general alerts types with icon
+  #   notice: {icon: 'user'} # general alerts types with icon
   # }
   #
-  # the available types are notice, alert, warning and info
+  # the available types are notice and alert
   def flash_messages(options = {})
     options[:alert] ||= {}
     options[:notice] ||= {}

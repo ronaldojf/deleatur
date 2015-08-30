@@ -13,6 +13,7 @@
   </div>
 <% end %>
 
+<%= flash_messages %>
 <div class="row responsive-padding">
   <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminStudents');
                                   classrooms = <%= Classroom.all.to_json_with_active_support_encoder %>">
@@ -25,8 +26,6 @@
       </div>
 
       <div class='ibox-content'>
-        <%= flash_messages %>
-
         <div class='m-b-lg'>
           <div class='row'>
               <div class='col-md-8 m-t-xs'>
@@ -39,6 +38,7 @@
                         class='form-control'
                         ng-model='config.filter.classroom'
                         ng-options='classroom.id as classroom.identifier for classroom in classrooms'>
+                  <option value=''></option>
                 </select>
               </div>
           </div>

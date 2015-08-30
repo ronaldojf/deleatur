@@ -35,6 +35,7 @@
   </div>
 <% end %>
 
+<%= flash_messages %>
 <div class="row responsive-padding">
   <div class='col-xs-12'>
     <div class='ibox float-e-margins'>
@@ -45,8 +46,6 @@
       </div>
 
       <div class='ibox-content'>
-        <%= flash_messages %>
-
         <ul class='todo-list'>
           <li class='show-action-label'>
             <div class='col-sm-3'><%= t('activerecord.attributes.administrator.name') %>:</div>

@@ -1,5 +1,5 @@
 class Admin::StudentsController < Admin::BaseController
-  before_action :set_student, only: [:show, :update, :destroy]
+  before_action :set_student, only: [:show, :update, :edit, :destroy]
 
   def index
     #Separar código repetido
@@ -16,8 +16,12 @@ class Admin::StudentsController < Admin::BaseController
   end
 
   def update
-    (params[:status] == 'locked') ? @student.lock : @student.unlock
-    #Atualizar turma
+    if params[:status].present?
+      (params[:status] == 'locked') ? @student.lock : @student.unlock
+    else
+      @student.update(student_params)
+    end
+
     respond_with :admin, @student
   end
 
@@ -25,5 +29,9 @@ class Admin::StudentsController < Admin::BaseController
 
   def set_student
     @student = Student.find(params[:id])
+  end
+
+  def student_params
+    params.require(:student).permit(:classroom_id)
   end
 end
