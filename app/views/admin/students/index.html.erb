@@ -14,7 +14,8 @@
 <% end %>
 
 <div class="row responsive-padding">
-  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminStudents')">
+  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminStudents');
+                                  classrooms = <%= Classroom.all.to_json_with_active_support_encoder %>">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
         <h5>
@@ -27,15 +28,27 @@
         <%= flash_messages %>
 
         <div class='m-b-lg'>
-          <div class='form-inputs'>
-            <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                class='form-control input-md' ng-model='config.filter.general'>
+          <div class='row'>
+              <div class='col-md-8 m-t-xs'>
+                <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
+                    class='form-control input-md' ng-model='config.filter.general'>
+              </div>
+              <div class='col-md-4 m-t-xs'>
+                <select chosen data-placeholder="<%= t('activerecord.attributes.student.classroom') %>"
+                        allow-single-deselect='true'
+                        class='form-control'
+                        ng-model='config.filter.classroom'
+                        ng-options='classroom.id as classroom.identifier for classroom in classrooms'>
+                </select>
+              </div>
           </div>
-          <div>
-            <small ng-bind-html='infoMessage'></small>
-            <small>
-              <a class='pull-right' ng-click='clearFilters()'><%= t('buttons.clear_filters') %></a>
-            </small>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <small ng-bind-html='infoMessage'></small>
+              <small>
+                <a class='pull-right' ng-click='clearFilters()'><%= t('buttons.clear_filters') %></a>
+              </small>
+            </div>
           </div>
         </div>
 

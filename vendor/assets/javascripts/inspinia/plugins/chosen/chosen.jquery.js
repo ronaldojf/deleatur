@@ -449,11 +449,12 @@
         };
 
         AbstractChosen.prototype.container_width = function() {
-            if (this.options.width != null) {
-                return this.options.width;
-            } else {
-                return "" + this.form_field.offsetWidth + "px";
-            }
+            return '100%';
+            // if (this.options.width != null) {
+            //     return this.options.width;
+            // } else {
+            //     return "" + this.form_field.offsetWidth + "px";
+            // }
         };
 
         AbstractChosen.prototype.include_option_in_results = function(option) {

@@ -3,4 +3,5 @@
 //= require angular/filters
 //= require angular/ng-table
 //= require angular/masks
+//= require angular-chosen-localytics/chosen
 // require angular/ngMask

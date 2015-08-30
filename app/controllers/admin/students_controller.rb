@@ -7,9 +7,10 @@ class Admin::StudentsController < Admin::BaseController
       format.html { render :index }
       format.json do
         @students = scope_for_ng_table(Student)
-                            .filter(params[:filter].try(:[], :general).to_s)
                             .includes(:classroom)
                             .references(:all)
+                            .filter(params[:filter].try(:[], :general).to_s)
+                            .in_classroom(params[:filter].try(:[], :classroom).to_s)
       end
     end
   end

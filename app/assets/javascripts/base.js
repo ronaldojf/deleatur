@@ -77,6 +77,12 @@ $(function() {
         });
       });
     }
+
+    setTimeout(function() {
+      if ($('[chosen]').length > 0) {
+        $('[chosen]').data('chosen').results_none_found = window.I18n.t('js.chosen.results_none_found');
+      }
+    });
   };
 
   $(document).on('page:change', function() {

@@ -34,7 +34,10 @@ deleatur
     };
 
     $scope.clearFilters = function() {
-      $scope.config.filter.general = '';
-      $('#filter').focus();
+      Object.keys($scope.config.filter || {}).forEach(function(key) {
+        $scope.config.filter[key] = undefined;
+      });
+
+      $scope.tableParams.$params.sorting = {};
     };
   }]);

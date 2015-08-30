@@ -22,3 +22,5 @@ pt-BR:
         other: ! Foram encontrados <strong>%{count}</strong> registros
     errors:
       searching_records: 'Ocorreu um erro ao tentar buscar os registros, tente novamente mais tarde'
+    chosen:
+      results_none_found: Nada foi encontrado para
