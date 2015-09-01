@@ -1,5 +1,5 @@
 deleatur
-  .controller('BaseController', ['$scope', '$http', '$sce', 'ngTableParams', function($scope, $http, $sce, ngTableParams) {
+  .controller('NgTableController', ['$scope', '$http', '$sce', 'ngTableParams', function($scope, $http, $sce, ngTableParams) {
 
     $scope.initTable = function(config, pathPrefix) {
       $scope.config = config;

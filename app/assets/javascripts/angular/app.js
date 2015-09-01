@@ -1,6 +1,6 @@
 //= require angular/custom-filters
 //= require angular/deleatur
-//= require angular/controllers/BaseController
+//= require angular/controllers/NgTableController
 
 $(document).on('page:change', function(){
   if (!$('body').scope()) {

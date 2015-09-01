@@ -1,5 +1,5 @@
 class Administrator < ActiveRecord::Base
-  include User::Base
+  include User::Base, Utils::Filtering
   devise :database_authenticatable, :recoverable, :validatable
 
   attr_accessor :current_password, :validate_current_password
@@ -7,9 +7,7 @@ class Administrator < ActiveRecord::Base
   validates :name, presence: true
   validate :authenticate_password, if: :validate_current_password
 
-  scope :filter, -> (text) {
-    where('name ILIKE :text OR email ILIKE :text', text: "%#{text}%") if text.present?
-  }
+  filtering :name, :email
 
   def destroy
     self.main? ? false : super

@@ -1,4 +1,4 @@
-<% content_for :angular_controller, 'BaseController' %>
+<% content_for :angular_controller, 'NgTableController' %>
 <% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
@@ -17,7 +17,7 @@
 <div class="row responsive-padding">
   <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminStudents');
                                   classrooms = <%= Classroom.all.to_json_with_active_support_encoder %>;
-                                  config.filter.classroom = <%= @config[:filter]['classroom'] || "''" %>">
+                                  config.filter.classroom = <%= @config[:filter]['classroom'] || "\'\'" %>">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
         <h5>

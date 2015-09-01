@@ -17,7 +17,7 @@
       <% end %>
 
       <% if @student.locked? %>
-        <%= link_to [:admin, @student], class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
+        <%= link_to url_for([:admin, @student, status: :unlocked]), class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
           <i class='fa fa-unlock'></i><br/>
           <%= t('buttons.unlock') %>
         <% end %>

@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
-  include User::Base, Person::Base, Utils::AttributesCleaner
+  include User::Base, Person::Base, Utils::AttributesCleaner, Utils::Filtering
   only_digits :phone
 
   belongs_to :classroom
@@ -14,14 +14,7 @@ class Student < ActiveRecord::Base
   validates :gender, inclusion: { in: Student.genders.keys }
   validates :status, inclusion: { in: Student.statuses.keys }
 
-  scope :filter, -> (text) {
-    if text.present?
-      cleaned_text = text.gsub(/[\-|\s|\.|\(|\)]/, '')
-
-      where('name ILIKE :text OR email ILIKE :text OR cpf ILIKE :special OR phone ILIKE :special',
-        text: "%#{text}%", special: "%#{cleaned_text}%")
-    end
-  }
+  filtering :name, :email, simple_clear: [:cpf, :phone]
 
   scope :in_classroom, -> (classroom) {
     classroom = classroom.try(:id) || classroom
