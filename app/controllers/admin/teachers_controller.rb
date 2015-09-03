@@ -7,6 +7,8 @@ class Admin::TeachersController < Admin::BaseController
       format.json do
         @teachers = scope_for_ng_table(Teacher)
                             .filter(params[:filter].try(:[], :general).to_s)
+                            .by_status(params[:filter].try(:[], :status).to_s)
+                            .by_gender(params[:filter].try(:[], :gender).to_s)
       end
     end
   end

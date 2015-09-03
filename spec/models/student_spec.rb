@@ -143,4 +143,52 @@ RSpec.describe Student, :type => :model do
       end
     end
   end
+
+  describe '.by_status' do
+    context "when a status 'locked' is given" do
+      before do
+        create :student, status: :locked
+        2.times { create :student, status: :normal }
+      end
+
+      it 'does return only the locked records' do
+        expect(Student.by_status('locked').count).to eq 1
+      end
+    end
+
+    context "when a status 'normal' is given" do
+      before do
+        create :student, status: :normal
+        2.times { create :student, status: :locked }
+      end
+
+      it 'does return only the normal records' do
+        expect(Student.by_status('normal').count).to eq 1
+      end
+    end
+  end
+
+  describe '.by_gender' do
+    context "when a gender 'male' is given" do
+      before do
+        create :student, gender: :male
+        2.times { create :student, gender: :female }
+      end
+
+      it 'does return only the male people' do
+        expect(Student.by_gender('male').count).to eq 1
+      end
+    end
+
+    context "when a gender 'female' is given" do
+      before do
+        create :student, gender: :female
+        2.times { create :student, gender: :male }
+      end
+
+      it 'does return only the female people' do
+        expect(Student.by_gender('female').count).to eq 1
+      end
+    end
+  end
 end

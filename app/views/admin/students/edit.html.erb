@@ -61,7 +61,7 @@
 
             <div class="row">
               <div class="col-xs-12">
-                <%= f.association :classroom, label_method: :identifier, include_blank: false %>
+                <%= f.association :classroom, label_method: :identifier, include_blank: false, input_html: { chosen: '' } %>
               </div>
             </div>
 

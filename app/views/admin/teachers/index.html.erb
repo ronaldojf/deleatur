@@ -27,9 +27,35 @@
       <div class='ibox-content'>
         <div class='m-b-lg'>
           <div class='form-inputs'>
-            <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                class='form-control input-md' ng-model='config.filter.general'>
+            <div class="row m-b-xs">
+              <div class="col-xs-12">
+                <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
+                    class='form-control input-md' ng-model='config.filter.general'>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class='col-sm-6 m-t-xs' ng-init="statuses = <%= t('enums.specific_items.teacher.status').to_json %>">
+                <select chosen data-placeholder="<%= t('activerecord.attributes.teacher.status') %>"
+                        allow-single-deselect='true'
+                        class='form-control'
+                        ng-model='config.filter.status'
+                        ng-options='key as label for (key, label) in statuses'>
+                  <option></option>
+                </select>
+              </div>
+              <div class='col-sm-6 m-t-xs' ng-init="genders = <%= t('enums.items.gender').to_json %>">
+                <select chosen data-placeholder="<%= t('activerecord.attributes.teacher.gender') %>"
+                        allow-single-deselect='true'
+                        class='form-control'
+                        ng-model='config.filter.gender'
+                        ng-options='key as label for (key, label) in genders'>
+                  <option></option>
+                </select>
+              </div>
+            </div>
           </div>
+
           <div>
             <small ng-bind-html='infoMessage'></small>
             <small>
@@ -45,14 +71,6 @@
             <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>
               <tr data-href='{{teacher.showHtmlUrl}}' ng-repeat='teacher in $data track by teacher.id'>
 
-                <td>
-                  <i class='fa'
-                      ng-class="{
-                        'fa-check-square-o text-success': (teacher.status === 'approved'),
-                        'fa-square-o text-warning': (teacher.status === 'pending'),
-                        'fa-lock text-warning': (teacher.status === 'locked')
-                      }"></i>
-                </td>
                 <td data-title="'<%= t('activerecord.attributes.teacher.name') %>'" sortable="'name'">
                   {{teacher.name}}
                 </td>

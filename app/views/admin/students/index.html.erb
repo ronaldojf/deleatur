@@ -16,8 +16,7 @@
 <%= flash_messages %>
 <div class="row responsive-padding">
   <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminStudents');
-                                  classrooms = <%= Classroom.all.to_json_with_active_support_encoder %>;
-                                  config.filter.classroom = <%= @config[:filter]['classroom'] || "\'\'" %>">
+                                  config.filter.classroom = <%= @config[:filter]['classroom'].present? ? @config[:filter]['classroom'] : "\'\'" %>">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
         <h5>
@@ -28,20 +27,41 @@
 
       <div class='ibox-content'>
         <div class='m-b-lg'>
-          <div class='row'>
-              <div class='col-md-8 m-t-xs'>
-                <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                    class='form-control input-md' ng-model='config.filter.general'>
-              </div>
-              <div class='col-md-4 m-t-xs'>
-                <select chosen data-placeholder="<%= t('activerecord.attributes.student.classroom') %>"
-                        allow-single-deselect='true'
-                        class='form-control'
-                        ng-model='config.filter.classroom'
-                        ng-options='classroom.id as classroom.identifier for classroom in classrooms'>
-                  <option value=''></option>
-                </select>
-              </div>
+          <div class='row m-b-xs'>
+            <div class='col-xs-12'>
+              <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
+                  class='form-control input-md' ng-model='config.filter.general'>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class='col-md-4 m-t-xs' ng-init='classrooms = <%= Classroom.all.to_json %>'>
+              <select chosen data-placeholder="<%= t('activerecord.attributes.student.classroom') %>"
+                      allow-single-deselect='true'
+                      class='form-control'
+                      ng-model='config.filter.classroom'
+                      ng-options="classroom.id as classroom.identifier for classroom in classrooms">
+                <option></option>
+              </select>
+            </div>
+            <div class='col-md-4 m-t-xs' ng-init="statuses = <%= t('enums.specific_items.student.status').to_json %>">
+              <select chosen data-placeholder="<%= t('activerecord.attributes.student.status') %>"
+                      allow-single-deselect='true'
+                      class='form-control'
+                      ng-model='config.filter.status'
+                      ng-options='key as label for (key, label) in statuses'>
+                <option></option>
+              </select>
+            </div>
+            <div class='col-md-4 m-t-xs' ng-init="genders = <%= t('enums.items.gender').to_json %>">
+              <select chosen data-placeholder="<%= t('activerecord.attributes.student.gender') %>"
+                      allow-single-deselect='true'
+                      class='form-control'
+                      ng-model='config.filter.gender'
+                      ng-options='key as label for (key, label) in genders'>
+                <option></option>
+              </select>
+            </div>
           </div>
           <div class='row'>
             <div class='col-xs-12'>
@@ -60,13 +80,6 @@
             <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>
               <tr data-href='{{student.showHtmlUrl}}' ng-repeat='student in $data track by student.id'>
 
-                <td>
-                  <i class='fa'
-                      ng-class="{
-                        'fa-unlock text-success': (student.status === 'normal'),
-                        'fa-lock text-warning': (student.status === 'locked')
-                      }"></i>
-                </td>
                 <td data-title="'<%= t('activerecord.attributes.student.name') %>'" sortable="'name'">
                   {{student.name}}
                 </td>

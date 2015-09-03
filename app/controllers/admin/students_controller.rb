@@ -11,6 +11,8 @@ class Admin::StudentsController < Admin::BaseController
                             .references(:all)
                             .filter(params[:filter].try(:[], :general).to_s)
                             .in_classroom(params[:filter].try(:[], :classroom).to_s)
+                            .by_status(params[:filter].try(:[], :status).to_s)
+                            .by_gender(params[:filter].try(:[], :gender).to_s)
       end
     end
   end

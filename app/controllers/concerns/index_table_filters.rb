@@ -1,5 +1,10 @@
-module AuthenticatedUsersHelper
+module IndexTableFilters
+  extend ActiveSupport::Concern
   include NgTableHelper
+
+  included do
+    before_action :filters, only: [:index]
+  end
 
   private
 
