@@ -19,7 +19,7 @@ module User::Base
     private
 
     def authenticate_password
-      if self.password.present? && !Administrator.find(self.id).valid_password?(@current_password.to_s)
+      if self.password.present? && !self.class.find(self.id).valid_password?(@current_password.to_s)
         errors.add(:current_password, I18n.t('errors.custom_messages.current_password_not_match'))
       end
     end

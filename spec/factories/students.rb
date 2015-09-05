@@ -6,5 +6,6 @@ FactoryGirl.define do
     password 'deleatur1234'
     birth_date '2000-08-12'
     association :classroom, factory: :classroom
+    confirmed_at '10/10/2010'
   end
 end

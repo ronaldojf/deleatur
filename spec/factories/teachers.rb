@@ -7,5 +7,6 @@ FactoryGirl.define do
     cpf { BrFaker::Cpf.cpf }
     phone '5498962123'
     birth_date '2000-08-07'
+    confirmed_at '10/10/2010'
   end
 end

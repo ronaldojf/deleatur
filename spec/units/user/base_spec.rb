@@ -2,8 +2,17 @@ require 'rails_helper'
 
 RSpec.describe User::Base, :type => :unit do
   let! :ExampleUser do
-    class ExampleUser
+    class ExampleUser < ActiveRecord::Base
       include User::Base
+
+      # TABLELESS
+      def self.columns
+        @columns ||= [];
+      end
+
+      def self.column(name, sql_type = nil, default = nil, null = true)
+        columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)
+      end
     end
   end
 
