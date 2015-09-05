@@ -12,7 +12,7 @@
     </title>
 
     <%= favicon_link_tag 'favicon.ico', rel: 'shortcut icon' %>
-    <%= stylesheet_link_tag    'admin/app', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    "#{current_namespace}/app", media: 'all', 'data-turbolinks-track' => true %>
 
     <!--[if lt IE 9]>
       <%= javascript_include_tag 'html5shiv.js' %>
@@ -27,7 +27,7 @@
       I18n.pathLocale = '<%= I18n.locale.to_s.underscore.camelize %>';
     </script>
 
-    <%= javascript_include_tag 'admin/app', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "#{current_namespace}/app", 'data-turbolinks-track' => true %>
   </head>
 
   <body class='<%= body_class %>' <%= raw(content_for?(:angular_controller) ? "ng-controller=\'#{content_for(:angular_controller)}\'" : '') %>>

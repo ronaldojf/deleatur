@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812231158) do
+ActiveRecord::Schema.define(version: 20150905170708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,18 +52,27 @@ ActiveRecord::Schema.define(version: 20150812231158) do
 
   create_table "students", force: :cascade do |t|
     t.string   "name"
-    t.integer  "gender",       default: 0, null: false
-    t.string   "email"
+    t.integer  "gender",                 default: 0,  null: false
+    t.string   "email",                  default: "", null: false
     t.string   "cpf"
     t.string   "phone"
     t.date     "birth_date"
     t.integer  "classroom_id"
-    t.integer  "status",       default: 0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "status",                 default: 0,  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
   add_index "students", ["classroom_id"], name: "index_students_on_classroom_id", using: :btree
+  add_index "students", ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true, using: :btree
+  add_index "students", ["email"], name: "index_students_on_email", unique: true, using: :btree
+  add_index "students", ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true, using: :btree
 
   create_table "subjects", force: :cascade do |t|
     t.string   "description"
@@ -78,15 +87,25 @@ ActiveRecord::Schema.define(version: 20150812231158) do
 
   create_table "teachers", force: :cascade do |t|
     t.string   "name"
-    t.integer  "gender",     default: 0, null: false
-    t.string   "email"
+    t.integer  "gender",                 default: 0,  null: false
+    t.string   "email",                  default: "", null: false
     t.string   "cpf"
     t.string   "phone"
     t.date     "birth_date"
-    t.integer  "status",     default: 0, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "status",                 default: 0,  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
+
+  add_index "teachers", ["confirmation_token"], name: "index_teachers_on_confirmation_token", unique: true, using: :btree
+  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
+  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "students", "classrooms"
 end

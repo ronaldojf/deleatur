@@ -9,16 +9,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   ensure_security_headers # See more: https://github.com/twitter/secureheaders
 
-  helper_method :current_user
-
-  def current_user
-    [:administrator, :teacher, :student].each do |key|
-      return send("current_#{key}") if respond_to? "current_#{key}"
-    end
-
-    nil
-  end
-
   def store_controller_config(name, value)
     session[key_for_controller_session] ||= {}
     session[key_for_controller_session][name.to_s] = value

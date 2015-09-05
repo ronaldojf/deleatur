@@ -8,6 +8,10 @@ module ApplicationHelper
     params[:action] == action_name ? 'active' : nil
   end
 
+  def current_namespace
+    current_user.administrator? ? :admin : current_user.user_type
+  end
+
   # options = {
   #   icon:       'user',    # general alerts types with icon
   #   alert: {icon: 'user'}, # general alerts types with icon

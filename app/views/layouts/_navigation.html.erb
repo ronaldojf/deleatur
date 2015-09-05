@@ -19,7 +19,7 @@
           </a>
           <ul class='dropdown-menu animated fadeInRight'>
             <li>
-              <%= link_to [:edit, :admin, :profile] do %>
+              <%= link_to [:edit, current_namespace, :profile] do %>
                 <i class='fa fa-edit'></i> <%= t('profile.edit') %>
               <% end %>
             </li>

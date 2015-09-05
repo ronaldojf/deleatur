@@ -115,7 +115,9 @@ pt-BR:
     subjects: disciplinas
     classrooms: turmas
     teachers: professores
+    teacher: professor
     students: estudantes
+    student: estudante
     profile: perfil
     password: senha
     sign_in: entrar
