@@ -6,7 +6,7 @@
     <meta name='robots' content='noindex,nofollow'>
     <%= csrf_meta_tags %>
 
-    <% content_for(:module, t('page.modules.login')) %>
+    <% content_for(:module, t(controller_name, scope: [:page, :modules], default: '')) unless content_for? :module %>
     <title>
       <%= page_title(app_name: t('page.titles.short'), page_title_symbol: :module, separator: ' | ') %>
     </title>
@@ -18,6 +18,14 @@
       <%= javascript_include_tag 'html5shiv.js' %>
       <%= javascript_include_tag 'respond.min.js' %>
     <![endif]-->
+
+    <%= javascript_include_tag 'i18n', 'data-turbolinks-track' => true %>
+
+    <script type='text/javascript'>
+      I18n.defaultLocale = '<%= I18n.default_locale %>';
+      I18n.locale = '<%= I18n.locale %>';
+      I18n.pathLocale = '<%= I18n.locale.to_s.underscore.camelize %>';
+    </script>
 
     <%= javascript_include_tag 'public/app', 'data-turbolinks-track' => true %>
   </head>

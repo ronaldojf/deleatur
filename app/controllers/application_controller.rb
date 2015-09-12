@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   ensure_security_headers # See more: https://github.com/twitter/secureheaders
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def store_controller_config(name, value)
     session[key_for_controller_session] ||= {}
     session[key_for_controller_session][name.to_s] = value
@@ -20,6 +22,14 @@ class ApplicationController < ActionController::Base
 
   def clear_controller_config
     session.delete key_for_controller_session
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:name, :email, :password, :password_confirmation, :gender, :cpf, :phone, :birth_date, :status, :classroom_id)
+    end
   end
 
   private

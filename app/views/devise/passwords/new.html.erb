@@ -15,8 +15,12 @@
                 <%= f.input :email, label: false, required: true, input_html: {'responsive-focus' => true} %>
               </div>
 
-              <%= f.button :submit, t('buttons.send_password_instructions'), class: 'btn btn-primary block full-width m-b' %>
+              <div class="form-actions">
+                <%= f.button :submit, t('buttons.send_password_instructions'), class: 'btn btn-primary block full-width m-b' %>
 
+                <p class="text-muted text-center"><%= t('view.keywords.or') %></p>
+                <a class="btn btn-sm btn-white btn-block" href="<%= new_session_path(resource_name) %>"><%= t('buttons.back_to_login') %></a>
+              </div>
             <% end %>
           </div>
         </div>

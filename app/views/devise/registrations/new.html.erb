@@ -1,15 +1,62 @@
-<h2>Sign up</h2>
+<div class='middle-box text-center loginscreen animated fadeInDown'
+      ng-init="user = <%= resource.to_json %>; user.birth_date = '<%= resource.birth_date ? l(resource.birth_date.to_date) : "" %>'">
+  <div>
+    <div class='logo-name'>
+      <%= image_tag 'deleatur-xs.png' %>
+      <%= t('app.name') %>
+    </div>
+    <%= render partial: 'devise/shared/breadcrumb', locals: { resource: resource, path: :new_registration_path } %>
+    <br/>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+    <h3><%= t("registrations.general.title") %></h3>
+    <%= simple_form_for(resource, as: resource_name, url: send("#{resource_name}_registration_path"), class: 'm-t') do |f| %>
+      <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
+      <%= f.input :name, label: false, input_html: {'responsive-focus' => true} %>
+
+      <%= f.input :gender, label: false,
+          collection: t('enums.items.gender').invert,
+          include_blank: true,
+          selected: resource.errors.present? ? resource.gender : false,
+          input_html: {chosen: '', 'data-placeholder' => t('simple_form.placeholders.defaults.gender')},
+          wrapper_html: {class: 'text-left'} %>
+
+      <%= f.input :cpf, label: false,
+          input_html: {'ng-model' => 'user.cpf', 'ui-br-cpf-mask' => ''} %>
+
+      <%= f.input :phone, label: false,
+          input_html: { 'ng-model' => 'user.phone', 'ui-br-phone-number' => '' } %>
+
+      <%= f.input :birth_date, as: :string, label: false,
+          placeholder: t('simple_form.placeholders.defaults.birth_date'),
+          input_html: {
+            class: 'datepicker',
+            'data-start-view' => 2,
+            'ng-model' => 'user.birth_date',
+            mask: '9?9/9?9/9999',
+            restrict: :reject
+          } %>
+
+      <%= f.association :classroom, label: false, label_method: :identifier,
+          input_html: {chosen: '', 'data-placeholder' => t('simple_form.placeholders.classroom.select')},
+          wrapper_html: {class: 'text-left'} if resource.student? %>
+
+      <%= f.input :email, label: false, required: true %>
+      <%= f.input :password, label: false, required: true %>
+      <%= f.input :password_confirmation, label: false, required: true %>
+
+      <div class='form-actions'>
+        <%= f.button :submit, t('buttons.signup'), class: 'btn btn-primary block full-width m-b' %>
+
+        <p class="text-muted text-center"><small><%= t("registrations.general.account_question") %></small></p>
+        <a class="btn btn-sm btn-white btn-block" href="<%= new_session_path(resource_name) %>"><%= t('buttons.back_to_login') %></a>
+      </div>
+
+    <% end %>
+    <p class='m-t'>
+      <small>
+        <strong><%= t('page.titles.short') %></strong> <%= Date.today.year %>
+      </small>
+    </p>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+</div>

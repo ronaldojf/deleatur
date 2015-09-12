@@ -1,6 +1,6 @@
 class Teacher < ActiveRecord::Base
   include User::Base, Person::Base, Utils::AttributesCleaner, Utils::Filtering
-  devise :database_authenticatable, :recoverable, :validatable, :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :validatable, :confirmable
   only_digits :phone
 
   has_and_belongs_to_many :classrooms

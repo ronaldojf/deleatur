@@ -10,7 +10,9 @@ pt-BR:
     modules:
       home: Home
       profile: Perfil
-      login: Login
+      sessions: Login
+      registrations: Cadastro
+      confirmations: Confirmação
       administrators: Administradores
       teachers: Professores
       students: Estudantes
@@ -50,24 +52,36 @@ pt-BR:
     search: Pesquisar
     clear_filters: Limpar Filtros
     signin: Entrar
+    signup: Cadastrar
     publish: Publicar
     forgot_password: Esqueceu sua senha?
+    resend_confirmation: Reenviar confirmação de e-mail?
+    back_to_login: Voltar para o painel de login
     send_password_instructions: Enviar instruções de troca de senha
+    resend_confirmation_instructions: Reenviar confirmação de e-mail
     change_my_password: Trocar minha senha
+    confirm_my_account: Confirmar minha conta
     approve_register: Aprovar Cadastro
     disapprove_register: Reprovar Cadastro
+    create_account: Criar uma conta
     lock: Bloquear
     unlock: Desbloquear
 
   login:
+    general:
+      account_question: Não possui uma conta?
     administrator:
       welcome: Administração
     teacher:
       welcome: Professores
     student:
-      welcome: Seja bem-vindo!
-      greeting: Você conseguirá ultrapassar seus limites hoje?
-      challenge: Faça login e mostre!
+      welcome: Estudantes
+
+  registrations:
+    general:
+      title: Cadastre-se no Deleatur
+      account_question: Já possui uma conta?
+      account_in_passwords_question: Lembrou da sua senha?
 
   passwords:
     new:
@@ -87,6 +101,15 @@ pt-BR:
       invalid_token: O link acessado não é mais válido para alterar a senha.
       found_errors: Não foi possível executar esta ação devido ao(s) erro(s) abaixo.
 
+  confirmations:
+    new:
+      title: Reenviar confirmação de e-mail
+      greeting: Coloque o seu endereço de e-mail abaixo.
+    email:
+      greeting_html: 'Seja bem-vindo ao Deleatur, %{name}!'
+      info_1_html: 'Sua conta foi criada, porém você ainda precisa confirmar seu e-mail.'
+      info_2: Você pode fazer isso clicando no botão abaixo.
+
   profile:
     edit: Alterar Dados
     signout: Sair
@@ -101,6 +124,7 @@ pt-BR:
       list: Listagem
       filter: Filtro
       see_more: Ver Mais
+      or: ou
 
   confirm:
     delete_record: O registro será excluído.
@@ -157,6 +181,8 @@ pt-BR:
         password: Senha
         password_confirmation: Confirmação de Senha
         current_password: Senha Atual
+        confirmation_token: Link de confirmação
+        reset_password_token: Link de troca de senha
       administrator:
         name: Nome
         <<: *user
@@ -213,3 +239,5 @@ pt-BR:
       <<: *enum_specific_items
       defaults:
         <<: *enum_items
+    placeholders:
+      <<: *attributes

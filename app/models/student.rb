@@ -1,6 +1,6 @@
 class Student < ActiveRecord::Base
   include User::Base, Person::Base, Utils::AttributesCleaner, Utils::Filtering
-  devise :database_authenticatable, :recoverable, :validatable, :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :validatable, :confirmable
   only_digits :phone
 
   belongs_to :classroom

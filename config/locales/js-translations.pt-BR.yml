@@ -9,6 +9,9 @@ pt-BR:
         sure: Você tem certeza?
       contents:
         signout: Você será desconectado.
+    date:
+      formats:
+        default: 'dd/mm/yyyy'
     buttons:
       ok: OK
       cancel: Cancelar
@@ -22,5 +25,8 @@ pt-BR:
         other: ! Foram encontrados <strong>%{count}</strong> registros
     errors:
       searching_records: 'Ocorreu um erro ao tentar buscar os registros, tente novamente mais tarde'
+    datepicker:
+      next: Próximo
+      prev: Anterior
     chosen:
       results_none_found: Nada foi encontrado para

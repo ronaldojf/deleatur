@@ -4,7 +4,8 @@
       <%= image_tag 'deleatur-xs.png' %>
       <%= t('app.name') %>
     </div>
-    <h3><%= t("login.#{resource_name}.welcome") %></h3>
+    <%= render partial: 'devise/shared/breadcrumb', locals: { resource: resource, path: :new_session_path } %>
+
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: 'm-t') do |f| %>
       <%= f.input :email, label: false, required: true, input_html: {'responsive-focus' => true} %>
       <%= f.input :password, label: false, required: true %>
@@ -14,7 +15,17 @@
         <%= f.button :submit, t('buttons.signin'), class: 'btn btn-primary block full-width m-b' %>
       </div>
 
-      <a href='<%= new_password_path(resource_name) %>'><small><%= t('buttons.forgot_password') %></small></a>
+      <small>
+        <%= link_to t('buttons.forgot_password'), new_password_path(resource_name) %><br>
+        <%= link_to t('buttons.resend_confirmation'), new_confirmation_path(resource_name) unless resource.administrator? %>
+      </small>
+
+      <% unless resource.administrator? %>
+        <br><br>
+        <p class="text-muted text-center"><small><%= t('login.general.account_question') %></small></p>
+        <%= link_to t('buttons.create_account'), send("new_#{resource_name}_registration_path"), class: 'btn btn-sm btn-white btn-block' %>
+      <% end %>
+
     <% end %>
     <p class='m-t'>
       <small>

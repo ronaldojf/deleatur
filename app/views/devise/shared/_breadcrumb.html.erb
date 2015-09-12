@@ -1,0 +1,13 @@
+<% if resource.administrator? %>
+  <h3><%= t('login.administrator.welcome') %></h3>
+<% elsif resource.student? %>
+  <h3>
+    <strong><%= t("login.student.welcome") %></strong> /
+    <%= link_to t("login.teacher.welcome"), send(path, :teacher) %>
+  </h3>
+<% else %>
+  <h3>
+    <%= link_to t("login.student.welcome"), send(path, :student) %> /
+    <strong><%= t("login.teacher.welcome") %></strong>
+  </h3>
+<% end %>

@@ -8,4 +8,5 @@
 //= require inspinia/plugins/toastr/toastr.min
 //= require inspinia/plugins/iCheck/icheck.min
 //= require inspinia/plugins/datepicker/bootstrap-datepicker
+//= require inspinia/plugins/datepicker/locales/bootstrap-datepicker.pt-BR
 //= require inspinia/plugins/sweetalert/sweetalert.min

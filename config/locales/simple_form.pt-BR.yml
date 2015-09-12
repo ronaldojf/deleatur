@@ -18,11 +18,12 @@ pt-BR:
         password_confirmation: Digite a Confirmação de Senha
         current_password: Digite a Senha Atual
         cpf: Digite o CPF
-        gender: Digite o Sexo
-        birthdate: Digite a Data de Nascimento
+        gender: Sexo
+        birth_date: Data de Nascimento
         phone: Digite o Telefone
         description: Digite a Descrição
       classroom:
+        select: Escolha a sua Sala de Aula
         identifier: Digite o Identificador da Sala
     # labels:
     #   defaults:

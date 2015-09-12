@@ -1,14 +1,39 @@
-<h2>Resend confirmation instructions</h2>
+<div class='passwordBox animated fadeInDown'>
+  <div class='row'>
 
-<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.full_error :confirmation_token %>
+    <div class='col-md-12'>
+      <div class='ibox-content'>
+        <h2 class='font-bold text-center'><%= t('confirmations.new.title') %></h2>
+        <p class='text-center'><%= t('confirmations.new.greeting') %></p>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+        <div class='row'>
+          <div class='col-lg-12'>
+            <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'm-t' }) do |f| %>
+              <%= f.error_notification %>
+              <%= f.full_error :confirmation_token, class: 'text-danger' %>
+
+              <div class='form-group'>
+                <%= f.input :email, label: false, required: true, input_html: {'responsive-focus' => true} %>
+              </div>
+
+              <div class="form-actions">
+                <%= f.button :submit, t('buttons.resend_confirmation_instructions'), class: 'btn btn-primary block full-width m-b' %>
+
+                <p class="text-muted text-center"><%= t('view.keywords.or') %></p>
+                <a class="btn btn-sm btn-white btn-block" href="<%= new_session_path(resource_name) %>"><%= t('buttons.back_to_login') %></a>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Resend confirmation instructions" %>
+  <hr />
+  <div class='row'>
+    <div class='col-md-12 text-center'>
+      <small>
+        <strong><%= t('page.titles.short') %></strong> <%= Date.today.year %>
+      </small>
+    </div>
   </div>
-<% end %>
+</div>

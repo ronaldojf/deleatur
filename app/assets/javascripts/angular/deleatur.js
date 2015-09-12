@@ -1,6 +1,6 @@
 (function() {
   window.deleatur = window.angular.module('deleatur', [
-    'ngTable', 'ui.utils.masks', 'idf.br-filters', 'ng-rails-csrf',
+    'ngTable', 'ui.utils.masks', 'ngMask', 'idf.br-filters', 'ng-rails-csrf',
     'localytics.directives','deleatur.filters'
   ])
   .directive('ngEnter', function() {

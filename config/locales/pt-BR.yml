@@ -1,5 +1,5 @@
 pt-BR:
-  date:
+  date: &date
     abbr_day_names:
     - Dom
     - Seg
@@ -52,7 +52,7 @@ pt-BR:
     - :day
     - :month
     - :year
-  datetime:
+  datetime: &datetime
     distance_in_words:
       about_x_hours:
         one: aproximadamente 1 hora
@@ -144,7 +144,7 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
-  number:
+  number: &number
     currency:
       format:
         delimiter: .
@@ -199,12 +199,12 @@ pt-BR:
     precision:
       format:
         delimiter: .
-  support:
+  support: &support
     array:
       last_word_connector: ! ' e '
       two_words_connector: ! ' e '
       words_connector: ! ', '
-  time:
+  time: &time
     am: ''
     formats:
       default: ! '%a, %d de %B de %Y, %H:%M:%S %z'
