@@ -12,8 +12,6 @@
         </span>
       </li>
 
-
-
       <li class="visible-xs user-menu-item-responsive">
         <div class='dropdown'>
           <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
@@ -21,7 +19,7 @@
           </a>
           <ul class='dropdown-menu animated fadeInRight user-menu'>
             <li>
-              <%= link_to [:edit, :admin, :profile] do %>
+              <%= link_to [:edit, current_namespace, :profile] do %>
                 <i class='fa fa-edit'></i> <%= t('profile.edit') %>
               <% end %>
             </li>

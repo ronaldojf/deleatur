@@ -2,7 +2,6 @@ class Admin::StudentsController < Admin::BaseController
   before_action :set_student, only: [:show, :update, :edit, :destroy]
 
   def index
-    #Separar código repetido
     respond_to do |format|
       format.html { render :index }
       format.json do

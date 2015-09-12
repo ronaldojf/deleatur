@@ -1,4 +1,4 @@
-deleatur
+window.deleatur
   .controller('NgTableController', ['$scope', '$http', '$sce', 'ngTableParams', function($scope, $http, $sce, ngTableParams) {
 
     $scope.initTable = function(config, pathPrefix) {

@@ -12,7 +12,8 @@ class Teacher::ProfilesController < Teacher::BaseController
 
     params
       .require(:teacher)
-      .permit(:name, :email, :password, :current_password, :password_confirmation)
+      .permit(:name, :gender, :status, :cpf, :phone, :birth_date,
+              :email, :password, :current_password, :password_confirmation)
       .merge({validate_current_password: true})
   end
 end

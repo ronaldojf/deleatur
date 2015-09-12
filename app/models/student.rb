@@ -9,7 +9,7 @@ class Student < ActiveRecord::Base
   enum status: [:normal, :locked]
 
   validates :name, :gender, :birth_date, :classroom, presence: true
-  validates :birth_date, date: { before_than: Proc.new { Date.current } }
+  validates :birth_date, date: { before: Proc.new { Date.current } }
   validates :cpf, cpf: true, uniqueness: true, allow_blank: true
   validates :phone, phone: true, allow_blank: true
   validates :gender, inclusion: { in: Student.genders.keys }

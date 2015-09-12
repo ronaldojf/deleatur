@@ -10,7 +10,7 @@ class Teacher < ActiveRecord::Base
   enum status: [:pending, :approved, :locked]
 
   validates :name, :gender, :cpf, :phone, :birth_date, presence: true
-  validates :birth_date, date: { before_than: Proc.new { Date.current } }
+  validates :birth_date, date: { before: Proc.new { Date.current } }
   validates :cpf, cpf: true, uniqueness: true
   validates :phone, phone: true
   validates :gender, inclusion: { in: Teacher.genders.keys }

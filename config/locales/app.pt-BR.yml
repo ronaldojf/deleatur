@@ -9,7 +9,7 @@ pt-BR:
       short: *app_name
     modules:
       home: Home
-      profile: Perfil
+      profiles: Perfil
       sessions: Login
       registrations: Cadastro
       confirmations: Confirmação

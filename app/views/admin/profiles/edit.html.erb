@@ -10,7 +10,7 @@
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
-      <%= link_to [:admin, :administrators], class: 'btn btn-w-s btn-primary m-t-md',
+      <%= link_to '#', class: 'btn btn-w-s btn-primary m-t-md',
             data: {'form-submit' => url_for([:admin, :profile])} do %>
 
         <i class='fa fa-save'></i><br/>
@@ -45,7 +45,7 @@
                 <%= f.input :current_password, input_html: {'fake-password' => true} %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :password, hint: current_user.errors.blank? ? t('info.editing_password') : '',
+                <%= f.input :password, hint: current_user.errors[:password].blank? ? t('info.editing_password') : '',
                       input_html: {'fake-password' => true} %>
               </div>
               <div class='col-md-4'>
