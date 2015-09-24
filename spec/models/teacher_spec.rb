@@ -15,7 +15,7 @@ RSpec.describe Teacher, :type => :model do
   describe '.filter' do
     subject(:name) { 'Jonh' }
     subject(:cpf) { '886.975.531-21' }
-    subject(:email) { 'johndoe@hotmail.com' }
+    subject(:email) { 'jòhńdôe@hotmail.com' }
     subject(:phone) { '(54) 9961-1111' }
 
     before do
@@ -51,7 +51,7 @@ RSpec.describe Teacher, :type => :model do
       end
 
       it 'does return a teacher who match the email' do
-        expect(Teacher.filter(email).count).to eq 1
+        expect(Teacher.filter('johndoe@hotmail.com').count).to eq 1
       end
 
       it 'does return a teacher who match the phone' do

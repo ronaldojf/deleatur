@@ -1,7 +1,7 @@
 <% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
-      <h2><%= t("models_and_attributes.models.teacher.other") %></h2>
+      <h2><%= current_user.name %></h2>
       <ol class='breadcrumb'>
         <li><%= link_to t('page.modules.home'), [:teacher, :root] %></li>
         <li class='active'>
@@ -31,7 +31,9 @@
       <div class='ibox-content protected'>
         <%= simple_form_for(current_user, url: [:teacher, :profile]) do |f| %>
           <div class='form-inputs'
-              ng-init="user = <%= current_user.to_json %>; user.birth_date = '<%= current_user.birth_date ? l(current_user.birth_date.to_date) : "" %>'">
+              ng-init="user = <%= current_user.to_json %>;
+                        user.birth_date = '<%= l(current_user.birth_date.to_date) if current_user.birth_date.present? %>'">
+
             <div class='row'>
               <div class='col-md-6'>
                 <%= f.input :name, input_html: {'responsive-focus' => true} %>
@@ -67,6 +69,7 @@
                       class: 'datepicker',
                       'data-start-view' => 2,
                       'ng-model' => 'user.birth_date',
+                      value: "#{l(current_user.birth_date.to_date) if current_user.birth_date}",
                       mask: '9?9/9?9/9999',
                       restrict: :reject
                     } %>

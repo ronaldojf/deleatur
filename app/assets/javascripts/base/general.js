@@ -5,6 +5,8 @@ $(document).on('page:change', function() {
     return window.Routes[pathPrefix + window.I18n.pathLocale].apply(this, arguments);
   };
 
+  $('.show-action-label').append('<div class="clearfix"></div>');
+
   if ($('html.no-touch').length > 0) {
     setTimeout(function() {
       $('[responsive-focus]:first').focus();

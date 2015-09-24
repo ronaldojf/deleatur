@@ -4,8 +4,8 @@ RSpec.describe Administrator, :type => :model do
   it { is_expected.to validate_presence_of :name }
 
     describe '.filter' do
-    subject(:name) { 'Jonh' }
-    subject(:email) { 'johndoe@hotmail.com' }
+    subject(:name) { 'Jônh' }
+    subject(:email) { 'jòhndoé@hõtmail.com' }
 
     before do
       create :administrator, name: name, email: email

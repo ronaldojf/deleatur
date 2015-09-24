@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   localized do
-    devise_for :administrators, path: :admin, controllers: { sessions: 'admin/sessions' }
-    devise_for :teachers, path: :teacher, controllers: { sessions: 'teacher/sessions' }
-    devise_for :students, path: :student, controllers: { sessions: 'student/sessions' }
+    devise_for :administrators, path: :admin
+    devise_for :teachers, path: :teacher, controllers: { registrations: 'devise/custom_registrations' }
+    devise_for :students, path: :student, controllers: { registrations: 'devise/custom_registrations' }
 
     namespace :admin do
       resource :profile, only: [:edit, :update]

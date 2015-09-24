@@ -18,6 +18,7 @@ pt-BR:
       students: Estudantes
       subjects: Disciplinas
       classrooms: Turmas
+      profile: Perfil
     footers: *page_titles
 
   users:
