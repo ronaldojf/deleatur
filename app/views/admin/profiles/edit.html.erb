@@ -1,7 +1,7 @@
 <% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
-      <h2><%= t("models_and_attributes.models.administrator.other") %></h2>
+      <h2><%= current_user.name %></h2>
       <ol class='breadcrumb'>
         <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
         <li class='active'>
