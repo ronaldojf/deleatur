@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924004927) do
+ActiveRecord::Schema.define(version: 20150926131047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 20150924004927) do
     t.string   "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "classrooms_subjects", id: false, force: :cascade do |t|
-    t.integer "classroom_id", null: false
-    t.integer "subject_id",   null: false
-  end
-
-  create_table "classrooms_teachers", id: false, force: :cascade do |t|
-    t.integer "classroom_id", null: false
-    t.integer "teacher_id",   null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -81,10 +71,15 @@ ActiveRecord::Schema.define(version: 20150924004927) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "subjects_teachers", id: false, force: :cascade do |t|
-    t.integer "subject_id", null: false
-    t.integer "teacher_id", null: false
+  create_table "teacher_classroom_subjects", force: :cascade do |t|
+    t.integer "classroom_id"
+    t.integer "teacher_id"
+    t.integer "subject_id"
   end
+
+  add_index "teacher_classroom_subjects", ["classroom_id"], name: "index_teacher_classroom_subjects_on_classroom_id", using: :btree
+  add_index "teacher_classroom_subjects", ["subject_id"], name: "index_teacher_classroom_subjects_on_subject_id", using: :btree
+  add_index "teacher_classroom_subjects", ["teacher_id"], name: "index_teacher_classroom_subjects_on_teacher_id", using: :btree
 
   create_table "teachers", force: :cascade do |t|
     t.string   "name"

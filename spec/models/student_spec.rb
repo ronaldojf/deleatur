@@ -191,4 +191,22 @@ RSpec.describe Student, :type => :model do
       end
     end
   end
+
+  describe '#active_for_authentication?' do
+    context 'when is blocked' do
+      subject(:student) { build :student, status: :locked }
+
+      it 'does not be active' do
+        expect(student.active_for_authentication?).not_to be
+      end
+    end
+
+    context 'when is normal' do
+      subject(:student) { build :student, status: :normal }
+
+      it 'does be active' do
+        expect(student.active_for_authentication?).to be
+      end
+    end
+  end
 end

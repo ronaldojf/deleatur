@@ -8,7 +8,7 @@ pt-BR:
       send_paranoid_instructions: 'Se o seu endereço de e-mail estiver cadastrado, você receberá uma mensagem com instruções para confirmação da sua conta.'
     failure:
       already_authenticated: 'Você já está logado.'
-      inactive: 'Sua conta ainda não foi ativada.'
+      inactive: 'Sua conta ainda não foi ativada ou foi bloqueada.'
       invalid: 'Email e/ou senha incorretos.'
       invalid_token: 'Token inválido ou a senha já foi trocada!'
       locked: 'Sua conta está bloqueada.'

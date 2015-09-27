@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Subject, :type => :model do
   it { is_expected.to validate_presence_of :description }
   it { is_expected.to validate_uniqueness_of :description }
-  it { is_expected.to have_and_belong_to_many :classrooms }
-  it { is_expected.to have_and_belong_to_many :teachers }
+  it { is_expected.to have_many :classrooms_teachers }
 
     describe '.filter' do
     subject(:description) { 'Math' }

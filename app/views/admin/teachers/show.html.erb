@@ -25,9 +25,13 @@
         <% end %>
 
       <% else %>
+        <%= link_to [:edit, :admin, @teacher], class: 'btn btn-w-s btn-info m-t-md' do %>
+          <i class='fa fa-edit'></i><br/>
+          <%= t('activerecord.models.classroom.other') %> / <%= t('activerecord.models.subject.other') %>
+        <% end %>
 
         <% if @teacher.locked? %>
-          <%= link_to [:admin, @teacher], class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
+          <%= link_to [:admin, @teacher, status: :approved], class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
             <i class='fa fa-unlock'></i><br/>
             <%= t('buttons.unlock') %>
           <% end %>

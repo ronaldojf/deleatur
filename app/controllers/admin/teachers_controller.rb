@@ -1,5 +1,6 @@
 class Admin::TeachersController < Admin::BaseController
-  before_action :set_teacher, only: [:show, :update, :destroy]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher_classroom_subjects, only: [:edit]
 
   def index
     respond_to do |format|
@@ -14,7 +15,14 @@ class Admin::TeachersController < Admin::BaseController
   end
 
   def update
-    (params[:status] == 'locked') ? @teacher.lock : @teacher.approve
+    if params[:status].to_s.to_sym == :locked
+      @teacher.lock
+    elsif params[:status].to_s.to_sym == :approved
+      @teacher.approve
+    else
+      @teacher.update(teacher_params)
+    end
+
     respond_with :admin, @teacher
   end
 
@@ -27,5 +35,17 @@ class Admin::TeachersController < Admin::BaseController
 
   def set_teacher
     @teacher = Teacher.find(params[:id])
+  end
+
+  def set_teacher_classroom_subjects
+    @teacher_classroom_subjects = @teacher.classrooms_subjects
+                                    .joins(:classroom, :subject)
+                                    .select('*, teacher_classroom_subjects.id')
+  end
+
+  def teacher_params
+    params
+      .require(:teacher)
+      .permit(classrooms_subjects_attributes: [:id, :classroom_id, :subject_id, :_destroy])
   end
 end

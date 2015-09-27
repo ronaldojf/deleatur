@@ -50,6 +50,7 @@ pt-BR:
     save: Salvar
     new: Novo
     create: Criar
+    add: Adicionar
     search: Pesquisar
     clear_filters: Limpar Filtros
     signin: Entrar
@@ -112,11 +113,13 @@ pt-BR:
       info_2: Você pode fazer isso clicando no botão abaixo.
 
   profile:
-    edit: Alterar Dados
+    edit: Alterar Perfil
     signout: Sair
 
   info:
     no_results: Nenhum resultado encontrado
+    no_classrooms: Nenhuma turma adicionada
+    no_subjects: Nenhuma disciplina adicionada
     editing_password: Preencha apenas se deseja alterar...
 
   view:
@@ -126,6 +129,7 @@ pt-BR:
       filter: Filtro
       see_more: Ver Mais
       or: ou
+      title_classrooms_subjects: 'Lessionar em Turmas / Matérias'
 
   confirm:
     delete_record: O registro será excluído.

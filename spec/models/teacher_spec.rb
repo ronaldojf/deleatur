@@ -9,8 +9,9 @@ RSpec.describe Teacher, :type => :model do
   it { is_expected.to validate_uniqueness_of :cpf }
   it { is_expected.to define_enum_for :gender }
   it { is_expected.to define_enum_for :status }
-  it { is_expected.to have_and_belong_to_many :classrooms }
-  it { is_expected.to have_and_belong_to_many :subjects }
+  it { is_expected.to have_many :classrooms_subjects }
+  it { is_expected.to have_many :classrooms }
+  it { is_expected.to have_many :subjects }
 
   describe '.filter' do
     subject(:name) { 'Jonh' }
@@ -169,6 +170,54 @@ RSpec.describe Teacher, :type => :model do
 
       it 'does not destroy the teacher' do
         expect(Teacher.count).to eq 1
+      end
+    end
+  end
+
+  describe '.classrooms_subjects' do
+    subject(:teacher) { create :teacher }
+    subject(:classroom1) { create :classroom }
+    subject(:classroom2) { create :classroom }
+    before do
+      Teacher.transaction do
+        teacher.classrooms_subjects << [
+          create(:teacher_classroom_subject, classroom: classroom1, subject: create(:subject)),
+          create(:teacher_classroom_subject, classroom: classroom1, subject: create(:subject)),
+          create(:teacher_classroom_subject, classroom: classroom2, subject: create(:subject))
+        ]
+      end
+    end
+
+    it "does group the teacher's subjects in his classrooms" do
+      expect(teacher.classrooms.count).to eq 2
+      expect(teacher.subjects.count).to eq 3
+      expect(teacher.subjects.where('teacher_classroom_subjects.classroom_id = ?', classroom1.id).count).to eq 2
+      expect(teacher.subjects.where('teacher_classroom_subjects.classroom_id = ?', classroom2.id).count).to eq 1
+    end
+  end
+
+  describe '#active_for_authentication?' do
+    context 'when is locked' do
+      subject(:teacher) { build :teacher, status: :locked }
+
+      it 'does not be active' do
+        expect(teacher.active_for_authentication?).not_to be
+      end
+    end
+
+    context 'when is pending' do
+      subject(:teacher) { build :teacher, status: :pending }
+
+      it 'does not be active' do
+        expect(teacher.active_for_authentication?).not_to be
+      end
+    end
+
+    context 'when is approved' do
+      subject(:teacher) { build :teacher, status: :approved }
+
+      it 'does be active' do
+        expect(teacher.active_for_authentication?).to be
       end
     end
   end

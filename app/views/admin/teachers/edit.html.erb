@@ -1,22 +1,23 @@
 <% content_for :sub_header do %>
   <div class='row'>
     <div class='col-sm-6'>
-      <h2><%= current_user.name %></h2>
+      <h2><%= t("models_and_attributes.models.teacher.other") %></h2>
       <ol class='breadcrumb'>
-        <li><%= link_to t('page.modules.home'), [:teacher, :root] %></li>
+        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
+        <li><%= link_to t('page.modules.teachers'), [:admin, :teachers] %></li>
         <li class='active'>
-          <strong><%= t('page.modules.profile') %></strong>
+          <strong><%= t('actions.edit') %></strong>
         </li>
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
       <%= link_to '#', class: 'btn btn-w-s btn-primary m-t-md',
-            data: {'form-submit' => url_for([:teacher, :profile])} do %>
+            data: {'form-submit' => url_for([:admin, @teacher])} do %>
 
         <i class='fa fa-save'></i><br/>
         <%= t('buttons.save') %>
       <% end %>
-      <%= link_to [:teacher, :root], class: 'btn btn-w-s btn-warning m-t-md' do %>
+      <%= link_to [:admin, @teacher], class: 'btn btn-w-s btn-warning m-t-md' do %>
         <i class='fa fa-remove'></i><br/>
         <%= t('buttons.cancel') %>
       <% end %>
@@ -25,70 +26,12 @@
 <% end %>
 
 <%= flash_messages %>
-<div class='row'>
+<div class="row">
   <div class='col-xs-12 current-responsive-padding'>
     <div class='ibox float-e-margins'>
       <div class='ibox-content protected'>
-        <%= simple_form_for(current_user, url: [:teacher, :profile]) do |f| %>
-          <div class='form-inputs'
-              ng-init="user = <%= current_user.to_json %>;
-                        user.birth_date = '<%= l(current_user.birth_date.to_date) if current_user.birth_date.present? %>'">
-
-            <div class='row'>
-              <div class='col-md-6'>
-                <%= f.input :name, input_html: {'responsive-focus' => true} %>
-              </div>
-              <div class='col-md-6'>
-                <%= f.input :email, required: true %>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <%= f.input :gender,
-                    collection: t('enums.items.gender').invert,
-                    include_blank: true,
-                    input_html: {chosen: '', 'data-placeholder' => t('simple_form.placeholders.defaults.gender')},
-                    wrapper_html: {class: 'text-left'} %>
-              </div>
-              <div class="col-md-6">
-                <%= f.input :cpf,
-                    input_html: {'ng-model' => 'user.cpf', 'ui-br-cpf-mask' => ''} %>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <%= f.input :phone,
-                    input_html: { 'ng-model' => 'user.phone', 'ui-br-phone-number' => '' } %>
-              </div>
-              <div class="col-md-6">
-                <%= f.input :birth_date, as: :string,
-                    placeholder: t('simple_form.placeholders.defaults.birth_date'),
-                    input_html: {
-                      class: 'datepicker',
-                      'data-start-view' => 2,
-                      'ng-model' => 'user.birth_date',
-                      value: "#{l(current_user.birth_date.to_date) if current_user.birth_date}",
-                      mask: '9?9/9?9/9999',
-                      restrict: :reject
-                    } %>
-              </div>
-            </div>
-
-            <div class='row'>
-              <div class='col-md-4'>
-                <%= f.input :current_password, input_html: {'fake-password' => true} %>
-              </div>
-              <div class='col-md-4'>
-                <%= f.input :password, hint: current_user.errors[:password].blank? ? t('info.editing_password') : '',
-                      input_html: {'fake-password' => true} %>
-              </div>
-              <div class='col-md-4'>
-                <%= f.input :password_confirmation, input_html: {'fake-password' => true} %>
-              </div>
-            </div>
-
+        <%= simple_form_for([:admin, @teacher]) do |f| %>
+          <div class='form-inputs'>
             <div ng-controller='TeachController'
                   ng-init="classrooms = <%= Classroom.all.to_json %>;
                             subjects = <%= Subject.all.to_json %>;

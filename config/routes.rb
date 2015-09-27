@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resource :profile, only: [:edit, :update]
       resources :administrators, :subjects, :classrooms
-      resources :teachers, only: [:index, :show, :update, :destroy]
+      resources :teachers, only: [:index, :show, :edit, :update, :destroy]
       resources :students, only: [:index, :show, :edit, :update]
       root 'home#index'
     end

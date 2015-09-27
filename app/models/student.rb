@@ -32,4 +32,8 @@ class Student < ActiveRecord::Base
   def unlock
     self.update status: :normal unless self.normal?
   end
+
+  def active_for_authentication?
+    super && !self.locked?
+  end
 end

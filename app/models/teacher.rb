@@ -3,8 +3,10 @@ class Teacher < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :validatable, :confirmable
   only_digits :phone
 
-  has_and_belongs_to_many :classrooms
-  has_and_belongs_to_many :subjects
+  has_many :classrooms_subjects, class_name: 'TeacherClassroomSubject', dependent: :destroy
+  has_many :classrooms, -> { uniq }, through: :classrooms_subjects, source: :classroom
+  has_many :subjects, -> { uniq }, through: :classrooms_subjects, source: :subject
+  accepts_nested_attributes_for :classrooms_subjects, allow_destroy: true
 
   enum gender: [:male, :female]
   enum status: [:pending, :approved, :locked]
@@ -28,5 +30,9 @@ class Teacher < ActiveRecord::Base
 
   def disapprove
     self.destroy if self.pending?
+  end
+
+  def active_for_authentication?
+    super && self.approved?
   end
 end
