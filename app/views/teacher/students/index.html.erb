@@ -4,7 +4,7 @@
     <div class='col-xs-12'>
       <h2><%= t('models_and_attributes.models.student.other') %></h2>
       <ol class='breadcrumb'>
-        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
+        <li><%= link_to t('page.modules.home'), [:teacher, :root] %></li>
         <li class='active'>
           <strong><%= t('page.modules.students') %></strong>
         </li>
@@ -15,7 +15,7 @@
 
 <%= flash_messages %>
 <div class="row responsive-padding">
-  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'adminStudents');
+  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'teacherStudents');
                                   config.filter.classroom = <%= @config[:filter]['classroom'].present? ? @config[:filter]['classroom'] : "\'\'" %>">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="row">
-            <div class='col-md-4 m-t-xs' ng-init='classrooms = <%= Classroom.all.to_json %>'>
+            <div class='col-md-4 m-t-xs' ng-init='classrooms = <%= current_user.classrooms.to_json %>'>
               <select chosen data-placeholder="<%= t('activerecord.attributes.student.classroom') %>"
                       allow-single-deselect='true'
                       class='form-control'
@@ -80,16 +80,16 @@
             <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>
               <tr data-href='{{student.showHtmlUrl}}' ng-repeat='student in $data track by student.id'>
 
-                <td data-title="'<%= t('activerecord.attributes.student.name') %>'" sortable="'name'">
+                <td data-title="'<%= t('activerecord.attributes.student.name') %>'" sortable="'students.name'">
                   {{student.name}}
                 </td>
-                <td data-title="'<%= t('activerecord.attributes.student.email') %>'" sortable="'email'">
+                <td data-title="'<%= t('activerecord.attributes.student.email') %>'" sortable="'students.email'">
                   {{student.email}}
                 </td>
-                <td data-title="'<%= t('activerecord.attributes.student.phone') %>'" sortable="'phone'">
+                <td data-title="'<%= t('activerecord.attributes.student.phone') %>'" sortable="'students.phone'">
                   {{student.phone | brPhoneNumber}}
                 </td>
-                <td data-title="'<%= t('activerecord.attributes.student.birth_date') %>'" sortable="'birth_date'">
+                <td data-title="'<%= t('activerecord.attributes.student.birth_date') %>'" sortable="'students.birth_date'">
                   {{student.birthDate | date}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.student.classroom') %>'">

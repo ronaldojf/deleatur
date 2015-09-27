@@ -511,11 +511,11 @@
             return true;
         };
 
-        AbstractChosen.default_multiple_text = "Select Some Options";
+        AbstractChosen.default_multiple_text = I18n.t('js.chosen.default_multiple_text');
 
-        AbstractChosen.default_single_text = "Select an Option";
+        AbstractChosen.default_single_text = I18n.t('js.chosen.default_single_text');
 
-        AbstractChosen.default_no_result_text = "No results match";
+        AbstractChosen.default_no_result_text = I18n.t('js.chosen.default_no_result_text');
 
         return AbstractChosen;
 

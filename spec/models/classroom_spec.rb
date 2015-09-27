@@ -4,6 +4,7 @@ RSpec.describe Classroom, :type => :model do
   it { is_expected.to validate_presence_of :identifier }
   it { is_expected.to validate_uniqueness_of :identifier }
   it { is_expected.to have_many :teachers_subjects }
+  it { is_expected.to have_many :students }
 
     describe '.filter' do
     subject(:identifier) { '301-A' }

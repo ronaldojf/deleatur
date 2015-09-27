@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     namespace :teacher do
       resource :profile, only: [:edit, :update]
+      resources :students, only: [:index, :show, :edit, :update]
       root 'home#index'
     end
 

@@ -35,19 +35,27 @@ window.deleatur
       var newCollection = [];
 
       collection.forEach(function(mainObject) {
-        newCollection.push(mainObject);
-
         var matches = newCollection.filter(function(object) {
           return mainObject.subject_id === object.subject_id && mainObject.classroom_id === object.classroom_id;
         });
 
-        if ((matches[0] || {})._destroy === 1 || (matches[1] || {})._destroy === 1) {
-          delete newCollection[newCollection.length-1]._destroy;
-        } else if (matches.length > 1) {
-          newCollection.pop();
+        if (matches.length === 0) {
+          newCollection.push(mainObject);
+        } else if ((matches[0] || {})._destroy === 1) {
+          for (var i = 0; i < newCollection.length; i++) {
+            if (newCollection[i].id === matches[0].id) {
+              delete newCollection[i]._destroy;
+            }
+          }
         }
       });
 
       return newCollection;
+    };
+
+    $scope.notDestroyed = function(items) {
+      return items.filter(function(item) {
+        return (item || {})._destroy !== 1;
+      });
     };
   }]);

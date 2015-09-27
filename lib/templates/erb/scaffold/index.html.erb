@@ -19,7 +19,7 @@
   </div>
 <%% end %>
 
-<%= flash_messages %>
+<%%= flash_messages %>
 
 <div class="row responsive-padding">
   <div class='col-xs-12' ng-init="initTable(<%%= @config.to_json_with_active_support_encoder %>, 'admin<%= class_name.pluralize %>')">
@@ -46,7 +46,7 @@
         </div>
 
         <hr>
-        <%= custom_flash_messages info: {show: true, fixed: true, icon: :info, message: t('info.no_results')}, html: {'ng-hide' => 'tableParams.data.length > 0'} %>
+        <%%= custom_flash_messages info: {show: true, fixed: true, icon: :info, message: t('info.no_results')}, html: {'ng-hide' => 'tableParams.data.length > 0'} %>
         <div class='table-responsive' ng-show='tableParams.data.length > 0'>
           <div loading-container='tableParams.settings().$loading'>
             <table ng-table='tableParams' template-pagination='/angular-templates/ng-table/paginate' class='table table-striped table-hover'>

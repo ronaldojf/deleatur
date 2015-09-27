@@ -114,9 +114,9 @@
                     <div class='row'>
                       <div class='col-xs-12'>
                         <%= custom_flash_messages info: {show: true, fixed: true, icon: :info, message: t('info.no_classrooms')},
-                                                          html: {'ng-hide' => 'classroomsSubjects.length > 0'} %>
+                                                          html: {'ng-hide' => 'notDestroyed(classroomsSubjects).length > 0'} %>
 
-                        <div class='full-height-scroll' ng-show='classroomsSubjects.length > 0' full-scroll>
+                        <div class='full-height-scroll' ng-show='notDestroyed(classroomsSubjects).length > 0' full-scroll>
                           <div class='table-responsive max-height-table'>
                             <table class='table table-striped table-hover vertical-center'>
                               <tr ng-repeat="item in (classroomsSubjects | orderBy:'identifier') track by $index" ng-hide='item._destroy === 1'>

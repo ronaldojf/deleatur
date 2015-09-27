@@ -3,32 +3,17 @@
     <div class='col-sm-6'>
       <h2><%= t('models_and_attributes.models.student.other') %></h2>
       <ol class='breadcrumb'>
-        <li><%= link_to t('page.modules.home'), [:admin, :root] %></li>
-        <li><%= link_to t('page.modules.students'), [:admin, :students] %></li>
+        <li><%= link_to t('page.modules.home'), [:teacher, :root] %></li>
+        <li><%= link_to t('page.modules.students'), [:teacher, :students] %></li>
         <li class="active">
           <strong><%= t('actions.show') %></strong>
         </li>
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
-      <%= link_to [:edit, :admin, @student], class: 'btn btn-w-s btn-info m-t-md' do %>
+      <%= link_to [:edit, :teacher, @student], class: 'btn btn-w-s btn-info m-t-md' do %>
         <i class='fa fa-edit'></i><br/>
         <%= t('buttons.edit') %>
-      <% end %>
-
-      <% if @student.locked? %>
-        <%= link_to url_for([:admin, @student, status: :unlocked]), class: 'btn btn-w-s btn-success m-t-md', method: :patch do %>
-          <i class='fa fa-unlock'></i><br/>
-          <%= t('buttons.unlock') %>
-        <% end %>
-
-      <% else %>
-
-        <%= link_to url_for([:admin, @student, status: :locked]), class: 'btn btn-w-s btn-warning m-t-md',
-            method: :patch, data: {confirm: t('confirm.lock_record')} do %>
-          <i class='fa fa-lock'></i><br/>
-          <%= t('buttons.lock') %>
-        <% end %>
       <% end %>
     </div>
   </div>
@@ -80,7 +65,7 @@
           </li>
           <li class='show-action-label'>
             <div class='col-sm-3'><%= t('activerecord.attributes.student.classroom') %>:</div>
-            <div class='col-sm-9' data-href='<%= url_for([:admin, @student.classroom]) %>'><%= @student.classroom.identifier %></div>
+            <div class='col-sm-9'><%= @student.classroom.identifier %></div>
           </li>
 
         </ul>
