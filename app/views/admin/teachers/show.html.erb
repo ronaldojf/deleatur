@@ -12,7 +12,7 @@
     </div>
     <div class='col-sm-6 text-right'>
       <% if @teacher.pending? %>
-        <%= link_to [:admin, @teacher], class: 'btn btn-w-s btn-primary m-t-md',
+        <%= link_to [:admin, @teacher, status: :approved], class: 'btn btn-w-s btn-primary m-t-md',
               method: :patch, data: {confirm: t('confirm.approve_record')} do %>
           <i class='fa fa-check'></i><br/>
           <%= t('buttons.approve_register') %>
