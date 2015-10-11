@@ -1,8 +1,8 @@
 (function() {
   window.deleatur = window.angular.module('deleatur', [
     'ngTable', 'ui.utils.masks', 'ngMask', 'idf.br-filters', 'ng-rails-csrf',
-    'localytics.directives','deleatur.filters'
-  ])
+    'localytics.directives', 'deleatur.filters', 'ui.sortable', 'summernote'
+    ])
   .directive('ngEnter', function() {
     return function(scope, element, attrs) {
       element.bind('keydown keypress', function(event) {
@@ -32,18 +32,52 @@
     };
   })
 
-  .directive('ngFocus', ['$timeout', function($timeout) {
+  .directive('iCheck', ['$timeout', function($timeout) {
     return {
-      link: function(scope, element, attrs) {
-        scope.$watch(attrs.ngFocus, function(value) {
-          if((Array.isArray(value) && value[0] === true) || (value === true)) {
-            $timeout(function() {
-              element[0].focus();
-              scope[attrs.ngFocus] = false;
-            }, Array.isArray(value) ? value[1] : 0);
-          }
+      restrict: 'A',
+      require: 'ngModel',
+      link: function($scope, element, $attrs, ngModel) {
+        return $timeout(function() {
+          var value;
+          value = $attrs['value'];
+
+          $scope.$watch($attrs['ngModel'], function(newValue){
+            $(element).iCheck('update');
+          })
+
+          return $(element).iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+
+          }).on('ifChanged', function(event) {
+            if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
+              $scope.$apply(function() {
+                return ngModel.$setViewValue(event.target.checked);
+              });
+            }
+            if ($(element).attr('type') === 'radio' && $attrs['ngModel']) {
+              return $scope.$apply(function() {
+                return ngModel.$setViewValue(value);
+              });
+            }
+          });
         });
       }
     };
-  }]);
+  }])
+
+.directive('ngFocus', ['$timeout', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.ngFocus, function(value) {
+        if((Array.isArray(value) && value[0] === true) || (value === true)) {
+          $timeout(function() {
+            element[0].focus();
+            scope[attrs.ngFocus] = false;
+          }, Array.isArray(value) ? value[1] : 0);
+        }
+      });
+    }
+  };
+}]);
 })();

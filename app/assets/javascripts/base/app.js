@@ -2,12 +2,13 @@ $(function() {
   window.Turbolinks.enableProgressBar();
 
   window.App = function() {
+    this.defaults();
     this.binds();
   };
 
   window.App.prototype.markDirty = function() {
     if (!window._isDirty) {
-      $(window).bind("beforeunload", function(e){
+      $(window).bind('beforeunload', function(e){
         var message = window.I18n.t('js.forms.unsaved.default');
 
         e = e || window.event;
@@ -20,7 +21,7 @@ $(function() {
   window.App.prototype.clearDirty = function() {
     window._isDirty = false;
     window.hrefDirty = undefined;
-    $(window).unbind("beforeunload");
+    $(window).unbind('beforeunload');
   };
 
   window.App.prototype.binds = function() {
@@ -40,6 +41,15 @@ $(function() {
 
     $('body').on('click', 'tr[data-href] td:not([data-no-href])', function() {
       window.Turbolinks.visit($(this).parents('tr:first').data('href'));
+    });
+  };
+
+  window.App.prototype.defaults = function() {
+    swal.setDefaults({
+      confirmButtonColor: '#1ab394',
+      cancelButtonColor: '#f3f3f4',
+      confirmButtonText: window.I18n.t('js.buttons.ok'),
+      cancelButtonText: window.I18n.t('js.buttons.cancel')
     });
   };
 });

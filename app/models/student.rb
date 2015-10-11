@@ -4,6 +4,8 @@ class Student < ActiveRecord::Base
   only_digits :phone
 
   belongs_to :classroom
+  has_many :teachers, through: :classroom
+  has_many :answered_questionnaires
 
   enum gender: [:male, :female]
   enum status: [:normal, :locked]

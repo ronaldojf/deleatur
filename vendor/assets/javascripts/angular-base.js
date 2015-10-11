@@ -5,3 +5,4 @@
 //= require angular/masks
 //= require angular-chosen-localytics/chosen
 //= require angular/ngMask
+//= require angular/sortable

@@ -1,0 +1,150 @@
+<% content_for :angular_controller, 'QuestionnaireRegistrationController' %>
+<%= simple_form_for([:teacher, @questionnaire], html: {multipart: true}) do |f| %>
+
+  <div class='form-inputs'>
+    <div class='row'>
+      <div class='col-xs-12'>
+        <%= f.input :title, input_html: { 'responsive-focus' => true } %>
+      </div>
+    </div>
+
+    <div class='row' ng-init="questionnaire = <%= @questionnaire.to_json %>;
+                              questionnaire.questions = <%= @questionnaire
+                                                              .questions
+                                                              .includes(:options)
+                                                              .to_json(methods: [:options]) %>;
+                              classrooms_subjects = <%= current_user
+                                                        .classrooms_subjects
+                                                        .includes(:classroom, :subject)
+                                                        .to_json(only: [:classroom_id, :subject_id],
+                                                            methods: [:classroom, :subject]) %>;
+                              initClassroomSubject();">
+
+      <div class='col-xs-12'>
+        <div class="form-group string required <%= 'has-error' if @questionnaire.errors.has_key?(:classroom) %>">
+          <label class='control-label' for='classrooms_subjects'>
+            <%= t('simple_form.required.html') %>
+            <%= t('activerecord.attributes.questionnaire.classroom_subject') %>
+          </label>
+
+          <select chosen data-placeholder="<%= t('activerecord.attributes.questionnaire.classroom_subject') %>"
+                  id='classrooms_subjects'
+                  class='form-control'
+                  ng-model='questionnaire.classroom_subject'
+                  ng-options="(item.classroom.identifier + ' | ' + item.subject.description) for item in classrooms_subjects">
+            <option></option>
+          </select>
+
+          <% if @questionnaire.errors.has_key?(:classroom) %>
+            <div class="help-block"><%= @questionnaire.errors[:classroom].first %></div>
+          <% end %>
+        </div>
+
+        <%= f.input :classroom_id, as: :hidden, input_html: { 'ng-value' => 'questionnaire.classroom_subject.classroom_id' } %>
+        <%= f.input :subject_id, as: :hidden, input_html: { 'ng-value' => 'questionnaire.classroom_subject.subject_id' } %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class="col-xs-12 <%= 'has-error' if @questionnaire.errors.keys.select { |key| key.to_s.match(/.*(question).*/) }.present? %>">
+        <label class='control-label'>
+          <%= t('simple_form.required.html') %>
+          <%= t('activerecord.models.question.other') %>
+        </label>
+
+        <div class='well'>
+          <div class='text-right'>
+            <button type='button' class='btn btn-primary m-r-xs' ng-click='addQuestion()'>
+              <i class='fa fa-plus'></i>
+              <%= t('buttons.add') %>
+            </button>
+          </div>
+          <hr class='m-t-xs'>
+
+          <%= custom_flash_messages info: {show: true, fixed: true, icon: :info, message: t('info.no_questions')},
+                                              html: {'ng-hide' => 'notDestroyed(questionnaire.questions).length > 0'} %>
+          <div ui-sortable='sortableOptions' ng-model='questionnaire.questions'
+                  ng-show='notDestroyed(questionnaire.questions).length > 0'>
+
+            <div class='ibox drag-item collapsed' ng-repeat='question in notDestroyed(questionnaire.questions) track by $index'>
+              <div class='ibox-title drag-handler'>
+                <h5><span class='label label-info'>{{$index + 1}}</span></h5>
+                <div class='ibox-tools'>
+                  <a class='collapse-link hover-text-primary'>
+                    <i class='fa fa-chevron-up'></i>
+                  </a>
+                  <a class='hover-text-danger' ng-click='removeQuestion($index)'>
+                    <i class='fa fa-times'></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class='ibox-content'>
+                <summernote ng-model='question.description' config='summernoteOptions'></summernote>
+                <br>
+
+                <div class='row m-b-sm'>
+                  <div class='col-sm-6'>
+                    <span class='text-muted'><%= t('infos.options_hint') %></span>
+                  </div>
+                  <div class='col-sm-6 text-right'>
+                    <a href class='btn btn-success' ng-click='addOptionTo(question)'>
+                      <i class='fa fa-plus'></i>
+                      <%= t('buttons.add_option') %>
+                    </a>
+                  </div>
+                </div>
+
+                <div class='row m-b' ng-repeat='option in notDestroyed(question.options) track by $index'>
+                  <div class="col-xs-12">
+                    <div class='input-group'>
+                      <span class='input-group-addon iCheck-wrapper'>
+                        <input type='checkbox' i-check tabindex='-1' ng-model='option.right'>
+                      </span>
+                      <input type='text' class='form-control' ng-model='option.description'>
+
+                      <a class='input-group-addon iCheck-wrapper cursor-pointer hover-text-danger'
+                            ng-click='removeOption($index, question)'>
+                        <i class='fa fa-times'></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if @questionnaire.errors.keys.select { |key| key.to_s.match(/.*(question).*/) }.present? %>
+          <div class='help-block'>
+            <%= t('errors.custom_messages.questions_and_options_required') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div ng-repeat='question in notSliced(questionnaire.questions) track by $index'>
+      <input type='hidden' name='questionnaire[questions_attributes][{{$index}}][id]' ng-value='question.id'>
+      <input type='hidden' name='questionnaire[questions_attributes][{{$index}}][index]' ng-value='$index'>
+      <input type='hidden' name='questionnaire[questions_attributes][{{$index}}][_destroy]' ng-value='question._destroy'>
+      <input type='hidden' name='questionnaire[questions_attributes][{{$index}}][description]' ng-value='question.description'>
+
+      <div ng-repeat='option in notSliced(question.options) track by $index'>
+        <input type='hidden' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][id]'
+                ng-value='option.id'>
+
+        <input type='hidden' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][_destroy]'
+                ng-value='option._destroy'>
+
+        <input type='checkbox' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][right]'
+                class='hide' ng-model='option.right' ng-value='option.right'>
+
+        <input type='hidden' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][description]'
+                ng-value='option.description'>
+      </div>
+    </div>
+
+    <%= f.submit '', class: 'hide' %>
+  </div>
+<% end %>

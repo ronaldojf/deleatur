@@ -3,6 +3,7 @@ class Teacher < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :validatable, :confirmable
   only_digits :phone
 
+  has_many :questionnaires
   has_many :classrooms_subjects, class_name: 'TeacherClassroomSubject', dependent: :destroy
   has_many :classrooms, -> { uniq }, through: :classrooms_subjects, source: :classroom
   has_many :subjects, -> { uniq }, through: :classrooms_subjects, source: :subject

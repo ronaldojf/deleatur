@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     namespace :teacher do
       resource :profile, only: [:edit, :update]
       resources :students, only: [:index, :show, :edit, :update]
+      resources :questionnaires do
+        patch :publish, on: :member
+      end
       root 'home#index'
     end
 

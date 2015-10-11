@@ -13,6 +13,7 @@ RSpec.describe Teacher, :type => :model do
   it { is_expected.to have_many :classrooms }
   it { is_expected.to have_many :subjects }
   it { is_expected.to have_many :students }
+  it { is_expected.to have_many :questionnaires }
 
   describe '.filter' do
     subject(:name) { 'Jonh' }

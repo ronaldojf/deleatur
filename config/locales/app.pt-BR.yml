@@ -17,6 +17,8 @@ pt-BR:
       teachers: Professores
       students: Estudantes
       subjects: Disciplinas
+      questionnaires: Questionários
+      answered_questionnaires: Questionários
       classrooms: Turmas
       profile: Perfil
     footers: *page_titles
@@ -66,6 +68,7 @@ pt-BR:
     approve_register: Aprovar Cadastro
     disapprove_register: Reprovar Cadastro
     create_account: Criar uma conta
+    add_option: Adicionar opção
     lock: Bloquear
     unlock: Desbloquear
 
@@ -120,6 +123,7 @@ pt-BR:
     no_results: Nenhum resultado encontrado
     no_classrooms: Nenhuma turma adicionada
     no_subjects: Nenhuma disciplina adicionada
+    no_questions: Nenhuma pergunta adicionada
     editing_password: Preencha apenas se deseja alterar...
 
   view:
@@ -135,6 +139,7 @@ pt-BR:
     delete_record: O registro será excluído.
     lock_record: O registro será bloqueado.
     approve_record: O registro será aprovado.
+    publish_record: O registro será publicado e não poderá mais ser editado ou excluído.
 
   routes:
     new: novo
@@ -154,6 +159,8 @@ pt-BR:
     sign_up: cadastro
     cancel: cancelar
     confirmation: confirmacao
+    questionnaires: questionarios
+    answered_questionnaires: questionarios
 
   models_and_attributes: &models_and_attributes
     models: &models
@@ -172,6 +179,15 @@ pt-BR:
       classroom:
         one: Turma
         other: Turmas
+      question:
+        one: Pergunta
+        other: Perguntas
+      questionnaire:
+        one: Questionário
+        other: Questionários
+      answered_questionnaire:
+        one: Questionário
+        other: Questionários
     attributes: &attributes
       person: &person
         name: Nome
@@ -202,15 +218,33 @@ pt-BR:
         description: Descrição
       classroom:
         identifier: Sala
+      questionnaire:
+        title: Título
+        teacher: Professor
+        classroom_subject: 'Turma/Disciplina'
+        classroom: Turma
+        subject: Disciplina
+        published: Publicado
+        updated_at: Última Atualização
+      question:
+        description: Descrição
+        points: Pontos
+      question_option:
+        description: Descrição
+        right: 'Resposta certa?'
 
   enums:
     names: &enum_names
       gender: Sexo
       status: Status
+      published: Publicação
     items: &enum_items
       gender:
         male: Masculino
         female: Feminino
+      published:
+        'true': 'Publicado'
+        'false': 'Não Publicado'
     specific_items: &enum_specific_items
       teacher:
         status:
@@ -221,14 +255,21 @@ pt-BR:
         status:
           normal: Normal
           locked: Bloqueado
+      answered_questionnaire:
+        status:
+          pending: Pendente
+          answered: Respondido
+          fixed: Corrigido
 
   errors:
     custom_messages:
       current_password_not_match: não confere
+      questions_and_options_required: 'É necessário ter perguntas e opções, e as mesmas não podem ficar em branco.'
 
   infos:
     pending_register: Cadastro pendente de aprovação.
     locked_record: Registro bloqueado.
+    options_hint: Digite as opções de resposta e marque as respostas certas.
 
   activerecord:
     <<: *models_and_attributes

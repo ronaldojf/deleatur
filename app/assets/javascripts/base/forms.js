@@ -7,7 +7,7 @@ $(document).on('page:change', function() {
 
   $("a[href^='/'], a[href^='/'] *").on('click', function(e) {
     if (window._isDirty) {
-    var target = $(e.target);
+      var target = $(e.target);
 
       if (target.is('a')) {
         window.hrefDirty = target.attr('href');
@@ -45,12 +45,12 @@ $(document).on('page:change', function() {
       text: message,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#1ab394',
-      cancelButtonColor: '#f3f3f4',
-      confirmButtonText: window.I18n.t('js.buttons.ok'),
-      cancelButtonText: window.I18n.t('js.buttons.cancel')
+      customClass: 'data-confirm-swal'
     });
-    $('.sweet-alert .confirm').on('click', function() { $.rails.confirmed(link); });
+
+    $('.data-confirm-swal .confirm, .data-confirm-swal .cancel').off('click');
+    $('.data-confirm-swal .confirm').on('click', function() { $.rails.confirmed(link); });
+    $('.data-confirm-swal .cancel').on('click', function() { $('.data-confirm-swal .confirm').off('click'); });
   };
 });
 
@@ -62,10 +62,7 @@ $(document).on('page:before-change', function(e) {
       text: window.I18n.t('js.forms.unsaved.quit'),
       type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#1ab394',
-      cancelButtonColor: '#f3f3f4',
-      confirmButtonText: window.I18n.t('js.buttons.ok'),
-      cancelButtonText: window.I18n.t('js.buttons.cancel')
+      customClass: ''
     }, function(confirmed) {
       if (confirmed) {
         var path = window.hrefDirty;

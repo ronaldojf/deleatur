@@ -7,6 +7,9 @@ pt-BR:
       update:
         notice: Registro atualizado com sucesso.
         alert: Registro não pôde ser atualizado. Confira o(s) erro(s) abaixo.
+      publish:
+        notice: Registro publicado com sucesso.
+        alert: Registro não pôde ser publicado. Confira o(s) erro(s) abaixo.
       edit:
         alerts:
           editing_main_administrator: Este administrador não pode ser editado.

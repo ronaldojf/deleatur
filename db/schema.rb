@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926131047) do
+ActiveRecord::Schema.define(version: 20150927193524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +35,68 @@ ActiveRecord::Schema.define(version: 20150926131047) do
   add_index "administrators", ["email"], name: "index_administrators_on_email", unique: true, using: :btree
   add_index "administrators", ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true, using: :btree
 
+  create_table "answered_questionnaires", force: :cascade do |t|
+    t.integer  "status",                                     default: 0,   null: false
+    t.decimal  "points",           precision: 15, scale: 10, default: 0.0, null: false
+    t.integer  "questionnaire_id"
+    t.integer  "student_id"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+  end
+
+  add_index "answered_questionnaires", ["questionnaire_id"], name: "index_answered_questionnaires_on_questionnaire_id", using: :btree
+  add_index "answered_questionnaires", ["student_id"], name: "index_answered_questionnaires_on_student_id", using: :btree
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "question_option_id"
+    t.integer  "answered_questionnaire_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "answers", ["answered_questionnaire_id"], name: "index_answers_on_answered_questionnaire_id", using: :btree
+  add_index "answers", ["question_option_id"], name: "index_answers_on_question_option_id", using: :btree
+
   create_table "classrooms", force: :cascade do |t|
     t.string   "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "question_options", force: :cascade do |t|
+    t.text     "description"
+    t.boolean  "right",       default: false, null: false
+    t.integer  "question_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "question_options", ["question_id"], name: "index_question_options_on_question_id", using: :btree
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.string   "title"
+    t.boolean  "published",    default: false, null: false
+    t.integer  "teacher_id"
+    t.integer  "classroom_id"
+    t.integer  "subject_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "questionnaires", ["classroom_id"], name: "index_questionnaires_on_classroom_id", using: :btree
+  add_index "questionnaires", ["subject_id"], name: "index_questionnaires_on_subject_id", using: :btree
+  add_index "questionnaires", ["teacher_id"], name: "index_questionnaires_on_teacher_id", using: :btree
+
+  create_table "questions", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "index",                  default: 0, null: false
+    t.integer  "questionnaire_id"
+    t.integer  "question_options_count"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "questions", ["questionnaire_id"], name: "index_questions_on_questionnaire_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "name"

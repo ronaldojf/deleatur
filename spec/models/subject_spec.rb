@@ -4,6 +4,7 @@ RSpec.describe Subject, :type => :model do
   it { is_expected.to validate_presence_of :description }
   it { is_expected.to validate_uniqueness_of :description }
   it { is_expected.to have_many :classrooms_teachers }
+  it { is_expected.to have_many :questionnaires }
 
     describe '.filter' do
     subject(:description) { 'Math' }
@@ -35,6 +36,19 @@ RSpec.describe Subject, :type => :model do
       it 'does return all of the subjects' do
         expect(Subject.filter('').count).to eq 2
       end
+    end
+  end
+
+  describe '.for_classroom' do
+    subject(:teacher) { create :teacher }
+    subject(:classroom) { create :classroom }
+    before do
+      teacher.classrooms_subjects << create(:teacher_classroom_subject, subject: create(:subject), classroom: classroom)
+      teacher.classrooms_subjects << create(:teacher_classroom_subject, subject: create(:subject), classroom: create(:classroom))
+    end
+
+    it "does return all the subjects that a teacher have in a classroom" do
+      expect(teacher.subjects.for_classroom(classroom).count).to eq 1
     end
   end
 end

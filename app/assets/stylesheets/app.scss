@@ -7,6 +7,7 @@ html.turbolinks-progress-bar::before {
 table.vertical-center td { vertical-align: middle !important; }
 .cursor-pointer { cursor: pointer; }
 [data-href] { cursor: pointer; }
+.float-none { float: none !important; }
 
 #bg-loader {
   opacity: 0.6;
@@ -29,3 +30,23 @@ table.vertical-center td { vertical-align: middle !important; }
     margin-left: -74px;
   }
 }
+
+.show-html {
+  &.show-action-label {
+    border-radius: 4px 4px 0 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  &.form-control {
+    font-weight: normal;
+    border-left: 6px solid #e7eaec;
+    border-right: 6px solid #e7eaec;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+  }
+}
+
+.hover-text-danger:hover { color: $red; }
+.hover-text-primary:hover { color: $lazur; }
+.auto-height { height: auto; }
+.font-normal { font-size: 13px !important; }

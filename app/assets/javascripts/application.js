@@ -15,10 +15,14 @@
 //= require turbolinks
 //= require js-routes
 //= require modernizr
+//= require jquery-ui
+//= require inspinia/plugins/summernote/summernote
+//= require inspinia/plugins/summernote/summernote-pt-BR
 //
 //= require bootstrap-sprockets
 //
 //= require angular-base
+//= require angular-summernote/angular-summernote
 //= require ng-rails-csrf
 //= require i18n/translations
 //= require base

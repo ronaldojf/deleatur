@@ -1,0 +1,115 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t('models_and_attributes.models.questionnaire.other') %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), [:teacher, :root] %></li>
+        <li><%= link_to t('page.modules.questionnaires'), [:teacher, :questionnaires] %></li>
+        <li class="active">
+          <strong><%= t('actions.show') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to [:new, :teacher, :questionnaire], class: 'btn btn-w-s btn-primary m-t-md' do %>
+        <i class='fa fa-plus'></i><br/>
+        <%= t('buttons.new') %>
+      <% end %>
+
+      <% unless @questionnaire.published? %>
+        <%= link_to [:edit, :teacher, @questionnaire],
+              class: 'btn btn-w-s btn-info m-t-md' do %>
+          <i class='fa fa-edit'></i><br/>
+          <%= t('buttons.edit') %>
+        <% end %>
+
+        <%= link_to [:publish, :teacher, @questionnaire], class: 'btn btn-w-s btn-success m-t-md',
+              method: :patch, data: {confirm: t('confirm.publish_record')} do %>
+          <i class='fa fa-share-square-o'></i><br/>
+          <%= t('buttons.publish') %>
+        <% end %>
+
+        <%= link_to [:teacher, @questionnaire], class: 'btn btn-w-s btn-danger m-t-md',
+              method: :delete, data: {confirm: t('confirm.delete_record')} do %>
+          <i class='fa fa-trash'></i><br/>
+          <%= t('buttons.destroy') %>
+        <% end %>
+      <% end %>
+
+      <%= link_to [:teacher, :questionnaires], class: 'btn btn-w-s btn-white m-t-md m-l-sm' do %>
+        <i class='fa fa-reply'></i><br/>
+        <%= t('buttons.back') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= flash_messages %>
+<div class='row responsive-padding'>
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%= t('view.keywords.informations') %>
+        </h5>
+      </div>
+
+      <div class='ibox-content'>
+        <span class="label label-<%= @questionnaire.published? ? 'primary' : 'warning' %>">
+          <%= t(@questionnaire.published.to_s, scope: [:enums, :items, :published]) %>
+        </span>
+        <br><br>
+
+        <ul class='todo-list'>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.title') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.title %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.classroom') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.classroom.identifier %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.subject') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.subject.description %></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='row responsive-padding'>
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5><%= t('activerecord.models.questionnaire.one') %></h5>
+      </div>
+
+      <div class='ibox-content'>
+        <ol>
+          <% @questionnaire.questions.eager_load(:options).each do |question| %>
+            <li>
+              <%= sanitize question.description, tags: Questionnaire::ALLOWED_TAGS, attributes: Questionnaire::ALLOWED_ATTRIBUTES %>
+
+              <br><br>
+              <blockquote class='font-normal'>
+                <ul class='list-unstyled'>
+                  <% question.options.find_each do |option| %>
+                  <li>
+                    <i class="fa fa-<%= option.right? ? 'check-square-o' : 'square-o' %>"></i>&nbsp;&nbsp;&nbsp;
+                    <%= option.description %>
+                  </li>
+                  <% end %>
+                </ul>
+              </blockquote>
+            </li>
+            <hr>
+          <% end %>
+        </ol>
+
+        <%= custom_flash_messages info: {show: @questionnaire.questions.length <= 0, fixed: true, icon: :info, message: t('info.no_questions')} %>
+      </div>
+    </div>
+  </div>
+</div>

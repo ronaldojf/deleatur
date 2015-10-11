@@ -35,7 +35,7 @@
           </div>
 
           <div class="row">
-            <div class='col-md-4 m-t-xs' ng-init='classrooms = <%= Classroom.all.to_json %>'>
+            <div class='col-md-4 m-t-xs' ng-init='classrooms = <%= Classroom.order(:identifier).to_json %>'>
               <select chosen data-placeholder="<%= t('activerecord.attributes.student.classroom') %>"
                       allow-single-deselect='true'
                       class='form-control'

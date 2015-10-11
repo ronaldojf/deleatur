@@ -8,6 +8,8 @@ RSpec.describe Student, :type => :model do
   it { is_expected.to validate_uniqueness_of :cpf }
   it { is_expected.to define_enum_for :gender }
   it { is_expected.to define_enum_for :status }
+  it { is_expected.to have_many :teachers }
+  it { is_expected.to have_many :answered_questionnaires }
   it { is_expected.to belong_to :classroom }
 
   describe '.filter' do
