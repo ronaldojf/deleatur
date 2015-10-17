@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927193524) do
+ActiveRecord::Schema.define(version: 20151015002734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,11 @@ ActiveRecord::Schema.define(version: 20150927193524) do
   add_index "administrators", ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true, using: :btree
 
   create_table "answered_questionnaires", force: :cascade do |t|
-    t.integer  "status",                                     default: 0,   null: false
-    t.decimal  "points",           precision: 15, scale: 10, default: 0.0, null: false
+    t.integer  "status",           default: 0, null: false
     t.integer  "questionnaire_id"
     t.integer  "student_id"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "answered_questionnaires", ["questionnaire_id"], name: "index_answered_questionnaires_on_questionnaire_id", using: :btree
@@ -62,6 +61,17 @@ ActiveRecord::Schema.define(version: 20150927193524) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "pontuations", force: :cascade do |t|
+    t.decimal  "points",                    precision: 15, scale: 5, default: 0.0, null: false
+    t.integer  "answered_questionnaire_id"
+    t.integer  "student_id"
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+  end
+
+  add_index "pontuations", ["answered_questionnaire_id"], name: "index_pontuations_on_answered_questionnaire_id", using: :btree
+  add_index "pontuations", ["student_id"], name: "index_pontuations_on_student_id", using: :btree
 
   create_table "question_options", force: :cascade do |t|
     t.text     "description"

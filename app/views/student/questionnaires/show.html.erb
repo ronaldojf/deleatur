@@ -1,0 +1,111 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t('models_and_attributes.models.questionnaire.other') %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), student_root_path %></li>
+        <li><%= link_to t('page.modules.questionnaires'), questionnaires_path %></li>
+        <li class="active">
+          <strong><%= t('actions.show') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to [:answer, @questionnaire], class: 'btn btn-w-s btn-info m-t-md' do %>
+        <i class='fa fa-edit'></i><br/>
+        <%= t('buttons.answer') %>
+      <% end %>
+
+      <%= link_to questionnaires_path, class: 'btn btn-w-s btn-white m-t-md m-l-sm' do %>
+        <i class='fa fa-reply'></i><br/>
+        <%= t('buttons.back') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= flash_messages %>
+<div class="row responsive-padding">
+  <div class='col-xs-12'>
+    <div class='ibox float-e-margins'>
+      <div class='ibox-title'>
+        <h5>
+          <%= t('view.keywords.informations') %>
+        </h5>
+        <div class='ibox-tools'>
+          <a class='text-primary' data-toggle='modal' data-target='#help-modal'>
+            <i class='fa fa-question'></i>
+          </a>
+        </div>
+      </div>
+
+      <div class='ibox-content'>
+        <% unless @answered.pending? %>
+          <%= custom_flash_messages info: { show: true, fixed: true, icon: :info,
+              message: t("infos.mark_as_#{@answered.answered? ? 'fixed' : 'answered'}_html",
+                          link_class: 'text-primary',
+                          action: answered_questionnaire_path(@answered.id, status: @answered.answered? ? :fixed : :answered),
+                          method: :patch)} %>
+        <% end %>
+
+        <ul class='todo-list'>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.title') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.title %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.teacher') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.teacher.name %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.subject') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.subject.description %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.pontuation.points') %>:</div>
+            <div class='col-sm-9'>
+              <% points = @answered.pontuation.try(:points) || 0.0 %>
+              <span class="text-<%= points > 0 ? 'success' : 'warning' %>">
+                <%= number_with_precision(points, precision: 4) %>
+              </span>
+            </div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.questions_count') %>:</div>
+            <div class='col-sm-9'><%= @questionnaire.questions.count %></div>
+          </li>
+          <li class='show-action-label'>
+            <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.published_at') %>:</div>
+            <div class='col-sm-9'><%= l(@questionnaire.updated_at, format: :long) %></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='modal inmodal' id='help-modal' tabindex='-1' role='dialog' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content animated fadeIn'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal'>
+          <span aria-hidden='true'>&times;</span>
+          <span class='sr-only'><%= t('buttons.close') %></span>
+        </button>
+
+        <i class='fa fa-question modal-icon'></i>
+        <h4 class='modal-title'><%= t('help.student_questionnaires.title') %></h4>
+      </div>
+      <div class='modal-body'>
+        <ul>
+          <% t('help.student_questionnaires.messages').each do |message| %>
+            <li class='m-b-xs'><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-white' data-dismiss='modal'><%= t('buttons.close') %></button>
+      </div>
+    </div>
+  </div>
+</div>
