@@ -1,0 +1,67 @@
+<% content_for :sub_header do %>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2><%= t("models_and_attributes.models.questionnaire.other") %></h2>
+      <ol class='breadcrumb'>
+        <li><%= link_to t('page.modules.home'), student_root_path %></li>
+        <li><%= link_to t('page.modules.questionnaires'), questionnaires_path %></li>
+        <li class='active'>
+          <strong><%= t('actions.answer') %></strong>
+        </li>
+      </ol>
+    </div>
+    <div class='col-sm-6 text-right'>
+      <%= link_to questionnaires_path, class: 'btn btn-w-s btn-primary m-t-md',
+            data: {'form-submit' => url_for(@questionnaire)} do %>
+
+        <i class='fa fa-check'></i><br/>
+        <%= t('buttons.confirm') %>
+      <% end %>
+      <%= link_to @questionnaire, class: 'btn btn-w-s btn-warning m-t-md' do %>
+        <i class='fa fa-remove'></i><br/>
+        <%= t('buttons.cancel') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= flash_messages %>
+<div class='row'>
+  <div class='col-xs-12 current-responsive-padding protected'>
+    <%= simple_form_for(@questionnaire, html: { multipart: true }) do |f| %>
+      <% @questionnaire.questions.includes(options: :answer).each_with_index do |question, i| %>
+        <div class='ibox float-e-margins'>
+          <div class='ibox-title'>
+            <h5><span class='label label-info'><%= i + 1 %></span></h5>
+          </div>
+          <div class='ibox-content'>
+            <%= sanitize question.description, tags: Questionnaire::ALLOWED_TAGS, attributes: Questionnaire::ALLOWED_ATTRIBUTES %>
+          </div>
+
+          <div class='ibox-footer'>
+            <ul class='list-unstyled'>
+              <% question.options.each_with_index do |option, i| %>
+                <input type='hidden' value='<%= option.answer.try(:id) %>'
+                        name='answered_questionnaire[answers_attributes][][id]'>
+                <input type='hidden' value='<%= option.id %>'
+                        name='answered_questionnaire[answers_attributes][][question_option_id]'>
+
+                <li>
+                  <label for='answer_<%= option.id %>'>
+                    <input type='checkbox' class='iCheck' id='answer_<%= option.id %>' <%= 'checked' if option.answer.present? %>
+                            name='answered_questionnaire[answers_attributes][][chosed]'>&nbsp;
+                    <%= option.description %>
+                  </label>
+                </li>
+
+                <% if i < (question.options.length - 1) %>
+                  <hr class='m-t-xss m-b-xss'>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

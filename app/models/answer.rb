@@ -4,5 +4,7 @@ class Answer < ActiveRecord::Base
   has_one :questionnaire, through: :answered_questionnaire
   has_one :student, through: :answered_questionnaire
 
-  validates :question_option, :answered_questionnaire, presence: true
+  validates :question_option, presence: true
+
+  scope :right, -> { joins(:question_option).where(question_option: { right: true }) }
 end

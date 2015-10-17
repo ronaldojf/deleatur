@@ -535,6 +535,14 @@ code {
   border-width: 1px 0px;
 }
 
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid $border-color;
+  font-size: 90%;
+  background: white;
+  padding: 10px 15px;
+}
+
 table.table-mail tr td {
   padding: 12px;
 }

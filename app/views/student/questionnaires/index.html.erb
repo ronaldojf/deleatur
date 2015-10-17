@@ -1,20 +1,14 @@
 <% content_for :angular_controller, 'NgTableController' %>
 <% content_for :sub_header do %>
   <div class='row'>
-    <div class='col-sm-6'>
+    <div class='col-xs-12'>
       <h2><%= t('models_and_attributes.models.questionnaire.other') %></h2>
       <ol class='breadcrumb'>
-        <li><%= link_to t('page.modules.home'), [:teacher, :root] %></li>
+        <li><%= link_to t('page.modules.home'), student_root_path %></li>
         <li class='active'>
           <strong><%= t('page.modules.questionnaires') %></strong>
         </li>
       </ol>
-    </div>
-    <div class='col-sm-6 text-right'>
-      <%= link_to [:new, :teacher, :questionnaire], class: 'btn btn-w-s btn-primary m-t-md' do %>
-        <i class='fa fa-plus'></i><br/>
-        <%= t('buttons.new') %>
-      <% end %>
     </div>
   </div>
 <% end %>
@@ -22,7 +16,7 @@
 <%= flash_messages %>
 
 <div class="row responsive-padding">
-  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'teacherQuestionnaires')">
+  <div class='col-xs-12' ng-init="initTable(<%= @config.to_json_with_active_support_encoder %>, 'questionnaires')">
     <div class='ibox float-e-margins'>
       <div class='ibox-title'>
         <h5>
@@ -42,28 +36,16 @@
             </div>
 
             <div class="row">
-              <div class='col-sm-4 m-t-xs' ng-init="publishEnum = <%= t('enums.items.published').to_json %>">
-                <select chosen data-placeholder="<%= t('enums.names.published') %>"
+              <div class='col-sm-6 m-t-xs' ng-init="statuses = <%= t('enums.specific_items.questionnaire.status').to_json %>">
+                <select chosen data-placeholder="<%= t('enums.names.status') %>"
                         allow-single-deselect='true'
                         class='form-control'
-                        ng-model='config.filter.published'
-                        ng-options='key as label for (key, label) in publishEnum'>
+                        ng-model='config.filter.status'
+                        ng-options='key as label for (key, label) in statuses'>
                   <option></option>
                 </select>
               </div>
-              <div class='col-sm-4 m-t-xs' ng-init="classrooms = <%= current_user.classrooms
-                                                                        .order(:identifier)
-                                                                        .to_json(only: [:id, :identifier]) %>">
-
-                <select chosen data-placeholder="<%= t('activerecord.models.classroom.other') %>"
-                        allow-single-deselect='true'
-                        class='form-control'
-                        ng-model='config.filter.classroom'
-                        ng-options='classroom.id as classroom.identifier for classroom in classrooms'>
-                  <option></option>
-                </select>
-              </div>
-              <div class='col-sm-4 m-t-xs' ng-init="subjects = <%= current_user.subjects.to_json(only: [:id, :description]) %>">
+              <div class='col-sm-6 m-t-xs' ng-init="subjects = <%= Subject.all.to_json(only: [:id, :description]) %>">
                 <select chosen data-placeholder="<%= t('activerecord.models.subject.other') %>"
                         allow-single-deselect='true'
                         class='form-control'
@@ -91,15 +73,26 @@
               <tr data-href='{{questionnaire.showHtmlUrl}}' ng-repeat='questionnaire in $data track by questionnaire.id'>
 
                 <td data-title="'<%= t('activerecord.attributes.questionnaire.title') %>'" sortable="'title'">
+                  <span class='label' ng-class="{'label-warning': questionnaire.status === 'pending',
+                                                 'label-info': questionnaire.status === 'answered',
+                                                 'label-success': questionnaire.status === 'fixed'}">
+
+                    {{statuses[questionnaire.status]}}
+                  </span>&nbsp;
                   {{questionnaire.title | truncate:35}}
                 </td>
-                <td data-title="'<%= t('activerecord.attributes.questionnaire.classroom') %>'" sortable="'classrooms.identifier'">
-                  {{questionnaire.classroom.identifier | truncate:15}}
+                <td data-title="'<%= t('activerecord.attributes.questionnaire.teacher') %>'" sortable="'teachers.name'">
+                  {{questionnaire.teacher.name | truncate:30}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.questionnaire.subject') %>'" sortable="'subjects.description'">
-                  {{questionnaire.subject.description | truncate:20}}
+                  {{questionnaire.subject.description | truncate:15}}
                 </td>
-                <td data-title="'<%= t('activerecord.attributes.questionnaire.updated_at') %>'" sortable="'questionnaires.updated_at'">
+                <td data-title="'<%= t('activerecord.attributes.questionnaire.points') %>'" sortable="'points'">
+                  <span class="label label-{{questionnaire.points > 0 ? 'info' : 'warning'}}">
+                    {{questionnaire.points | number:2}}
+                  </span>
+                </td>
+                <td data-title="'<%= t('activerecord.attributes.questionnaire.published_at') %>'" sortable="'questionnaires.updated_at'">
                   {{questionnaire.updatedAt | date:'short'}}
                 </td>
 

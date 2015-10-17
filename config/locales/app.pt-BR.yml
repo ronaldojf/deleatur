@@ -42,6 +42,7 @@ pt-BR:
     create: Inserção
     destroy: Exclusão
     publish: Publicação
+    answer: Responder
 
   buttons:
     close: Fechar
@@ -58,6 +59,8 @@ pt-BR:
     signin: Entrar
     signup: Cadastrar
     publish: Publicar
+    confirm: Confirmar
+    answer: Responder
     forgot_password: Esqueceu sua senha?
     resend_confirmation: Reenviar confirmação de e-mail?
     back_to_login: Voltar para o painel de login
@@ -160,7 +163,8 @@ pt-BR:
     cancel: cancelar
     confirmation: confirmacao
     questionnaires: questionarios
-    answered_questionnaires: questionarios
+    answered_questionnaires: questionarios-respondidos
+    answer: responder
 
   models_and_attributes: &models_and_attributes
     models: &models
@@ -188,6 +192,9 @@ pt-BR:
       answered_questionnaire:
         one: Questionário
         other: Questionários
+      pontuation:
+        one: Pontuação
+        other: Pontuações
     attributes: &attributes
       person: &person
         name: Nome
@@ -225,13 +232,19 @@ pt-BR:
         classroom: Turma
         subject: Disciplina
         published: Publicado
+        status: Status
+        points: Pontos
+        questions_count: Quantidade de Perguntas
         updated_at: Última Atualização
+        published_at: Publicado em
       question:
         description: Descrição
         points: Pontos
       question_option:
         description: Descrição
         right: 'Resposta certa?'
+      pontuation:
+        points: Pontos
 
   enums:
     names: &enum_names
@@ -256,20 +269,49 @@ pt-BR:
           normal: Normal
           locked: Bloqueado
       answered_questionnaire:
-        status:
+        status: &answered_questionnaire_statuses
           pending: Pendente
           answered: Respondido
           fixed: Corrigido
+      questionnaire:
+        status: *answered_questionnaire_statuses
 
   errors:
     custom_messages:
       current_password_not_match: não confere
       questions_and_options_required: 'É necessário ter perguntas e opções, e as mesmas não podem ficar em branco.'
+      saving_questionnaire: 'Ocorreu um erro tentando atualizar o questionário. Por favor, tente novamente mais tarde.'
 
   infos:
     pending_register: Cadastro pendente de aprovação.
     locked_record: Registro bloqueado.
     options_hint: Digite as opções de resposta e marque as respostas certas.
+    mark_as_fixed_html: |
+      Este questionário já foi respondido.
+      <strong>
+        <a href="%{action}" data-method="patch" class="%{link_class}">
+          Marcar como corrigido?
+        </a>
+      </strong>
+    mark_as_answered_html: |
+      Este questionário foi marcado como corrigido.
+      <strong>
+        <a href="%{action}" data-method="patch" class="%{link_class}">
+          Desfazer?
+        </a>
+      </strong>
+
+  help:
+    student_questionnaires:
+      title: Dicas/Ajuda
+      messages:
+        - 'Procure pesquisar em vários meios (internet, livros) que você considera confiáveis;'
+        - 'Não existe um tempo limite para responder;'
+        - 'Cada opção de resposta possui a mesma pontuação, baseada na quantidade total de opções de todas as perguntas;'
+        - 'Cada erro desconta da pontuação a mesma quantidade de pontos que um acerto atribui.'
+        - 'É possível que todas as opções em uma pergunta estejam certas, assim como também pode não haver nenhuma certa;'
+        - 'As respostas não serão divulgadas após o questionário ter sido respondido;'
+        - 'Recomenda-se que os questionários sejam corrigidos para que se possa tê-los como referência futuramente.'
 
   activerecord:
     <<: *models_and_attributes

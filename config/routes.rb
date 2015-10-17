@@ -19,11 +19,17 @@ Rails.application.routes.draw do
       resources :questionnaires do
         patch :publish, on: :member
       end
+
       root 'home#index'
     end
 
     scope module: :student do
       resource :profile, only: [:edit, :update], as: :student_profile
+      resources :answered_questionnaires, only: [:update]
+      resources :questionnaires, only: [:index, :show, :update] do
+        get :answer, on: :member
+      end
+
       root 'home#index', as: :student_root
     end
   end

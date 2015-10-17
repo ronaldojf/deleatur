@@ -4,14 +4,14 @@
     <div class='col-sm-6'>
       <h2><%%= t('models_and_attributes.models.<%= singular_table_name %>.other') %></h2>
       <ol class='breadcrumb'>
-        <li><%%= link_to t('page.modules.home'), [:teacher, :root] %></li>
+        <li><%%= link_to t('page.modules.home'), [:admin, :root] %></li>
         <li class='active'>
           <strong><%%= t('page.modules.<%= plural_table_name %>') %></strong>
         </li>
       </ol>
     </div>
     <div class='col-sm-6 text-right'>
-      <%%= link_to [:new, :teacher, :<%= singular_table_name %>], class: 'btn btn-w-s btn-primary m-t-md' do %>
+      <%%= link_to [:new, :admin, :<%= singular_table_name %>], class: 'btn btn-w-s btn-primary m-t-md' do %>
         <i class='fa fa-plus'></i><br/>
         <%%= t('buttons.new') %>
       <%% end %>

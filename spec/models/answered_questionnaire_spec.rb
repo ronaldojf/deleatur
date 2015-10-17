@@ -5,11 +5,13 @@ RSpec.describe AnsweredQuestionnaire, :type => :model do
   it { is_expected.to validate_presence_of :questionnaire }
   it { is_expected.to validate_presence_of :student }
   it { is_expected.to validate_presence_of :status }
+  it { is_expected.to have_one :pontuation }
   it { is_expected.to have_many :answers }
   it { is_expected.to have_many :options }
   it { is_expected.to have_many :questions }
   it { is_expected.to belong_to :questionnaire }
   it { is_expected.to belong_to :student }
+  it { is_expected.to accept_nested_attributes_for :answers }
 
   describe '.by_status' do
     context "when searched for pending answered questionnaires" do

@@ -6,7 +6,7 @@ window.deleatur
 
       $scope.tableParams = new ngTableParams({
         page: $scope.config.page,
-        count: 25,
+        count: $scope.config.count || 25,
         sorting: $scope.config.sorting,
         filter: $scope.config.filter,
       }, {

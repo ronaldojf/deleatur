@@ -14,6 +14,7 @@ RSpec.describe Questionnaire, :type => :model do
   it { is_expected.to have_many :options }
   it { is_expected.to have_many :answers }
   it { is_expected.to accept_nested_attributes_for :questions }
+  it { is_expected.to define_enum_for :status }
 
   describe '.published' do
     before do
@@ -123,6 +124,52 @@ RSpec.describe Questionnaire, :type => :model do
 
       it 'does return all records' do
         expect(Questionnaire.by_publication('').count).to eq 1
+      end
+    end
+  end
+
+  describe '.by_status' do
+    context 'when the status pending is given' do
+      subject(:questionnaire) { create :questionnaire }
+      before do
+        create :answered_questionnaire, status: :pending, questionnaire: questionnaire
+        2.times { create :answered_questionnaire, status: :answered, questionnaire: questionnaire }
+      end
+
+      it 'does return all pending questionnaires' do
+        expect(Questionnaire.joins(:answereds).by_status(:pending).count).to eq 1
+      end
+    end
+
+    context 'when the status answered is given' do
+      subject(:questionnaire) { create :questionnaire }
+      before do
+        create :answered_questionnaire, status: :answered, questionnaire: questionnaire
+        2.times { create :answered_questionnaire, questionnaire: questionnaire }
+      end
+
+      it 'does return all answered questionnaires' do
+        expect(Questionnaire.joins(:answereds).by_status(:answered).count).to eq 1
+      end
+    end
+
+    context 'when the status fixed is given' do
+      subject(:questionnaire) { create :questionnaire }
+      before do
+        create :answered_questionnaire, status: :fixed, questionnaire: questionnaire
+        2.times { create :answered_questionnaire, questionnaire: questionnaire }
+      end
+
+      it 'does return all fixed questionnaires' do
+        expect(Questionnaire.joins(:answereds).by_status('fixed').count).to eq 1
+      end
+    end
+
+    context 'when nothing is given' do
+      before { create :questionnaire }
+
+      it 'does return all records' do
+        expect(Questionnaire.by_status('').count).to eq 1
       end
     end
   end

@@ -8,8 +8,10 @@ RSpec.describe Student, :type => :model do
   it { is_expected.to validate_uniqueness_of :cpf }
   it { is_expected.to define_enum_for :gender }
   it { is_expected.to define_enum_for :status }
+  it { is_expected.to have_many :pontuations }
   it { is_expected.to have_many :teachers }
   it { is_expected.to have_many :answered_questionnaires }
+  it { is_expected.to have_many :questionnaires }
   it { is_expected.to belong_to :classroom }
 
   describe '.filter' do
@@ -208,6 +210,50 @@ RSpec.describe Student, :type => :model do
 
       it 'does be active' do
         expect(student.active_for_authentication?).to be
+      end
+    end
+  end
+
+  describe '#student_questionnaires' do
+    context 'when the student do not have an answered questionnaire' do
+      let(:classroom) { create :classroom }
+      let(:student) { create :student, classroom: classroom }
+      let!(:questionnaire) { create :questionnaire, published: true, classroom: classroom }
+      let!(:student_questionnaire) { student.student_questionnaires.first }
+
+      it 'does return the fields of the questionnaire but with status and points with defaults' do
+        expect(student_questionnaire.id).to eq questionnaire.id
+        expect(student_questionnaire.title).to eq questionnaire.title
+        expect(student_questionnaire.subject_id).to eq questionnaire.subject_id
+        expect(student_questionnaire.teacher_id).to eq questionnaire.teacher_id
+        expect(student_questionnaire.updated_at.to_s).to eq questionnaire.updated_at.to_s
+        expect(student_questionnaire.points).to eq 0
+      end
+    end
+
+    context 'when the student has an answered questionnaire' do
+      let(:classroom) { create :classroom }
+      let(:student) { create :student, classroom: classroom }
+      let!(:questionnaire) { create :questionnaire, published: true, classroom: classroom }
+      let!(:question) { create :question, questionnaire: questionnaire }
+      let!(:answered) do
+        create :answered_questionnaire,
+          questionnaire: questionnaire,
+          student: student,
+          status: 1,
+          answers: [create(:answer, question_option: create(:question_option, question: question, right: true))]
+      end
+      let!(:pontuation) { create(:pontuation, student: student, answered_questionnaire: answered) }
+      let!(:student_questionnaire) { student.student_questionnaires.first }
+
+      it 'does the fields of the questionnaire plus the answered questionnaire' do
+        expect(student_questionnaire.id).to eq questionnaire.id
+        expect(student_questionnaire.title).to eq questionnaire.title
+        expect(student_questionnaire.subject_id).to eq questionnaire.subject_id
+        expect(student_questionnaire.teacher_id).to eq questionnaire.teacher_id
+        expect(student_questionnaire.updated_at.to_s).to eq questionnaire.updated_at.to_s
+        expect(student_questionnaire.status).to eq 'answered'
+        expect(student_questionnaire.points).to eq 9.99
       end
     end
   end

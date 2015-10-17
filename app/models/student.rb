@@ -4,8 +4,10 @@ class Student < ActiveRecord::Base
   only_digits :phone
 
   belongs_to :classroom
+  has_many :pontuations, dependent: :destroy
   has_many :teachers, through: :classroom
-  has_many :answered_questionnaires
+  has_many :answered_questionnaires, dependent: :destroy
+  has_many :questionnaires, -> { published }, through: :classroom
 
   enum gender: [:male, :female]
   enum status: [:normal, :locked]
@@ -26,6 +28,17 @@ class Student < ActiveRecord::Base
       .where{classrooms.id == classroom}
     end
   }
+
+  def student_questionnaires
+    questionnaires
+      .select([:id, :title, :subject_id, :teacher_id, :updated_at,
+          'COALESCE(answered_questionnaires.status, 0) AS status',
+          'COALESCE(pontuations.points, 0) AS points'])
+      .joins("LEFT JOIN answered_questionnaires
+                ON (questionnaires.id = answered_questionnaires.questionnaire_id AND
+                    answered_questionnaires.student_id = #{self.id})")
+      .joins("LEFT JOIN pontuations ON (answered_questionnaires.id = pontuations.answered_questionnaire_id)")
+  end
 
   def lock
     self.update status: :locked if self.normal?
