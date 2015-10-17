@@ -32,6 +32,13 @@ You can see [an example here](http://showterm.io/6a0054fb8b6b53a56ef2c#slow)
 
 ## Demo URL
 
-[http://deleatur.herokuapp.com](http://deleatur.herokuapp.com)
+### Administrator's panel
+[http://deleatur.herokuapp.com/admin](http://deleatur.herokuapp.com/admin)
 * Username: teste@teste.com.br
 * Password: deleatur1234
+
+### Teacher's panel
+[http://deleatur.herokuapp.com/professor/entrar](http://deleatur.herokuapp.com/professor/entrar)
+
+### Student's panel
+[http://deleatur.herokuapp.com/estudante/entrar](http://deleatur.herokuapp.com/estudante/entrar)
