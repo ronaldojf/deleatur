@@ -312,6 +312,15 @@ pt-BR:
         - 'É possível que todas as opções em uma pergunta estejam certas, assim como também pode não haver nenhuma certa;'
         - 'As respostas não serão divulgadas após o questionário ter sido respondido;'
         - 'Recomenda-se que os questionários sejam corrigidos para que se possa tê-los como referência futuramente.'
+    teacher_questionnaires:
+      title: Dicas/Ajuda
+      messages:
+        - 'Os questionários tem como objetivo fortalecer as habilidades de pesquisas dos estudantes;'
+        - 'Recomenda-se gerar a incerteza nos estudantes para que os mesmos tenham que pesquisar muito a fim de garantir que as respostas estão corretas;'
+        - 'Cada opção de resposta possui a mesma pontuação, baseada na quantidade total de opções de todas as perguntas;'
+        - 'Cada erro desconta da pontuação a mesma quantidade de pontos que um acerto atribui;'
+        - 'É possível que todas as opções em uma pergunta estejam certas, assim como também pode não haver nenhuma certa;'
+        - 'As respostas não serão divulgadas após o questionário ter sido respondido.'
 
   activerecord:
     <<: *models_and_attributes
