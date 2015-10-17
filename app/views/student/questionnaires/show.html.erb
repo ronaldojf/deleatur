@@ -48,6 +48,12 @@
                           method: :patch)} %>
         <% end %>
 
+        <span class="label
+            label-<%= (@answered.status == 'pending') ? 'warning' : (@answered.status == 'answered') ? 'info' : 'success' %>">
+          <%= t(@answered.status, scope: [:enums, :specific_items, :answered_questionnaire, :status]) %>
+        </span>
+        <br><br>
+
         <ul class='todo-list'>
           <li class='show-action-label'>
             <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.title') %>:</div>

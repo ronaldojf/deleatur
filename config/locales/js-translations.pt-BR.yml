@@ -9,6 +9,10 @@ pt-BR:
         sure: Você tem certeza?
       contents:
         signout: Você será desconectado.
+    enums:
+      published:
+        yes: Publicado
+        no: Não Publicado
     date:
       formats:
         default: 'dd/mm/yyyy'

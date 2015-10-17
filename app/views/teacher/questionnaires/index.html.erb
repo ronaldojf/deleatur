@@ -91,6 +91,9 @@
               <tr data-href='{{questionnaire.showHtmlUrl}}' ng-repeat='questionnaire in $data track by questionnaire.id'>
 
                 <td data-title="'<%= t('activerecord.attributes.questionnaire.title') %>'" sortable="'title'">
+                  <span class="label label-{{questionnaire.published ? 'primary' : 'warning'}}">
+                    {{ questionnaire.published | t:{scope: 'enums.published'} }}
+                  </span>&nbsp;
                   {{questionnaire.title | truncate:35}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.questionnaire.classroom') %>'" sortable="'classrooms.identifier'">
