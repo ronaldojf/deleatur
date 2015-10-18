@@ -1,1 +1,62 @@
 <%= flash_messages %>
+
+<div class='row'>
+  <div class='col-xs-12 current-responsive-padding'>
+    <div class='ibox'>
+      <div class='ibox-title'>
+        <h5><%= t('view.keywords.ranking') %></h5>
+      </div>
+
+      <div class='ibox-content protected'>
+        <div class='table-responsive'>
+          <table class='table table-hover no-margins'>
+            <thead>
+              <tr>
+                <th></th>
+                <th><%= t('view.keywords.user') %></th>
+                <th><%= t('activerecord.models.classroom.one') %></th>
+                <th><%= t('activerecord.attributes.pontuation.points') %></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @ranking.each_with_index do |student, i| %>
+                <tr class="<%= 'selected-row' if current_user.id == student.id %>">
+                  <td>
+                    <span class='label label-success'><%= i + 1 %></span>
+                  </td>
+                  <td><%= student.name %></td>
+                  <td><%= student.classroom_identifier %></td>
+                  <td>
+                    <span class="label label-<%= student.total_points > 0 ? 'info' : 'warning' %>">
+                      <%= number_with_precision(student.total_points, precision: 5) %>
+                    </span>
+                  </td>
+                </tr>
+              <% end %>
+
+              <% if @user_ranking.try(:ranking_position).try(:>, @ranking.length) %>
+                <% if @user_ranking.ranking_position > (@ranking.length + 1) %>
+                  <tr><td colspan='4' class='text-center'>.........</td></tr>
+                <% end %>
+
+                <tr class='selected-row'>
+                  <td>
+                    <span class='label label-success'><%= @user_ranking.ranking_position %></span>
+                  </td>
+                  <td><%= current_user.name %></td>
+                  <td><%= @user_ranking.classroom_identifier %></td>
+                  <td>
+                    <span class="label label-<%= @user_ranking.total_points > 0 ? 'info' : 'warning' %>">
+                      <%= number_with_precision(@user_ranking.total_points, precision: 5) %>
+                    </span>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

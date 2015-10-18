@@ -1,6 +1,6 @@
 class QuestionOption < ActiveRecord::Base
   belongs_to :question, counter_cache: true
-  has_one :answer
+  has_many :answers
 
   validates :description, presence: true
 

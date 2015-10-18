@@ -29,7 +29,7 @@
 <div class='row'>
   <div class='col-xs-12 current-responsive-padding protected'>
     <%= simple_form_for(@questionnaire, html: { multipart: true }) do |f| %>
-      <% @questionnaire.questions.includes(options: :answer).each_with_index do |question, i| %>
+      <% @questionnaire.questions.eager_load(:options).each_with_index do |question, i| %>
         <div class='ibox float-e-margins'>
           <div class='ibox-title'>
             <h5><span class='label label-info'><%= i + 1 %></span></h5>
@@ -41,14 +41,16 @@
           <div class='ibox-footer'>
             <ul class='list-unstyled'>
               <% question.options.each_with_index do |option, i| %>
-                <input type='hidden' value='<%= option.answer.try(:id) %>'
+                <% answer = @answered.answers.select { |answer| answer.question_option_id == option.id }.first %>
+
+                <input type='hidden' value='<%= answer.try(:id) %>'
                         name='answered_questionnaire[answers_attributes][][id]'>
                 <input type='hidden' value='<%= option.id %>'
                         name='answered_questionnaire[answers_attributes][][question_option_id]'>
 
                 <li>
                   <label for='answer_<%= option.id %>'>
-                    <input type='checkbox' class='iCheck' id='answer_<%= option.id %>' <%= 'checked' if option.answer.present? %>
+                    <input type='checkbox' class='iCheck' id='answer_<%= option.id %>' <%= 'checked' if answer.present? %>
                             name='answered_questionnaire[answers_attributes][][chosed]'>&nbsp;
                     <%= option.description %>
                   </label>

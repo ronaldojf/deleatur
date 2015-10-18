@@ -1,6 +1,6 @@
 class Student::QuestionnairesController < Student::BaseController
   before_action :set_questionnaire, only: [:show, :answer, :update]
-  before_action :set_answered, only: [:show]
+  before_action :set_answered, only: [:show, :answer]
   before_action :set_sorting, only: [:index]
 
   def index
@@ -25,7 +25,7 @@ class Student::QuestionnairesController < Student::BaseController
       respond_with @answered_service.answered_questionnaire, location: -> { questionnaire_path(@questionnaire) }
     rescue
       flash[:alert] = I18n.t('errors.custom_messages.saving_questionnaire')
-      render :answer
+      redirect_to answer_questionnaire_path(@questionnaire)
     end
   end
 

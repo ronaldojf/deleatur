@@ -257,4 +257,75 @@ RSpec.describe Student, :type => :model do
       end
     end
   end
+
+  describe '.top_ranking' do
+    let!(:classroom) { create :classroom }
+    let!(:questionnaire) { create :questionnaire, classroom: classroom }
+    let!(:question) { create :question, questionnaire: questionnaire }
+    let!(:option) { create :question_option, question: question }
+    let!(:student) { create :student, classroom: classroom }
+    let!(:answered) { student.answered_questionnaires.create(questionnaire_id: questionnaire.id, status: :answered) }
+
+    it 'does return student id' do
+      ranking = Student.top_ranking(1).first
+      expect(ranking.id).to eq student.id
+    end
+
+    it "does return the classroom's identifier" do
+      ranking = Student.top_ranking(1).first
+      expect(ranking.classroom_identifier).to eq classroom.identifier
+    end
+
+    context 'when already has points' do
+      let!(:pontuation) { create :pontuation, answered_questionnaire: answered, student: student }
+
+      it 'does return the total_points' do
+        ranking = Student.top_ranking(1).first
+        expect(ranking.total_points).to eq 9.99
+      end
+    end
+
+    context 'when do not have any points' do
+      it 'does return the total_points as 0' do
+        ranking = Student.top_ranking(1).first
+        expect(ranking.total_points).to eq 0.0
+      end
+    end
+  end
+
+  describe '#get_ranking' do
+    let!(:classroom) { create :classroom }
+    let!(:questionnaire) { create :questionnaire, classroom: classroom }
+    let!(:question) { create :question, questionnaire: questionnaire }
+    let!(:option) { create :question_option, question: question }
+    let!(:student1) { create :student, classroom: classroom }
+    let!(:student2) { create :student, classroom: classroom }
+    let!(:answered1) { student1.answered_questionnaires.create(questionnaire_id: questionnaire.id, status: :answered) }
+    let!(:answered2) { student2.answered_questionnaires.create(questionnaire_id: questionnaire.id, status: :answered) }
+    let!(:pontuation1) { create :pontuation, answered_questionnaire: answered1, student: student1 }
+
+    it 'does return the ranking_position' do
+      ranking = student2.get_ranking
+      expect(ranking.ranking_position).to eq 2
+    end
+
+    it 'does return the classroom_identifier' do
+      ranking = student2.get_ranking
+      expect(ranking.classroom_identifier).to eq classroom.identifier
+    end
+
+    context 'when already has points' do
+      it 'does return the total_points' do
+        ranking = student1.get_ranking
+        expect(ranking.total_points).to eq 9.99
+      end
+    end
+
+    context 'when do not have any points' do
+      it 'does return the total_points' do
+        ranking = student2.get_ranking
+        expect(ranking.total_points).to eq 0.0
+      end
+    end
+  end
 end

@@ -29,8 +29,31 @@ class Student < ActiveRecord::Base
     end
   }
 
+  scope :top_ranking, -> (limit) {
+    Student
+      .joins(:classroom)
+      .joins{pontuations.outer}
+      .select('students.*, classrooms.identifier AS classroom_identifier,
+                SUM(COALESCE(pontuations.points, 0)) AS total_points')
+      .where(status: statuses[:normal])
+      .order('total_points DESC')
+      .limit(limit.to_i)
+      .group(:id, 'classroom_identifier')
+  }
+
+  scope :ranking_with_position, -> {
+    Student
+      .joins(:classroom)
+      .joins{pontuations.outer}
+      .select('students.id, students.classroom_id, classrooms.identifier AS classroom_identifier,
+              SUM(COALESCE(pontuations.points, 0)) AS total_points,
+              (ROW_NUMBER() OVER (ORDER BY SUM(COALESCE(pontuations.points, 0)) DESC)) AS ranking_position')
+      .where(status: statuses[:normal])
+      .group(:id, 'classroom_identifier')
+  }
+
   def student_questionnaires
-    questionnaires
+    self.questionnaires
       .select([:id, :title, :subject_id, :teacher_id, :updated_at,
           'COALESCE(answered_questionnaires.status, 0) AS status',
           'COALESCE(pontuations.points, 0) AS points'])
@@ -38,6 +61,15 @@ class Student < ActiveRecord::Base
                 ON (questionnaires.id = answered_questionnaires.questionnaire_id AND
                     answered_questionnaires.student_id = #{self.id})")
       .joins("LEFT JOIN pontuations ON (answered_questionnaires.id = pontuations.answered_questionnaire_id)")
+  end
+
+  def get_ranking
+    Student
+      .select([:total_points, :ranking_position, :classroom_identifier])
+      .from("(#{Student.ranking_with_position.to_sql}) AS students")
+      .joins(:classroom)
+      .where(id: self.id)
+      .first
   end
 
   def lock

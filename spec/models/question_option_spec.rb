@@ -4,7 +4,7 @@ RSpec.describe QuestionOption, :type => :model do
   it { is_expected.to be_an ActiveRecord::Base }
   it { is_expected.to validate_presence_of :description }
   it { is_expected.to belong_to :question }
-  it { is_expected.to have_one :answer }
+  it { is_expected.to have_many :answers }
 
   describe '.right' do
     before do

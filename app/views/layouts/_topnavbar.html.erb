@@ -6,13 +6,21 @@
       </a>
     </div>
     <ul class='nav navbar-top-links navbar-right user-menu-responsive'>
+      <% if current_user.student? %>
+        <li class='hidden-xs'>
+          <span class="label label-<%= (@user_pontuation > 0) ? 'info' : 'warning' %>">
+            <%= t('view.keywords.points', count: number_with_precision(@user_pontuation, precision: 2)) %>
+          </span>
+        </li>
+      <% end %>
+
       <li>
         <span class='m-r-sm text-muted welcome-message'>
           <%= t('page.welcome_html', app_name: t('app.name')) %>
         </span>
       </li>
 
-      <li class="visible-xs user-menu-item-responsive">
+      <li class='visible-xs user-menu-item-responsive'>
         <div class='dropdown'>
           <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
             <b class='caret'></b>
@@ -34,9 +42,15 @@
         </div>
       </li>
 
+      <% if current_user.student? %>
+        <li class='top-pontuation visible-xs p-xss'>
+          <span class='label label-info'>
+            <%= t('view.keywords.points', count: number_with_precision(@user_pontuation, precision: 2)) %>
+          </span>
+        </li>
+      <% end %>
 
-
-      <li class="hidden-xs">
+      <li class='hidden-xs'>
         <%= link_to destroy_session_path(current_user.user_type), method: :delete, class: 'superior-logout',
             data: {confirm: t('js.messages.contents.signout')} do %>
           <i class='fa fa-sign-out'></i> <%= t('profile.signout') %>

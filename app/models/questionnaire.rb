@@ -9,8 +9,8 @@ class Questionnaire < ActiveRecord::Base
   belongs_to :subject
   has_many :questions, -> { order(:index) }, dependent: :destroy
   has_many :answereds, class_name: 'AnsweredQuestionnaire', foreign_key: :questionnaire_id, dependent: :destroy
-  has_many :options, through: :questions
-  has_many :answers, through: :answereds
+  has_many :options, through: :questions, dependent: :destroy
+  has_many :answers, through: :answereds, dependent: :destroy
   accepts_nested_attributes_for :questions, allow_destroy: true
 
   enum status: AnsweredQuestionnaire.statuses
