@@ -36,6 +36,7 @@ class Student < ActiveRecord::Base
       .select('students.*, classrooms.identifier AS classroom_identifier,
                 SUM(COALESCE(pontuations.points, 0)) AS total_points')
       .where(status: statuses[:normal])
+      .where.not(confirmed_at: nil)
       .order('total_points DESC')
       .limit(limit.to_i)
       .group(:id, 'classroom_identifier')
@@ -49,6 +50,7 @@ class Student < ActiveRecord::Base
               SUM(COALESCE(pontuations.points, 0)) AS total_points,
               (ROW_NUMBER() OVER (ORDER BY SUM(COALESCE(pontuations.points, 0)) DESC)) AS ranking_position')
       .where(status: statuses[:normal])
+      .where.not(confirmed_at: nil)
       .group(:id, 'classroom_identifier')
   }
 
