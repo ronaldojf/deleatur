@@ -9,6 +9,7 @@ pt-BR:
       short: *app_name
     modules:
       home: Home
+      dashboard: Dashboard
       profiles: Perfil
       sessions: Login
       registrations: Cadastro
@@ -137,6 +138,12 @@ pt-BR:
       see_more: Ver Mais
       or: ou
       title_classrooms_subjects: 'Lessionar em Turmas / Matérias'
+      ranking: Ranking
+      user: Usuário
+      points:
+        zero: '0 Pontos'
+        one: '1 Ponto'
+        other: '%{count} Pontos'
 
   confirm:
     delete_record: O registro será excluído.
@@ -307,6 +314,7 @@ pt-BR:
       messages:
         - 'Procure pesquisar em vários meios (internet, livros) que você considera confiáveis;'
         - 'Não existe um tempo limite para responder;'
+        - 'Apenas contará pontos na primeira vez que os questionários forem respondidos;'
         - 'Cada opção de resposta possui a mesma pontuação, baseada na quantidade total de opções de todas as perguntas;'
         - 'Cada erro desconta da pontuação a mesma quantidade de pontos que um acerto atribui.'
         - 'É possível que todas as opções em uma pergunta estejam certas, assim como também pode não haver nenhuma certa;'
@@ -317,6 +325,8 @@ pt-BR:
       messages:
         - 'Os questionários tem como objetivo fortalecer as habilidades de pesquisas dos estudantes;'
         - 'Recomenda-se gerar a incerteza nos estudantes para que os mesmos tenham que pesquisar muito a fim de garantir que as respostas estão corretas;'
+        - 'Alunos bloqueados não aparecerão no ranking;'
+        - 'Apenas contará pontos na primeira vez que os questionários forem respondidos;'
         - 'Cada opção de resposta possui a mesma pontuação, baseada na quantidade total de opções de todas as perguntas;'
         - 'Cada erro desconta da pontuação a mesma quantidade de pontos que um acerto atribui;'
         - 'É possível que todas as opções em uma pergunta estejam certas, assim como também pode não haver nenhuma certa;'

@@ -72,7 +72,7 @@
             <div class='col-sm-9'>
               <% points = @answered.pontuation.try(:points) || 0.0 %>
               <span class="text-<%= points > 0 ? 'success' : 'warning' %>">
-                <%= number_with_precision(points, precision: 4) %>
+                <%= number_with_precision(points, precision: 5) %>
               </span>
             </div>
           </li>

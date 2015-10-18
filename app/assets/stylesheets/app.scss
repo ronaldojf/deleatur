@@ -46,6 +46,11 @@ table.vertical-center td { vertical-align: middle !important; }
   }
 }
 
+.selected-row {
+  background-color: #CCEFE1 !important;
+  font-weight: bold;
+}
+
 .hover-text-danger:hover { color: $red; }
 .hover-text-primary:hover { color: $lazur; }
 .auto-height { height: auto; }
