@@ -27,8 +27,11 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def destroy
-    @classroom.destroy
-    respond_with @classroom, location: -> { admin_classrooms_path }
+    unless @classroom.destroy
+      redirect_to([:admin, @classroom], alert: I18n.t('flash.actions.destroy.alerts.is_associated'))
+    else
+      respond_with @classroom, location: -> { admin_classrooms_path }
+    end
   end
 
   private

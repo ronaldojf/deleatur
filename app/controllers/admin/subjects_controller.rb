@@ -27,8 +27,15 @@ class Admin::SubjectsController < Admin::BaseController
   end
 
   def destroy
-    @subject.destroy if current_user.main?
-    respond_with @subject, location: -> { admin_subjects_path }
+    if current_user.main?
+      unless @subject.destroy
+        redirect_to([:admin, @subject], alert: I18n.t('flash.actions.destroy.alerts.is_associated'))
+      else
+        respond_with @subject, location: -> { admin_subjects_path }
+      end
+    else
+      respond_with @subject, location: -> { admin_subjects_path }
+    end
   end
 
   private

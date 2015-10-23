@@ -71,11 +71,11 @@
           </li>
           <li class='show-action-label'>
             <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.classroom') %>:</div>
-            <div class='col-sm-9'><%= @questionnaire.classroom.identifier %></div>
+            <div class='col-sm-9'><%= @questionnaire.classroom.try(:identifier) %></div>
           </li>
           <li class='show-action-label'>
             <div class='col-sm-3'><%= t('activerecord.attributes.questionnaire.subject') %>:</div>
-            <div class='col-sm-9'><%= @questionnaire.subject.description %></div>
+            <div class='col-sm-9'><%= @questionnaire.subject.try(:description) %></div>
           </li>
         </ul>
       </div>
