@@ -10,6 +10,7 @@ class Teacher::QuestionnairesController < Teacher::BaseController
       format.html { render :index }
       format.json do
         @questionnaires = scope_for_ng_table(current_user.questionnaires)
+                            .joins(:classroom, :subject)
                             .includes(:classroom, :subject)
                             .filter(params[:filter].try(:[], :general).to_s)
                             .by_publication(params[:filter].try(:[], :published).to_s)

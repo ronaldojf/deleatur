@@ -51,4 +51,33 @@ RSpec.describe Subject, :type => :model do
       expect(teacher.subjects.for_classroom(classroom).count).to eq 1
     end
   end
+
+  describe '#destroy' do
+    context 'when has classrooms_teachers associated' do
+      let(:subject) { create(:teacher_classroom_subject).subject }
+
+      it 'does not destroy the subject' do
+        expect(subject.destroy).not_to be
+        expect(Subject.count).to eq 1
+      end
+    end
+
+    context 'when has questionnaires associated' do
+      let(:subject) { create(:questionnaire).subject }
+
+      it 'does not destroy the subject' do
+        expect(subject.destroy).not_to be
+        expect(Subject.count).to eq 1
+      end
+    end
+
+    context 'when do not have any teachers_subjects, students or questionnaires associated' do
+      let(:subject) { create :subject }
+
+      it 'does destroy the subject' do
+        subject.destroy
+        expect(Subject.count).to eq 0
+      end
+    end
+  end
 end

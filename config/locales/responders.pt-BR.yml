@@ -19,3 +19,4 @@ pt-BR:
         alerts:
           main_administrator: Este administrador não pode ser excluído.
           self_destroy: Não é posível se autoexcluir.
+          is_associated: Não foi possível excluir este registro pois está associado à outros registros.
