@@ -231,7 +231,7 @@ pt-BR:
       subject:
         description: Descrição
       classroom:
-        identifier: Sala
+        identifier: Identificador da Turma
       questionnaire:
         title: Título
         teacher: Professor
