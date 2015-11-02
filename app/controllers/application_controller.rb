@@ -34,6 +34,18 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(resource)
+    url_redirect = if resource.is_a?(Administrator)
+        admin_root_path
+      elsif resource.is_a?(Teacher)
+        teacher_root_path
+      else
+        root_path
+      end
+
+    request.env['omniauth.origin'] || stored_location_for(resource) || url_redirect
+  end
+
   def after_sign_out_path_for(resource_or_scope)
     new_session_path(resource_or_scope)
   end
