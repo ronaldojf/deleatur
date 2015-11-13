@@ -83,6 +83,11 @@
                 <td data-title="'<%= t('activerecord.attributes.student.name') %>'" sortable="'students.name'">
                   {{student.name}}
                 </td>
+                <td data-title="'<%= t('activerecord.attributes.questionnaire.points') %>'" sortable="'points'">
+                  <span class="label label-{{student.points > 0 ? 'info' : 'warning'}}">
+                    {{student.points | number:5}}
+                  </span>
+                </td>
                 <td data-title="'<%= t('activerecord.attributes.student.email') %>'" sortable="'students.email'">
                   {{student.email}}
                 </td>
