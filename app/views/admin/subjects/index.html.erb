@@ -33,8 +33,8 @@
       <div class='ibox-content'>
         <div class='m-b-lg'>
           <div class='form-inputs'>
-            <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                class='form-control input-md' ng-model='config.filter.general'>
+            <input type='text' id='filter' class='form-control input-md' ng-model='config.filter.general' responsive-focus
+                    placeholder="<%= t([:description], scope: [:activerecord, :attributes, :subject]).join('/') %>">
           </div>
           <div>
             <small ng-bind-html='infoMessage'></small>

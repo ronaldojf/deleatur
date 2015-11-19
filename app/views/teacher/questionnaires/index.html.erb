@@ -36,8 +36,8 @@
           <div class='form-inputs'>
             <div class="row m-b-xs">
               <div class="col-xs-12">
-                <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                    class='form-control input-md' ng-model='config.filter.general'>
+                <input type='text' id='filter' class='form-control input-md' ng-model='config.filter.general' responsive-focus
+                    placeholder="<%= t([:title], scope: [:activerecord, :attributes, :questionnaire]).join('/') %>">
               </div>
             </div>
 

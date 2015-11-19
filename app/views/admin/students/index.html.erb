@@ -29,8 +29,8 @@
         <div class='m-b-lg'>
           <div class='row m-b-xs'>
             <div class='col-xs-12'>
-              <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                  class='form-control input-md' ng-model='config.filter.general'>
+              <input type='text' id='filter' class='form-control input-md' ng-model='config.filter.general' responsive-focus
+                    placeholder="<%= t([:name, :email, :cpf, :phone], scope: [:activerecord, :attributes, :student]).join('/') %>">
             </div>
           </div>
 
@@ -81,7 +81,7 @@
               <tr data-href='{{student.showHtmlUrl}}' ng-repeat='student in $data track by student.id'>
 
                 <td data-title="'<%= t('activerecord.attributes.student.name') %>'" sortable="'name'">
-                  {{student.name}}
+                  {{student.name | truncate:30}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.questionnaire.points') %>'" sortable="'points'">
                   <span class="label label-{{student.points > 0 ? 'info' : 'warning'}}">
@@ -89,13 +89,16 @@
                   </span>
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.student.email') %>'" sortable="'email'">
-                  {{student.email}}
+                  {{student.email | truncate:30}}
+                </td>
+                <td data-title="'<%= t('activerecord.attributes.student.cpf') %>'" sortable="'cpf'">
+                  {{student.cpf | brCpf}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.student.phone') %>'" sortable="'phone'">
                   {{student.phone | brPhoneNumber}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.student.birth_date') %>'" sortable="'birth_date'">
-                  {{student.birthDate | date}}
+                  {{student.birthDate | date:'shortDate'}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.student.classroom') %>'">
                   {{student.classroom}}

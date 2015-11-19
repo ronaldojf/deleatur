@@ -29,8 +29,8 @@
           <div class='form-inputs'>
             <div class="row m-b-xs">
               <div class="col-xs-12">
-                <input type='text' id='filter' placeholder="<%= t('js.placeholders.search') %>" responsive-focus
-                    class='form-control input-md' ng-model='config.filter.general'>
+                <input type='text' id='filter' class='form-control input-md' ng-model='config.filter.general' responsive-focus
+                    placeholder="<%= t([:name, :email, :cpf, :phone], scope: [:activerecord, :attributes, :teacher]).join('/') %>">
               </div>
             </div>
 
@@ -76,6 +76,9 @@
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.teacher.email') %>'" sortable="'email'">
                   {{teacher.email}}
+                </td>
+                <td data-title="'<%= t('activerecord.attributes.teacher.cpf') %>'" sortable="'cpf'">
+                  {{teacher.cpf | brCpf}}
                 </td>
                 <td data-title="'<%= t('activerecord.attributes.teacher.phone') %>'" sortable="'phone'">
                   {{teacher.phone | brPhoneNumber}}
