@@ -45,6 +45,7 @@ pt-BR:
     destroy: Exclusão
     publish: Publicação
     answer: Responder
+    duplicate: Duplicar
 
   buttons:
     close: Fechar
@@ -174,6 +175,8 @@ pt-BR:
     answered_questionnaires: questionarios-respondidos
     classrooms_and_subjects: turmas-e-disciplinas
     answer: responder
+    duplicate: duplicar
+    duplication: duplicacao
 
   models_and_attributes: &models_and_attributes
     models: &models

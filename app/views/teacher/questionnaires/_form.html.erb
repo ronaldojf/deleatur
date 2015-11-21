@@ -9,9 +9,9 @@
     </div>
 
     <div class='row' ng-init="questionnaire = <%= @questionnaire.to_json %>;
-                              questionnaire.questions = <%= @questionnaire
+                              questionnaire.questions = <%= (@questionnaire.errors.any? ? @questionnaire.questions : @questionnaire
                                                               .questions
-                                                              .includes(:options)
+                                                              .includes(:options))
                                                               .to_json(methods: [:options]) %>;
                               classrooms_subjects = <%= current_user
                                                         .classrooms_subjects
