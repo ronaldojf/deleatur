@@ -50,6 +50,11 @@
   .todo-list > li { padding: 5px; }
 }
 
+.drag-handler:hover {
+  cursor: move;
+  color: $navy;
+}
+
 .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group { z-index: 0; }
 
 .table-hover tbody tr:hover { background-color: $light-navy; }

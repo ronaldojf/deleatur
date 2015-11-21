@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
 
     namespace :teacher do
-      resource :profile, only: [:edit, :update]
+      resource :profile, :classrooms_and_subjects, only: [:edit, :update]
       resources :students, only: [:index, :show, :edit, :update]
       resources :questionnaires do
         patch :publish, on: :member

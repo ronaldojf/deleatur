@@ -2,7 +2,14 @@
   window.deleatur = window.angular.module('deleatur', [
     'ngTable', 'ui.utils.masks', 'ngMask', 'idf.br-filters', 'ng-rails-csrf',
     'localytics.directives', 'deleatur.filters', 'ui.sortable', 'summernote'
-    ])
+  ])
+  .config( ['$provide', function ($provide) {
+    $provide.decorator('$browser', ['$delegate', function ($delegate) {
+      $delegate.onUrlChange = function() {};
+      $delegate.url = function() { return '' };
+      return $delegate;
+    }]);
+  }])
   .directive('ngEnter', function() {
     return function(scope, element, attrs) {
       element.bind('keydown keypress', function(event) {

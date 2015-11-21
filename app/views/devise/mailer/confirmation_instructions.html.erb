@@ -1,40 +1,46 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-  <meta name="viewport" content="width=device-width" />
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name='viewport' content='width=device-width' />
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
   <%= stylesheet_link_tag 'email', media: 'all' %>
 </head>
 
 <body>
 
-  <table class="body-wrap">
+  <table class='body-wrap'>
     <tr>
       <td></td>
-      <td class="container" width="600">
-        <div class="content">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0">
+      <td class='container' width='600'>
+        <div class='content'>
+          <table class='main' width='100%' cellpadding='0' cellspacing='0'>
             <tr>
-              <td class="content-wrap">
-                <table cellpadding="0" cellspacing="0" style="width: 100%">
+              <td class='content-wrap'>
+                <table cellpadding='0' cellspacing='0' style='width: 100%'>
                   <tr>
-                    <td class="logo-name aligncenter">
-                      <%= image_tag("deleatur-xs.png") %><%= t('app.name') %>
+                    <td class='logo-name aligncenter'>
+                      <%= image_tag('deleatur-xs.png') %><%= t('app.name') %>
                     </td>
                   </tr>
                   <tr>
-                    <td class="content-block aligncenter font-md">
-                      <h3><%= t('confirmations.email.greeting_html', name: @resource.name) %></h3>
+                    <td class='content-block aligncenter font-md'>
+                      <h3>
+                        <% unless @resource.student? %>
+                          <strong>&lt;<%= t("login.#{@resource.user_type}.welcome") %>&gt;</strong>
+                          <br />
+                        <% end %>
+                        <%= t('confirmations.email.greeting_html', name: @resource.name) %>
+                      </h3>
                     </td>
                   </tr>
                   <tr>
-                    <td class="content-block aligncenter">
+                    <td class='content-block aligncenter'>
                       <%= t('confirmations.email.info_1_html') %><br/>
                       <%= t('confirmations.email.info_2') %>
                     </td>
                   </tr>
                   <tr>
-                    <td class="content-block aligncenter no-padding">
+                    <td class='content-block aligncenter no-padding'>
                       <%= link_to t('buttons.confirm_my_account'),
                             confirmation_url(@resource, confirmation_token: @token),
                             class: 'btn-primary', target: :_blank %>
@@ -44,10 +50,10 @@
               </td>
             </tr>
           </table>
-          <div class="footer">
-            <table width="100%">
+          <div class='footer'>
+            <table width='100%'>
               <tr>
-                <td class="aligncenter content-block">
+                <td class='aligncenter content-block'>
                   <strong><%= t('app.name') %></strong> <%= Date.today.year %>
                 </td>
               </tr>
@@ -55,7 +61,6 @@
           </div>
         </div>
       </td>
-      <td></td>
     </tr>
   </table>
 

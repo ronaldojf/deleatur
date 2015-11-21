@@ -5,6 +5,13 @@
   <% end %>
 </li>
 
+<li class="<%= class_for_item_menu('classrooms_and_subjects') %>">
+  <%= link_to edit_teacher_classrooms_and_subjects_path do %>
+    <i class='fa fa-cogs'></i>
+    <span class="nav-label"><%= t('page.modules.classrooms_and_subjects') %></span>
+  <% end %>
+</li>
+
 <li class="<%= class_for_item_menu('students') %>">
   <%= link_to teacher_students_path do %>
     <i class='fa fa-graduation-cap'></i>

@@ -40,7 +40,16 @@
       </div>
 
       <div class='ibox-content'>
-        <% unless @answered.pending? %>
+        <% if !@answered.pending? && @wrong_answer_indexes.size > 0 %>
+          <br />
+          <%= custom_flash_messages warning: { show: true, fixed: true, icon: :warning,
+                message: t('infos.wrong_answers_hint_html',
+                            count: @wrong_answer_indexes.size,
+                            wrongs: @wrong_answer_indexes.join(', '))
+            } %>
+        <% end %>
+
+        <% if !@answered.pending? %>
           <%= custom_flash_messages info: { show: true, fixed: true, icon: :info,
               message: t("infos.mark_as_#{@answered.answered? ? 'fixed' : 'answered'}_html",
                           link_class: 'text-primary',

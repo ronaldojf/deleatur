@@ -106,4 +106,54 @@ RSpec.describe AnsweredQuestionnaireService, :type => :service do
       end
     end
   end
+
+  describe '#wrong_indexes_of' do
+    let!(:questionnaire) { create :questionnaire }
+    let!(:answered) { create :answered_questionnaire, questionnaire: questionnaire }
+    before do
+      questionnaire.questions << [
+        create(:question, index: 0, options: [
+          create(:question_option, right: false),
+          create(:question_option, right: false)
+        ]),
+        create(:question, index: 1, options: [
+          create(:question_option, right: false,  answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: false)
+        ]),
+        create(:question, index: 2, options: [
+          create(:question_option, right: false),
+          create(:question_option, right: true,   answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: false)
+        ]),
+        create(:question, index: 3, options: [
+          create(:question_option, right: false,  answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: true,   answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: false,  answers: [create(:answer, answered_questionnaire: answered)])
+        ]),
+        create(:question, index: 4, options: [
+          create(:question_option, right: true,   answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: false),
+          create(:question_option, right: true,   answers: [create(:answer, answered_questionnaire: answered)])
+        ]),
+        create(:question, index: 5, options: [
+          create(:question_option, right: true,   answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: false,  answers: [create(:answer, answered_questionnaire: answered)]),
+          create(:question_option, right: false),
+          create(:question_option, right: true)
+        ]),
+        create(:question, index: 6, options: [
+          create(:question_option, right: true),
+          create(:question_option, right: false,  answers: [create(:answer, answered_questionnaire: answered)])
+        ])
+      ]
+    end
+
+    it 'does return the only the indexes of the questions that are answered wrong' do
+      service = AnsweredQuestionnaireService.new(answered)
+
+      wrong_indexes = service.wrong_indexes_of(questionnaire)
+
+      expect(wrong_indexes).to eq [1,3,5,6]
+    end
+  end
 end

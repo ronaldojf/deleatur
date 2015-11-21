@@ -7,6 +7,7 @@ class Admin::TeachersController < Admin::BaseController
       format.html { render :index }
       format.json do
         @teachers = scope_for_ng_table(Teacher)
+                            .where.not(confirmed_at: nil)
                             .filter(params[:filter].try(:[], :general).to_s)
                             .by_status(params[:filter].try(:[], :status).to_s)
                             .by_gender(params[:filter].try(:[], :gender).to_s)

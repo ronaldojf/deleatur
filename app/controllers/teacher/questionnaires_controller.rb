@@ -78,7 +78,7 @@ class Teacher::QuestionnairesController < Teacher::BaseController
     params
       .require(:questionnaire)
       .permit(:title, :published, questions_attributes: [:id, :description, :index, :_destroy,
-                        options_attributes: [:id, :description, :right, :_destroy]
+                        options_attributes: [:id, :description, :index, :right, :_destroy]
       ]).merge(classroom_id: @classroom.try(:id), subject_id: @subject.try(:id))
   end
 

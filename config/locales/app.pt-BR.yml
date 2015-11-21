@@ -20,6 +20,7 @@ pt-BR:
       subjects: Disciplinas
       questionnaires: Questionários
       answered_questionnaires: Questionários
+      classrooms_and_subjects: Turmas e Disciplinas
       classrooms: Turmas
       profile: Perfil
     footers: *page_titles
@@ -171,6 +172,7 @@ pt-BR:
     confirmation: confirmacao
     questionnaires: questionarios
     answered_questionnaires: questionarios-respondidos
+    classrooms_and_subjects: turmas-e-disciplinas
     answer: responder
 
   models_and_attributes: &models_and_attributes
@@ -293,6 +295,9 @@ pt-BR:
     pending_register: Cadastro pendente de aprovação.
     locked_record: Registro bloqueado.
     options_hint: Digite as opções de resposta e marque as respostas certas.
+    wrong_answers_hint_html:
+      one: 'A pergunta de número <strong>%{wrongs}</strong> ainda não está totalmente correta.'
+      other: 'As perguntas <strong>%{wrongs}</strong> ainda não estão totalmente corretas.'
     mark_as_fixed_html: |
       Este questionário já foi respondido.
       <strong>
@@ -325,7 +330,7 @@ pt-BR:
       messages:
         - 'Os questionários tem como objetivo fortalecer as habilidades de pesquisas dos estudantes;'
         - 'Recomenda-se gerar a incerteza nos estudantes para que os mesmos tenham que pesquisar muito a fim de garantir que as respostas estão corretas;'
-        - 'Alunos bloqueados não aparecerão no ranking;'
+        - 'Estudantes bloqueados não aparecerão no ranking;'
         - 'Apenas contará pontos na primeira vez que os questionários forem respondidos;'
         - 'Cada opção de resposta possui a mesma pontuação, baseada na quantidade total de opções de todas as perguntas;'
         - 'Cada erro desconta da pontuação a mesma quantidade de pontos que um acerto atribui;'

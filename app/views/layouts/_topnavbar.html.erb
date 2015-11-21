@@ -8,6 +8,12 @@
     <ul class='nav navbar-top-links navbar-right user-menu-responsive'>
       <% if current_user.student? %>
         <li class='hidden-xs'>
+          <span class='label label-success'>
+            <%= current_user.classroom.identifier %>
+          </span>
+        </li>
+
+        <li class='hidden-xs'>
           <span class="label label-<%= (@user_pontuation > 0) ? 'info' : 'warning' %>">
             <%= t('view.keywords.points', count: number_with_precision(@user_pontuation, precision: 2)) %>
           </span>
@@ -46,6 +52,12 @@
         <li class='top-pontuation visible-xs p-xss'>
           <span class='label label-info'>
             <%= t('view.keywords.points', count: number_with_precision(@user_pontuation, precision: 2)) %>
+          </span>
+        </li>
+
+        <li class='top-pontuation visible-xs p-xss'>
+          <span class='label label-success'>
+            <%= current_user.classroom.identifier %>
           </span>
         </li>
       <% end %>

@@ -95,18 +95,21 @@
                   </div>
                 </div>
 
-                <div class='row m-b' ng-repeat='option in notDestroyed(question.options) track by $index'>
-                  <div class="col-xs-12">
-                    <div class='input-group'>
-                      <span class='input-group-addon iCheck-wrapper'>
-                        <input type='checkbox' i-check tabindex='-1' ng-model='option.right'>
-                      </span>
-                      <input type='text' class='form-control' ng-model='option.description'>
+                <div ui-sortable='sortableOptions' ng-model='question.options'>
+                  <div class='row m-b drag-item' ng-repeat='option in notDestroyed(question.options) track by $index'>
+                    <div class="col-xs-12">
+                      <div class='input-group'>
+                        <span class='input-group-addon drag-handler'><i class="fa fa-arrows"></i></span>
+                        <span class='input-group-addon iCheck-wrapper'>
+                          <input type='checkbox' i-check tabindex='-1' ng-model='option.right'>
+                        </span>
+                        <input type='text' class='form-control' ng-model='option.description'>
 
-                      <a class='input-group-addon iCheck-wrapper cursor-pointer hover-text-danger'
-                            ng-click='removeOption($index, question)'>
-                        <i class='fa fa-times'></i>
-                      </a>
+                        <a class='input-group-addon iCheck-wrapper cursor-pointer hover-text-danger'
+                              ng-click='removeOption($index, question)'>
+                          <i class='fa fa-times'></i>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -139,6 +142,9 @@
 
         <input type='checkbox' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][right]'
                 class='hide' ng-model='option.right' ng-value='option.right'>
+
+        <input type='hidden' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][index]'
+                ng-value='$index'>
 
         <input type='hidden' name='questionnaire[questions_attributes][{{$parent.$index}}][options_attributes][][description]'
                 ng-value='option.description'>

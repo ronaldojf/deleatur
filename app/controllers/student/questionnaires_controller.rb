@@ -9,10 +9,18 @@ class Student::QuestionnairesController < Student::BaseController
       format.json do
         @questionnaires = scope_for_ng_table(current_user.student_questionnaires)
                             .joins(:teacher, :subject)
+                            .preload(:teacher, :subject)
                             .filter(params[:filter].try(:[], :general).to_s)
                             .by_subject(params[:filter].try(:[], :subject).to_s)
                             .by_status(params[:filter].try(:[], :status).to_s)
       end
+    end
+  end
+
+  def show
+    unless @answered.pending?
+      service = AnsweredQuestionnaireService.new(@answered)
+      @wrong_answer_indexes = service.wrong_indexes_of(@questionnaire).collect { |index| index + 1 }
     end
   end
 

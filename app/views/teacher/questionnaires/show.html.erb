@@ -105,7 +105,7 @@
               <br><br>
               <blockquote class='font-normal'>
                 <ul class='list-unstyled'>
-                  <% question.options.find_each do |option| %>
+                  <% question.options.each do |option| %>
                   <li>
                     <i class="fa fa-<%= option.right? ? 'check-square-o' : 'square-o' %>"></i>&nbsp;&nbsp;&nbsp;
                     <%= option.description %>

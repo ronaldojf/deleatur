@@ -5,18 +5,15 @@ class Admin::StudentsController < Admin::BaseController
     respond_to do |format|
       format.html { render :index }
       format.json do
-        from_table = Student
-                      .select('students.*, SUM(COALESCE(pontuations.points, 0)) AS points')
-                      .joins{pontuations.outer}
-                      .filter(params[:filter].try(:[], :general).to_s)
-                      .in_classroom(params[:filter].try(:[], :classroom).to_s)
-                      .by_status(params[:filter].try(:[], :status).to_s)
-                      .by_gender(params[:filter].try(:[], :gender).to_s)
-                      .group(:id)
-
         @students = scope_for_ng_table(Student)
-                            .from("(#{from_table.to_sql}) AS students")
-                            .includes(:classroom)
+                          .select('students.*, SUM(COALESCE(pontuations.points, 0)) AS points')
+                          .joins{pontuations.outer}
+                          .preload(:classroom)
+                          .filter(params[:filter].try(:[], :general).to_s)
+                          .in_classroom(params[:filter].try(:[], :classroom).to_s)
+                          .by_status(params[:filter].try(:[], :status).to_s)
+                          .by_gender(params[:filter].try(:[], :gender).to_s)
+                          .group(:id)
       end
     end
   end
