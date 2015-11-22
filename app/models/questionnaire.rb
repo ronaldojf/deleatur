@@ -1,8 +1,8 @@
 class Questionnaire < ActiveRecord::Base
   include Utils::Filtering
 
-  ALLOWED_TAGS = %w(p div span br hr ol ul li blockquote h1 h2 h3 h4 h5 table tbody thead tr th td)
-  ALLOWED_ATTRIBUTES = %w(style class)
+  ALLOWED_TAGS = %w(p div span br hr ol ul li blockquote h1 h2 h3 h4 h5 table tbody thead tr th td img)
+  ALLOWED_ATTRIBUTES = %w(style class src)
 
   belongs_to :teacher
   belongs_to :classroom
