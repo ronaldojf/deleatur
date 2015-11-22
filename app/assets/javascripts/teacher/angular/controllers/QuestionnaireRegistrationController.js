@@ -22,9 +22,8 @@ window.deleatur
         ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
         ['height', ['height']],
         ['table', ['table']],
-        ['insert', ['link', 'picture', 'hr']],
-        ['view', ['codeview']],
-        ['help', ['help']]
+        ['insert', ['hr']],
+        ['view', ['codeview']]
       ]
     };
 
