@@ -298,6 +298,7 @@ pt-BR:
     pending_register: Cadastro pendente de aprovação.
     locked_record: Registro bloqueado.
     options_hint: Digite as opções de resposta e marque as respostas certas.
+    earned_extra_points: 'Você acaba de ganhar %{points} pontos por não deixar nenhuma questão incorreta!'
     wrong_answers_hint_html:
       one: 'A pergunta de número <strong>%{wrongs}</strong> ainda não está totalmente correta.'
       other: 'As perguntas <strong>%{wrongs}</strong> ainda não estão totalmente corretas.'
@@ -326,7 +327,8 @@ pt-BR:
         - 'Cada opção de resposta possui a mesma pontuação, baseada na quantidade total de opções de todas as perguntas;'
         - 'Cada erro desconta da pontuação a mesma quantidade de pontos que um acerto atribui.'
         - 'É possível que todas as opções em uma pergunta estejam certas, assim como também pode não haver nenhuma certa;'
-        - 'As respostas não serão divulgadas após o questionário ter sido respondido;'
+        - 'As respostas não serão divulgadas após o questionário ter sido respondido, apenas quais questões estão incorretas;'
+        - 'Será adicionada uma pontuação extra se o questionário ficar com todas as respostas certas, mesmo após já ter sido respondido;'
         - 'Recomenda-se que os questionários sejam corrigidos para que se possa tê-los como referência futuramente.'
     teacher_questionnaires:
       title: Dicas/Ajuda

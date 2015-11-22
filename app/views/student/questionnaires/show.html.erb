@@ -40,6 +40,10 @@
       </div>
 
       <div class='ibox-content'>
+        <%= custom_flash_messages info: {
+          show: flash[:notice_extra_points].present?, icon: :info, message: flash[:notice_extra_points]
+        } %>
+
         <% if !@answered.pending? && @wrong_answer_indexes.size > 0 %>
           <br />
           <%= custom_flash_messages warning: { show: true, fixed: true, icon: :warning,

@@ -30,6 +30,11 @@ class Student::QuestionnairesController < Student::BaseController
 
     begin
       @answered_service.update!(answered_questionnaire_params)
+
+      if answered_questionnaire.pontuation.generate_extra_points
+        flash[:notice_extra_points] = I18n.t('infos.earned_extra_points', points: Pontuation::EXTRA_POINTS)
+      end
+
       respond_with @answered_service.answered_questionnaire, location: -> { questionnaire_path(@questionnaire) }
     rescue
       flash[:alert] = I18n.t('errors.custom_messages.saving_questionnaire')

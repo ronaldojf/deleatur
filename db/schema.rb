@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121201142) do
+ActiveRecord::Schema.define(version: 20151122200919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,12 @@ ActiveRecord::Schema.define(version: 20151121201142) do
   end
 
   create_table "pontuations", force: :cascade do |t|
-    t.decimal  "points",                    precision: 15, scale: 5, default: 0.0, null: false
+    t.decimal  "points",                    precision: 15, scale: 5, default: 0.0,   null: false
     t.integer  "answered_questionnaire_id"
     t.integer  "student_id"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
+    t.boolean  "has_extra_points",                                   default: false, null: false
   end
 
   add_index "pontuations", ["answered_questionnaire_id"], name: "index_pontuations_on_answered_questionnaire_id", using: :btree

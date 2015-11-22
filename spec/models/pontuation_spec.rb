@@ -66,4 +66,56 @@ RSpec.describe Pontuation, :type => :model do
       end
     end
   end
+
+  describe '#generate_extra_points' do
+    context 'when do not have any extra points' do
+      it 'does generate if all answers are right' do
+        questionnaire = create :questionnaire, questions: [
+          create(:question, options: [
+            create(:question_option, right: true),
+            create(:question_option, right: true)
+          ])
+        ]
+        answered = create :answered_questionnaire, questionnaire: questionnaire, answers: [
+          create(:answer, question_option: questionnaire.options.first),
+          create(:answer, question_option: questionnaire.options.last)
+        ]
+        pontuation = create :pontuation, student: answered.student, answered_questionnaire: answered
+
+        expect(pontuation.generate_extra_points).to be
+        expect(pontuation.has_extra_points).to be
+      end
+
+      it 'does not generate if all answers are not right' do
+        questionnaire = create :questionnaire, questions: [
+          create(:question, options: [
+            create(:question_option, right: true)
+          ])
+        ]
+        answered = create :answered_questionnaire, questionnaire: questionnaire, answers: []
+        pontuation = create :pontuation, student: answered.student, answered_questionnaire: answered
+
+        expect(pontuation.generate_extra_points).to_not be
+        expect(pontuation.has_extra_points).to_not be
+      end
+    end
+
+    context 'when already have extra points' do
+      it 'does not generate extra points' do
+        questionnaire = create :questionnaire, questions: [
+          create(:question, options: [
+            create(:question_option, right: true)
+          ])
+        ]
+        answered = create :answered_questionnaire, questionnaire: questionnaire, answers: [
+          create(:answer, question_option: questionnaire.options.first),
+          create(:answer, question_option: questionnaire.options.last)
+        ]
+        pontuation = create :pontuation, student: answered.student, answered_questionnaire: answered, has_extra_points: true
+
+        expect(pontuation.generate_extra_points).to_not be
+        expect(pontuation.has_extra_points).to be
+      end
+    end
+  end
 end
