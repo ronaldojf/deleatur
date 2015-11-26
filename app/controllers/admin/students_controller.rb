@@ -9,6 +9,7 @@ class Admin::StudentsController < Admin::BaseController
                           .select('students.*, SUM(COALESCE(pontuations.points, 0)) AS points')
                           .joins{pontuations.outer}
                           .preload(:classroom)
+                          .where.not(confirmed_at: nil)
                           .filter(params[:filter].try(:[], :general).to_s)
                           .in_classroom(params[:filter].try(:[], :classroom).to_s)
                           .by_status(params[:filter].try(:[], :status).to_s)
