@@ -18,6 +18,7 @@ window.deleatur
         ['headline', ['style']],
         ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
         ['fontface', ['fontname']],
+        ['color', ['color']],
         ['textsize', ['fontsize']],
         ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
         ['height', ['height']],
