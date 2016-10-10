@@ -3,7 +3,7 @@ Deleatur
 
 [![Circle CI](https://circleci.com/gh/ronaldojf/deleatur/tree/master.svg?style=shield&circle-token=8a7ae8cba8c9ad625e7f5a1a9267ef53b32e24a6)](https://circleci.com/gh/ronaldojf/deleatur/tree/master) [![Code Climate](https://codeclimate.com/github/ronaldojf/deleatur/badges/gpa.svg)](https://codeclimate.com/github/ronaldojf/deleatur) [![Test Coverage](https://codeclimate.com/github/ronaldojf/deleatur/badges/coverage.svg)](https://codeclimate.com/github/ronaldojf/deleatur/coverage)
 
-This project is a [Rails](http://rubyonrails.org/) application used to be an academic software that assesses high school students skills through questionnaires.
+This is an academic software that assesses high school students skills through questionnaires.
 
 ## Dependencies
 
