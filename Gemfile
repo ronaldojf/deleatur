@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.1'
 
-gem 'rails',                          '4.2.0'
+gem 'rails',                          '~> 4.2.0'
 gem 'puma',                           '2.11.1'
 gem 'secure_headers',                 '1.4.1'
 gem 'jquery-rails',                   '4.0.4'
@@ -15,7 +15,7 @@ gem 'simple_form',                    '3.1.0'
 gem 'flutie',                         '2.0.0'
 
 gem 'devise',                         '3.5.1'
-gem 'paperclip',                      '4.3.0'
+gem 'paperclip',                      '~> 4.3'
 gem 'brazilian-rails',                '3.3.0'
 gem 'friendly_id',                    '5.1.0'
 gem 'cancancan',                      '1.12.0'
